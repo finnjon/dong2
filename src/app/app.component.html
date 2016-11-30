@@ -1,16 +1,19 @@
-<nav class="navbar navbar-dark bg-inverse">
-  <a class="navbar-brand" href="#">Deeply Open</a>
-  <ul class="nav navbar-nav">
+<nav class="navbar">
+  <a class="navbar-brand" [routerLink]="['dashboard']">Deeply Open</a>
+  <ul class="nav navbar-nav" *ngIf="auth.authenticated()">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" [routerLink]="['create']">Create<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" [routerLink]="['api']">API<span class="sr-only">(current)</span></a>
     </li>
   </ul>
-  <div class="float-xs-right">
-    <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-    <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+  <div class="pull-right pad8">
+    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</li>
+    <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</li>
   </div>
 </nav>
 
-<h1>
-  {{title}}
-</h1>
+<div style="padding: 20px">
+  <router-outlet></router-outlet>
+</div>
