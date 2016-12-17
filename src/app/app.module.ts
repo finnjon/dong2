@@ -11,6 +11,10 @@ import { AuthGuard } from "./auth.guard";
 import { Auth } from "./auth.service";
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateStartComponent } from './create/create-start/create-start.component';
+import { Create1Component } from './create/create-1/create-1.component';
+import { Create2Component } from './create/create-2/create-2.component';
+import { Create3Component } from './create/create-3/create-3.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CreateComponent,
     ApiComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateStartComponent,
+    Create1Component,
+    Create2Component,
+    Create3Component
   ],
   imports: [
     BrowserModule,

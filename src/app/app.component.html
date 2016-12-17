@@ -1,15 +1,15 @@
 <nav class="navbar">
-  <a class="navbar-brand" [routerLink]="['dashboard']">Deeply Open</a>
+  <a class="navbar-brand" [routerLink]="['/dashboard']">Deeply Open</a>
   <ul class="nav navbar-nav" *ngIf="auth.authenticated()">
     <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['create']">Create<span class="sr-only">(current)</span></a>
+      <a class="nav-link" [routerLink]="['/create']">Create<span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['api']">API<span class="sr-only">(current)</span></a>
+      <a class="nav-link" [routerLink]="['/api']">API<span class="sr-only">(current)</span></a>
     </li>
   </ul>
   <div class="pull-right pad8">
-    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</li>
+    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In | Sign Up</li>
     <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</li>
   </div>
 </nav>
