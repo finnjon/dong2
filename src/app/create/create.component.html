@@ -1,5 +1,12 @@
 <h3>Create a Droplet</h3>
 <button class="btn btn-large" [routerLink]="['create1']">Check</button>
 <button class="btn btn-large" [routerLink]="['create2']">Basic Details</button>
-<button class="btn btn-large" [routerLink]="['create3']">More Details</button> 
-<router-outlet></router-outlet>
+<button class="btn btn-large" [routerLink]="['create3']">More Details</button>
+<div class="row">
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col-md-6">
+    <app-show-droplet></app-show-droplet>
+  </div>
+</div>

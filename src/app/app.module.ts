@@ -15,6 +15,7 @@ import { CreateStartComponent } from './create/create-start/create-start.compone
 import { Create1Component } from './create/create-1/create-1.component';
 import { Create2Component } from './create/create-2/create-2.component';
 import { Create3Component } from './create/create-3/create-3.component';
+import { ShowDropletComponent } from './show-droplet/show-droplet.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Create3Component } from './create/create-3/create-3.component';
     CreateStartComponent,
     Create1Component,
     Create2Component,
-    Create3Component
+    Create3Component,
+    ShowDropletComponent
   ],
   imports: [
     BrowserModule,
