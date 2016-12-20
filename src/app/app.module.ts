@@ -16,6 +16,7 @@ import { Create1Component } from './create/create-1/create-1.component';
 import { Create2Component } from './create/create-2/create-2.component';
 import { Create3Component } from './create/create-3/create-3.component';
 import { ShowDropletComponent } from './show-droplet/show-droplet.component';
+import { DropletService } from './droplet.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ShowDropletComponent } from './show-droplet/show-droplet.component';
     HttpModule,
     routing
   ],
-  providers: [AUTH_PROVIDERS, AuthGuard, Auth],
+  providers: [AUTH_PROVIDERS, AuthGuard, Auth, DropletService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

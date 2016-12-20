@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Droplet } from '../droplet';
+import { DropletService } from '../droplet.service';
 
 @Component({
   selector: 'create',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
+  dropletId: Number;
+  droplet: Droplet;
 
-  constructor() { }
+  constructor(private dropletService: DropletService) { }
 
   ngOnInit() {
+    this.droplet = this.dropletService.getCurrentDroplet();
   }
+
+
 
 }
