@@ -3,6 +3,7 @@ export class Droplet {
     public status: string,
     public name: string,
     public description: string,
-    public explanations: any
+    public explanations: any,
+    public questions: any
   ) {}
 }
