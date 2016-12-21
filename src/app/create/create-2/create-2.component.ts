@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
@@ -12,7 +12,7 @@ import { DropletService } from '../../droplet.service';
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">
         <label>Name: <small>(required)</small></label>
-        <input class="form-control" name="name" type="text" class="form-control" placeholder="Add clear and unique name" ngModel required>
+        <input class="form-control" name="name" type="text" class="form-control" placeholder="Add clear and unique name" [ngModel]="droplet.name" value="droplet.name" required>
       </div>
       <div class="form-group">
         <label>Description: <small>(required)</small></label>
