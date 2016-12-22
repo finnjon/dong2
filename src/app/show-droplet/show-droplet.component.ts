@@ -18,11 +18,10 @@ import { DropletService } from '../droplet.service';
        <div>{{ question.answer || "empty" }}</div>
       <div>{{ question.filled_answer || "empty" }}</div>
     </div>
-    <!--<h4>Helps:</h4>
-    <div *ngFor="let help of droplet.helps; let i=index">
-      <div>{{ i+1 }}. {{ help.category || "empty" }}</div>
-      <div>{{ help.content || "empty" }}</div>
-    </div> -->
+    <h4>Hints:</h4>
+    <div *ngFor="let hint of droplet.hints; let i=index">
+      <div>{{ i+1 }}. {{ hint.hint || "empty" }}</div>
+    </div>
   `,
   styles: []
 })

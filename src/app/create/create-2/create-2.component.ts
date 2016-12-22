@@ -7,7 +7,7 @@ import { DropletService } from '../../droplet.service';
   selector: 'app-create-2',
   template: `
     <h4>Step 2</h4>
-    <div>Now give your droplet a name and description, together with some keywords</div>
+    <div>Now give your droplet a description.</div>
     <br>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">

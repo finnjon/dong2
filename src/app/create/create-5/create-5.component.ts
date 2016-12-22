@@ -3,15 +3,15 @@ import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 
 @Component({
-  selector: 'app-create-3',
+  selector: 'app-create-5',
   template: `
-    <h4>Step 3</h4>
-    <div>Give a clear explanation to help students understand the droplet being tested.</div>
+    <h4>Step 5</h4>
+    <div>Create hints that will help jog students' memories as they try to answer questions.</div>
     <br>
-    <form (ngSubmit)="addExplanation(f.value)" #f="ngForm">
+    <form (ngSubmit)="addHint(f.value)" #f="ngForm">
       <div class="form-group">
-        <label>Explanation: <small>(required)</small></label>
-        <textarea class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
+        <label>Hint: <small>(required)</small></label>
+        <textarea class="form-control" rows="3" [(ngModel)]="hint" name="hint" placeholder="Add a hint." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">Submit</button>
       <button class="btn btn-large" [routerLink]="['/create/create2']">Next</button>
@@ -19,9 +19,9 @@ import { DropletService } from '../../droplet.service';
   `,
   styles: []
 })
-export class Create3Component implements OnInit {
+export class Create5Component implements OnInit {
   droplet: Droplet;
-  content: String;
+  hint: String;
 
   constructor(private dropletService: DropletService) { }
 
@@ -29,11 +29,11 @@ export class Create3Component implements OnInit {
     this.droplet = this.dropletService.getCurrentDroplet();
   }
 
-  addExplanation(explanation) {
-    this.droplet.explanations.push(explanation); //note explanation is an object
+  addHint(hint) {
+    this.droplet.hints.push(hint); // hint is an object: hint.hint is the text
     this.dropletService.updateCurrentDroplet(this.droplet);
     this.dropletService.pushDroplet(this.droplet);
-    this.content = ''; //empty form field
+    this.hint = ''; //empty form field
   }
 
 }
