@@ -22,6 +22,8 @@ import { DropletService } from '../droplet.service';
     <div *ngFor="let hint of droplet.hints; let i=index">
       <div>{{ i+1 }}. {{ hint.hint || "empty" }}</div>
     </div>
+    <h4>Tags:</h4>
+    <button *ngFor="let tag of droplet.tags" class="btn btn-sm">{{ tag.tag }}</button>
   `,
   styles: []
 })

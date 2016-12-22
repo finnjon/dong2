@@ -14,7 +14,7 @@ import { DropletService } from '../../droplet.service';
         <textarea class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">Submit</button>
-      <button class="btn btn-large" [routerLink]="['/create/create2']">Next</button>
+      <button class="btn btn-large" [routerLink]="['/create/create4']">Next</button>
     </form>
   `,
   styles: []

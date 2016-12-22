@@ -19,6 +19,7 @@ import { DropletService } from '../../droplet.service';
         <textarea class="form-control" rows="3" name="description" placeholder="Add helpful description of what this droplet tests." ngModel required></textarea>
       </div>
       <button type="submit" class="btn btn-default">Submit</button>
+      <button class="btn btn-large" [routerLink]="['/create/create3']">Next</button>
     </form>
   `,
   styles: []
@@ -39,7 +40,6 @@ export class Create2Component implements OnInit {
     } else {
       this.droplet.name = droplet.name;
       this.droplet.description = droplet.description;
-      console.log(this.droplet);
       this.dropletService.updateCurrentDroplet(droplet);
       this.dropletService.pushDroplet(droplet);
     }
