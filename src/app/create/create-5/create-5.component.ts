@@ -13,8 +13,8 @@ import { DropletService } from '../../droplet.service';
         <label>Hint: <small>(required)</small></label>
         <textarea class="form-control" rows="3" [(ngModel)]="hint" name="hint" placeholder="Add a hint." required></textarea>
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-      <button class="btn btn-large" [routerLink]="['/create/create4']">Next</button>
+      <button type="submit" class="btn btn-default">Add Hint</button>
+      <button class="btn btn-large" [routerLink]="['/create/create6']">Next</button>
     </form>
   `,
   styles: []

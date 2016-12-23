@@ -21,7 +21,7 @@ import { DropletService } from '../../droplet.service';
         <label>Filled Answer:</label>
         <input class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Add Question</button>
       <button class="btn btn-large" [routerLink]="['/create/create5']">Next</button>
     </form>
   `,
@@ -39,9 +39,8 @@ export class Create4Component implements OnInit {
   }
 
   addQuestion(question) {
-    this.question = question;
-    this.droplet.questions.push(this.question);
-    console.log(this.droplet);
+    //this.question = question;
+    this.droplet.questions.push(question);
     this.dropletService.updateCurrentDroplet(this.droplet);
     this.dropletService.pushDroplet(this.droplet);
     this.question = {};

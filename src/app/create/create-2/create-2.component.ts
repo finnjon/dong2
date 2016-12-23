@@ -11,14 +11,10 @@ import { DropletService } from '../../droplet.service';
     <br>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">
-        <label>Name: <small>(required)</small></label>
-        <input class="form-control" name="name" type="text" class="form-control" placeholder="Add clear and unique name" [ngModel]="droplet.name" value="droplet.name" required>
-      </div>
-      <div class="form-group">
         <label>Description: <small>(required)</small></label>
         <textarea class="form-control" rows="3" name="description" placeholder="Add helpful description of what this droplet tests." ngModel required></textarea>
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Save Description</button>
       <button class="btn btn-large" [routerLink]="['/create/create3']">Next</button>
     </form>
   `,
@@ -38,10 +34,9 @@ export class Create2Component implements OnInit {
     if (!this.isNew) {
       console.log(droplet.name);
     } else {
-      this.droplet.name = droplet.name;
       this.droplet.description = droplet.description;
-      this.dropletService.updateCurrentDroplet(droplet);
-      this.dropletService.pushDroplet(droplet);
+      this.dropletService.updateCurrentDroplet(this.droplet);
+      this.dropletService.pushDroplet(this.droplet);
     }
   }
 }

@@ -27,6 +27,7 @@ export class Create1Component implements OnInit {
   onSubmit(data) {
     this.droplet.name = data.name;
     this.dropletService.updateCurrentDroplet(this.droplet);
+    this.dropletService.pushDroplet(this.droplet);
     this.router.navigate(['create/create2']);
   }
 

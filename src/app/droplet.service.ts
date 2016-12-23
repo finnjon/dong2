@@ -4,7 +4,7 @@ import { Droplet } from './droplet';
 @Injectable()
 export class DropletService {
   pushedDroplet = new EventEmitter<Droplet>();
-  private droplet: Droplet = new Droplet("draft", "nameless", "empty", [], [], [], []);
+  private droplet: Droplet = new Droplet("draft", "", "", [], [], [], []);
 
   constructor() { }
 
