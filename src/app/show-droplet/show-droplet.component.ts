@@ -47,9 +47,13 @@ import { Router } from '@angular/router';
 
     <h4>Hints:</h4>
     <div *ngIf="droplet.hints.length < 1">None</div>
-    <div *ngFor="let hint of droplet.hints; let i=index">
-      <div class="hint">{{ hint.hint || "empty" }}</div>
+    <div class="row" *ngFor="let hint of droplet.hints; let i=index">
+      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.hint || "empty" }}</div>
+      <div class="col-md-2">
+        <span (click)="removeElement(i, 'hint')" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </div>
     </div>
+
     <h4>Tags:</h4>
     <div *ngIf="droplet.tags.length < 1">None</div>
     <button *ngFor="let tag of droplet.tags; let i=index" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
@@ -94,13 +98,6 @@ export class ShowDropletComponent implements OnInit {
     }
     this.dropletService.updateCurrentDroplet(this.droplet);
     this.dropletService.pushDroplet(this.droplet);
-    this.router.navigate(['create/create3']);
-  }
-
-  removeTag(index) {
-    this.droplet.tags.splice(index, 1);
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
   }
 
   editThis(field) {
@@ -117,6 +114,10 @@ export class ShowDropletComponent implements OnInit {
 
   selectQuestion(index) {
     this.router.navigate(['create/create4', index]);
+  }
+
+  selectHint(index) {
+    this.router.navigate(['create/create5', index]);
   }
 
 }

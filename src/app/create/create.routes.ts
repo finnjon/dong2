@@ -17,5 +17,6 @@ export const CREATE_ROUTES: Routes = [
   { path: 'create4', component: Create4Component },
   { path: 'create4/:index', component: Create4Component },
   { path: 'create5', component: Create5Component },
+  { path: 'create5/:index', component: Create5Component },
   { path: 'create6', component: Create6Component }
 ];
