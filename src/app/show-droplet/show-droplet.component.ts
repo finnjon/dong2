@@ -35,7 +35,7 @@ import { Router } from '@angular/router';
     <h4>Questions:</h4>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
-      <div class="question col-md-10" (click)="editQuestion(i)">
+      <div class="question col-md-10" (click)="selectQuestion(i)">
         <div>{{ question.prompt || "empty" }}</div>
         <div>{{ question.answer || "empty" }}</div>
         <div>{{ question.filledAnswer || "empty" }}</div>
@@ -113,6 +113,10 @@ export class ShowDropletComponent implements OnInit {
 
   selectExplanation(index) {
     this.router.navigate(['create/create3', index]);
+  }
+
+  selectQuestion(index) {
+    this.router.navigate(['create/create4', index]);
   }
 
 }
