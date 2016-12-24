@@ -22,7 +22,7 @@ import { DropletService } from '../../droplet.service';
         <input class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
       </div>
       <button type="submit" class="btn btn-default">Add Question</button>
-      <button class="btn btn-large" [routerLink]="['/create/create5']">Next</button>
+      <button class="btn" [routerLink]="['/create/create5']">Next</button>
     </form>
   `,
   styles: []

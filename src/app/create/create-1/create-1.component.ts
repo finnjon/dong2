@@ -9,9 +9,11 @@ import { Droplet } from '../../droplet';
     <h4>Step 1</h4>
     <p>Make sure no-one has already created your droplet. Check below. If nothing comes up you are good to go.</p>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
-      <input class="form-control" type="text" placeholder="Something here." ngModel name="name" (keyup)="search">
-      <!-- have search results here -->
-      <button type="submit" class="btn btn-large">This droplet is unique</button>
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="Add unique name" [ngModel]="droplet.name" name="name" (keyup)="search">
+        <!-- have search results here -->
+      </div>
+      <button type="submit" class="btn btn-default">Save name</button>
     </form>
   `,
   styles: []
