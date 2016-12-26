@@ -10,11 +10,11 @@ import { Subscription } from 'rxjs/Rx';
     <h4>Step 4</h4>
     <div>Add some questions to test understanding of this droplet.</div>
     <br>
-    <form id="questionForm" (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
+    <form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Question: <small>(required)</small></label>
-        <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." required></textarea>
-        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." required></textarea>
+        <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." required autofocus></textarea>
+        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." required autofocus></textarea>
       </div>
       <div class="form-group">
         <label>Answer: <small>(required)</small></label>
@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs/Rx';
       <div class="form-group">
         <label>Filled Answer:</label>
         <input id="filled" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
-        <input  id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
+        <input id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Question</span>
@@ -53,19 +53,20 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
-    this.dropletService.pushedDroplet.subscribe(
-      () => document.getElementById('question').focus()
-    )
   }
 
   ngAfterViewChecked() {
-    setTimeout(function(){
-      if (!(document.activeElement.id === ('question') ||
-          document.activeElement.id === ('answer') ||
-          document.activeElement.id === ('filled'))) {
-        document.getElementById('question').focus();
-      }
-    }, 500);
+    let el = document.getElementById('question');
+    if ( el ) {
+      setTimeout(function(){
+        let focussed = document.activeElement.id;
+         if (
+           focussed !== ('question') &&
+           focussed !== ('answer') &&
+           focussed !== ('filled')
+         ) { el.focus(); }
+       }, 500);
+    }
   }
 
   ngOnDestroy() {
@@ -73,7 +74,6 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   addQuestion(question, index) {
-    console.log(index);
     if (index) {
       this.droplet.questions[index] = question;
     } else {

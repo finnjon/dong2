@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked  } from '@angular/core';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
 
@@ -16,6 +16,13 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
   }
+
+  // ngOnChanges() { console.log("on changes");}
+  // ngDoCheck() { console.log("do check");}
+  // ngAfterContentInit() { console.log("after content init");}
+  // ngAfterContentChecked() { console.log("after content checked");}
+  // ngAfterViewInit() { console.log("after view init");}
+  // ngAfterViewChecked() { console.log("after view chcked");}
 
 
 

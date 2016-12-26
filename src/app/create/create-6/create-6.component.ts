@@ -28,10 +28,9 @@ export class Create6Component implements OnInit, AfterViewChecked {
     this.droplet = this.dropletService.getCurrentDroplet();
   }
 
-  ngAfterViewChecked() { //sets focus if not set
-    setTimeout(function(){
-      document.getElementById('tag').focus();
-    }, 500);
+  ngAfterViewChecked() {
+    let el = document.getElementById('tag');
+    if (el) { el.focus(); }
   }
 
   addTag(tag) { //adds one at a time to the tags array.

@@ -13,8 +13,8 @@ import { Subscription } from 'rxjs/Rx';
     <form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Explanation: <small>(required)</small></label>
-        <textarea id="explanation" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
-        <textarea id="explanation" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
+        <textarea id="explanation" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
+        <textarea id="explanation" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update</span>
@@ -43,15 +43,11 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
-    this.dropletService.pushedDroplet.subscribe(
-      () => document.getElementById('explanation').focus()
-    )
   }
 
-  ngAfterViewChecked() { //sets focus if not set
-    setTimeout(function(){
-      document.getElementById('explanation').focus();
-    }, 500);
+  ngAfterViewChecked() {
+    let el = document.getElementById('explanation');
+    if (el) { el.focus(); }
   }
 
   ngOnDestroy() {

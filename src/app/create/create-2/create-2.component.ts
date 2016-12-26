@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewChecked, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Droplet } from '../../droplet';
@@ -13,7 +13,7 @@ import { DropletService } from '../../droplet.service';
     <form (ngSubmit)="addDescription(f.value)" #f="ngForm">
       <div class="form-group">
         <label>Description: <small>(required)</small></label>
-        <textarea #description class="form-control" rows="3" name="description" placeholder="Add helpful description of what this droplet tests." [ngModel]="droplet.description" required></textarea>
+        <textarea id="description" class="form-control" rows="3" name="description" placeholder="Add helpful description of what this droplet tests." [ngModel]="droplet.description" required></textarea>
       </div>
       <button type="submit" class="btn btn-default">Save Description</button>
       <button class="btn" [routerLink]="['/create/create3']">Next</button>
@@ -24,7 +24,6 @@ import { DropletService } from '../../droplet.service';
 
 export class Create2Component implements OnInit, AfterViewChecked {
   droplet: Droplet;
-  @ViewChild('description') description: ElementRef;
 
   constructor(
     private dropletService: DropletService,
@@ -35,8 +34,9 @@ export class Create2Component implements OnInit, AfterViewChecked {
     this.droplet = this.dropletService.getCurrentDroplet();
   }
 
-  ngAfterViewChecked() { //sets focus if not set
-    this.description.nativeElement.focus();
+  ngAfterViewChecked() {
+    let el = document.getElementById('description');
+    if (el) { el.focus(); }
   }
 
   addDescription(droplet: Droplet){

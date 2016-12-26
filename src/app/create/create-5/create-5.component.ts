@@ -43,15 +43,11 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
-    this.dropletService.pushedDroplet.subscribe(
-      () => document.getElementById('hint').focus()
-    )
   }
 
-  ngAfterViewChecked() { //sets focus if not set
-    setTimeout(function(){
-      document.getElementById('hint').focus();
-    }, 500);
+  ngAfterViewChecked() {
+    let el = document.getElementById('hint');
+    if (el) { el.focus(); }
   }
 
   ngOnDestroy() {
