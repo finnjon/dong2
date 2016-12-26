@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
@@ -13,8 +13,8 @@ import { Subscription } from 'rxjs/Rx';
     <form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Explanation: <small>(required)</small></label>
-        <textarea *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
-        <textarea *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
+        <textarea id="explanation" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
+        <textarea id="explanation" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update</span>
@@ -25,8 +25,8 @@ import { Subscription } from 'rxjs/Rx';
   `,
   styles: []
 })
-export class Create3Component implements OnInit, OnDestroy {
-  private subscription: Subscription; //needed to revent memory leak on destroy
+export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
+  private routeSubscription: Subscription; //needed to revent memory leak on destroy
   droplet: Droplet;
   content: String;
   index: Number;
@@ -36,17 +36,26 @@ export class Create3Component implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.subscription = this.activatedRoute.params.subscribe(
+    this.routeSubscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
     );
   }
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      () => document.getElementById('explanation').focus()
+    )
+  }
+
+  ngAfterViewChecked() { //sets focus if not set
+    setTimeout(function(){
+      document.getElementById('explanation').focus();
+    }, 500);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe(); //prevents memory leaks from observable
+    this.routeSubscription.unsubscribe(); //prevents memory leaks from observable
   }
 
   addExplanation(explanation, index) {

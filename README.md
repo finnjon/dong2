@@ -26,6 +26,11 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 Run `ng github-pages:deploy` to deploy to Github Pages.
 
-## Further help
+##Notes
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1) Improve the way focussing is done. At the moment it feels crude.
+
+We need the focus back to the form in three circumstances:
+1) When the component loads - achieved with AfterViewChecked
+2) When a droplet is updated - achieved by subscribing to pushedDroplet and setting the focus
+3) Tricky one - when the route param changes but doesn't trigger a new component. For this we also use AfterViewChecked. We add a delay using the timeout so that we can check that the focus is not on one of the necessary fields because this lifecycle method is run all the time.

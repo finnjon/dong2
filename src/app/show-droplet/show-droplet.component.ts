@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
 import { Router } from '@angular/router';
@@ -89,15 +89,25 @@ export class ShowDropletComponent implements OnInit {
   removeElement(index, element) {
     if (element === "explanation") {
       this.droplet.explanations.splice(index, 1);
+      this.dropletService.updateCurrentDroplet(this.droplet);
+      this.dropletService.pushDroplet(this.droplet);
+      this.router.navigate(['create/create3']);
     } else if (element === "question") {
       this.droplet.questions.splice(index, 1);
+      this.dropletService.updateCurrentDroplet(this.droplet);
+      this.dropletService.pushDroplet(this.droplet);
+      this.router.navigate(['create/create4']);
     } else if (element === "hint") {
       this.droplet.hints.splice(index, 1);
+      this.dropletService.updateCurrentDroplet(this.droplet);
+      this.dropletService.pushDroplet(this.droplet);
+      this.router.navigate(['create/create5']);
     } else if (element === "tag") {
       this.droplet.tags.splice(index, 1);
+      this.dropletService.updateCurrentDroplet(this.droplet);
+      this.dropletService.pushDroplet(this.droplet);
+      this.router.navigate(['create/create6']);
     }
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
   }
 
   editThis(field) {

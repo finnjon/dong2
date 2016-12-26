@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
@@ -13,8 +13,8 @@ import { Subscription } from 'rxjs/Rx';
     <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Hint: <small>(required)</small></label>
-        <textarea *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].hint" name="hint" placeholder="Add a hint." required></textarea>
-        <textarea *ngIf="!index" class="form-control" rows="3" [(ngModel)]="hint" name="hint" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].hint" name="hint" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="hint" name="hint" placeholder="Add a hint." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Hint</span>
@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs/Rx';
   `,
   styles: []
 })
-export class Create5Component implements OnInit, OnDestroy {
+export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   private subscription: Subscription; //needed to revent memory leak on destroy
   droplet: Droplet;
   hint: String;
@@ -43,6 +43,15 @@ export class Create5Component implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      () => document.getElementById('hint').focus()
+    )
+  }
+
+  ngAfterViewChecked() { //sets focus if not set
+    setTimeout(function(){
+      document.getElementById('hint').focus();
+    }, 500);
   }
 
   ngOnDestroy() {

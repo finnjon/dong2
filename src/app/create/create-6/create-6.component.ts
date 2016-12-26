@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 
@@ -11,14 +11,14 @@ import { DropletService } from '../../droplet.service';
     <form (ngSubmit)="addTag(f.value)" #f="ngForm">
       <div class="form-group">
         <label>Tag: <small>(required)</small></label>
-        <input class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
+        <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
       </div>
       <button type="submit" class="btn btn-default">Add Tag</button>
     </form>
   `,
   styles: []
 })
-export class Create6Component implements OnInit {
+export class Create6Component implements OnInit, AfterViewChecked {
   droplet: Droplet;
   tag: String;
 
@@ -26,6 +26,12 @@ export class Create6Component implements OnInit {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+  }
+
+  ngAfterViewChecked() { //sets focus if not set
+    setTimeout(function(){
+      document.getElementById('tag').focus();
+    }, 500);
   }
 
   addTag(tag) { //adds one at a time to the tags array.
