@@ -3,6 +3,7 @@ import { CreateComponent } from './create/create.component';
 import { ApiComponent } from './api/api.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReviewComponent } from './review/review.component';
 import { CREATE_ROUTES} from './create/create.routes';
 import { AuthGuard } from './auth.guard';
 
@@ -12,6 +13,7 @@ const APP_ROUTES: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
+  { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'dashboard' }
 ];
 
