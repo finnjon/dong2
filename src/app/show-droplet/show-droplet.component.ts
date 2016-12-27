@@ -35,22 +35,20 @@ import { Router } from '@angular/router';
     <h4>Questions:</h4>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
-      <div class="question col-md-10" (click)="selectQuestion(i)">
-        <div>{{ question.prompt || "empty" }}</div>
+      <div class="question col-md-11" (click)="selectQuestion(i)">
+        <div>{{ question.prompt || "empty" }}
+          <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </div>
         <div>{{ question.answer || "empty" }}</div>
         <div>{{ question.filledAnswer || "empty" }}</div>
-      </div>
-      <div class="col-md-2">
-        <span (click)="removeElement(i, 'question')" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>
 
     <h4>Hints:</h4>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index">
-      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.hint || "empty" }}</div>
-      <div class="col-md-2">
-        <span (click)="removeElement(i, 'hint')" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.hint || "empty" }}
+        <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>
 
@@ -62,8 +60,12 @@ import { Router } from '@angular/router';
   `,
   styles: [`
     .explanation, .question, .hint {
-      border: 1px solid black;
-      padding: 10px; margin-bottom: 5px;
+      background-color: rgba(255, 235, 59, 0.54);
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 5px;
+      margin-left: 15px;
     }
     .droplet-name {
       font-size: 24px;
