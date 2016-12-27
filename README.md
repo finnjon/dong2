@@ -28,9 +28,8 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 
 ##Notes
 
-1) Improve the way focussing is done. At the moment it feels crude.
+Adding focus was a challenge. It turned out the lifecycle hook AfterViewChecked was run everytime I would want to check on focus, so I simply used this to set the focus using vanilla js. The issue was that sometimes there was a a mismatch between the hook running and the new element being created. It was stuck on the old one, could not find the element and threw an error. As a result I needed to check each time that it could find the element before performing the action.
 
-We need the focus back to the form in three circumstances:
-1) When the component loads - achieved with AfterViewChecked
-2) When a droplet is updated - achieved by subscribing to pushedDroplet and setting the focus
-3) Tricky one - when the route param changes but doesn't trigger a new component. For this we also use AfterViewChecked. We add a delay using the timeout so that we can check that the focus is not on one of the necessary fields because this lifecycle method is run all the time.
+The other issue was with questions where there were several fields and we needed to prevent focus always returning to the first one. To do this we needed to check for where focus was, before then only refocussing if it wasn't somewhere it ought to be. The problem was that it was slow to get focus, so I needed to add a setTimout to give it time to work.
+
+All feels a bit hacky. 
