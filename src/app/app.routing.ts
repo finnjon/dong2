@@ -17,8 +17,4 @@ const APP_ROUTES: Routes = [
   { path: '**', redirectTo: 'dashboard' }
 ];
 
-// export const appRoutingProviders: any[] = [
-//   AuthGuard
-// ];
-
 export const routing = RouterModule.forRoot(APP_ROUTES);

@@ -21,6 +21,7 @@ import { Create4Component } from './create/create-4/create-4.component';
 import { Create5Component } from './create/create-5/create-5.component';
 import { Create6Component } from './create/create-6/create-6.component';
 import { ReviewComponent } from './review/review.component';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { ReviewComponent } from './review/review.component';
     HttpModule,
     routing
   ],
-  providers: [AUTH_PROVIDERS, AuthGuard, Auth, DropletService],
+  providers: [AUTH_PROVIDERS, AuthGuard, Auth, DropletService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
