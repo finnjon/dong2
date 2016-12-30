@@ -3,7 +3,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 // Avoid name not found warnings
-
+declare var require: any //just a hack because the line below was throwing an error.
 let Auth0Lock: any = require('auth0-lock').default; //this is buggy but a persistent problem. Works now.
 
 @Injectable()
