@@ -12,6 +12,16 @@ export class DropletService {
     return this.droplet;
   }
 
+  setNewDroplet() {
+    this.droplet = new Droplet("draft", "", "", [], [], [], []);
+    this.setCurrentDroplet(this.droplet);
+  }
+
+  setCurrentDroplet(droplet) {
+    this.droplet = droplet;
+    this.pushDroplet(droplet);
+  }
+
   updateCurrentDroplet(droplet: Droplet) {
     this.droplet = droplet;
   }

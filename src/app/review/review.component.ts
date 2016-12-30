@@ -21,7 +21,6 @@ export class ReviewComponent implements OnInit {
     this.httpService.getReviewDroplets()
       .subscribe(
         (data: Response) => {
-          console.log(data);
           this.reviewDroplets = data.json();
       });
   }

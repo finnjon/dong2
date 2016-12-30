@@ -27,7 +27,7 @@ import { Router } from '@angular/router';
     <h4>Explanations:</h4>
     <div *ngIf="droplet.explanations.length < 1">None</div>
     <div class="row" *ngFor="let explanation of droplet.explanations; let i=index">
-      <div class="explanation col-md-11" (click)="selectExplanation(i)">{{ explanation.content }}
+      <div class="explanation col-md-10" (click)="selectExplanation(i)">{{ explanation.content }}
         <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>
@@ -35,7 +35,7 @@ import { Router } from '@angular/router';
     <h4>Questions:</h4>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
-      <div class="question col-md-11" (click)="selectQuestion(i)">
+      <div class="question col-md-10" (click)="selectQuestion(i)">
         <div>{{ question.prompt || "empty" }}
           <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         </div>
@@ -47,7 +47,7 @@ import { Router } from '@angular/router';
     <h4>Hints:</h4>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index">
-      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.hint || "empty" }}
+      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.content || "empty" }}
         <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>

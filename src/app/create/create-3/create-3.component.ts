@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs/Rx';
   styles: []
 })
 export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
-  private routeSubscription: Subscription; //needed to revent memory leak on destroy
+  private routeSubscription: Subscription; //needed to prevent memory leak on destroy
   droplet: Droplet;
   content: String;
   index: Number;

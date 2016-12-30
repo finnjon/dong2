@@ -6,6 +6,7 @@ export class Droplet {
     public explanations: any,
     public questions: any,
     public hints: any,
-    public tags: any
+    public tags: any,
+    public _id?: string
   ) {}
 }

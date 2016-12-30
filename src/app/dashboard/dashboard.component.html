@@ -1,5 +1,8 @@
 <h1>Dashboard</h1>
 <h3>Your Droplets</h3>
 <div *ngFor="let droplet of userDroplets">
-  <div>{{ droplet.name | uppercase }}</div>
+  <div>
+    <span>{{ droplet.name }}</span> |
+    <a [routerLink]="['/edit', droplet._id]">edit</a>
+  </div>
 </div>

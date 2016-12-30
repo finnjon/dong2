@@ -12,6 +12,7 @@ const APP_ROUTES: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
+  { path: 'edit/:id', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'dashboard' }

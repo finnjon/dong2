@@ -13,8 +13,8 @@ import { Subscription } from 'rxjs/Rx';
     <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Hint: <small>(required)</small></label>
-        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].hint" name="hint" placeholder="Add a hint." required></textarea>
-        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="hint" name="hint" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].content" name="hint" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="hint" placeholder="Add a hint." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Hint</span>

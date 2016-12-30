@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
 import { Response } from '@angular/http';
 
@@ -16,7 +17,6 @@ export class DashboardComponent implements OnInit {
     this.httpService.getUserDroplets()
       .subscribe(
         (data: Response) => {
-          console.log(data);
           this.userDroplets = data.json();
       });
   }
