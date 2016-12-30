@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
+import { HttpService } from '../../http.service';
 
 @Component({
   selector: 'app-create-6',
@@ -22,7 +23,10 @@ export class Create6Component implements OnInit, AfterViewChecked {
   droplet: Droplet;
   tag: String;
 
-  constructor(private dropletService: DropletService) { }
+  constructor(
+    private dropletService: DropletService,
+    private httpService: HttpService
+  ) { }
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
@@ -35,8 +39,12 @@ export class Create6Component implements OnInit, AfterViewChecked {
 
   addTag(tag) { //adds one at a time to the tags array.
     this.droplet.tags.push(tag); // hint is an object: hint.hint is the text
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        }
+      );
     this.tag = ''; //empty form field
   }
 

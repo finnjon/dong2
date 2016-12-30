@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth } from './auth.service';
+import { DropletService } from './droplet.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,15 @@ import { Auth } from './auth.service';
   providers: [ Auth ]
 })
 export class AppComponent {
-  constructor(private auth: Auth) {}
-  
+  constructor(
+    private auth: Auth,
+    private dropletService: DropletService,
+    private router: Router
+  ) {}
+
+  createNew() {
+    this.dropletService.setNewDroplet();
+    this.router.navigate(['create']);
+  }
+
 }

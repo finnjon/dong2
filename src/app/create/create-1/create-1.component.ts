@@ -19,7 +19,10 @@ import { Response } from '@angular/http';
           <div>{{ result.name }}</div>
         </div>
       </div>
-      <button type="submit" class="btn btn-default">Add Name</button>
+      <button type="submit" class="btn btn-default">
+        <span *ngIf="droplet._id">Edit Name</span>
+        <span *ngIf="!droplet._id">Add Name</span>
+      </button>
     </form>
   `,
   styleUrls: ['./create-1.component.css']
@@ -27,6 +30,7 @@ import { Response } from '@angular/http';
 export class Create1Component implements OnInit, AfterViewChecked {
   droplet: Droplet;
   searchResults = [];
+  error;
 
   constructor(
     private router: Router,
@@ -45,9 +49,14 @@ export class Create1Component implements OnInit, AfterViewChecked {
 
   onSubmit(data) {
     this.droplet.name = data.name;
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
-    this.router.navigate(['create/create2']);
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        },
+        (error) => this.error = error,
+        () => this.router.navigate(['create/create2'])
+      );
   }
 
   onSearch(query) {

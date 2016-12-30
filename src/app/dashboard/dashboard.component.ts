@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
 import { Response } from '@angular/http';
+import { Droplet } from '../droplet';
+import { DropletService } from '../droplet.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +12,14 @@ import { Response } from '@angular/http';
 })
 export class DashboardComponent implements OnInit {
   userDroplets;
+  droplet: Droplet;
+  error;
 
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private router: Router,
+    private httpService: HttpService,
+    private dropletService: DropletService
+  ) { }
 
   ngOnInit() {
     this.httpService.getUserDroplets()
@@ -19,6 +27,20 @@ export class DashboardComponent implements OnInit {
         (data: Response) => {
           this.userDroplets = data.json();
       });
+  }
+
+  editDroplet(id) {
+    console.log("clicked");
+    this.httpService.getDroplet(id)
+      .subscribe(
+        (data: Response) => {
+          this.droplet = data.json();
+          this.dropletService.setCurrentDroplet(this.droplet);
+          this.router.navigate(['/edit', this.droplet._id]);
+        }
+      ),
+      (error) => this.error = error;
+      () => this.router.navigate(['/edit', this.droplet._id]);
   }
 
 }

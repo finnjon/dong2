@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
+import { HttpService } from '../../http.service';
 
 @Component({
   selector: 'app-create-2',
@@ -27,7 +28,8 @@ export class Create2Component implements OnInit, AfterViewChecked {
 
   constructor(
     private dropletService: DropletService,
-    private router: Router
+    private router: Router,
+    private httpService: HttpService
   ) { }
 
   ngOnInit() {
@@ -41,8 +43,12 @@ export class Create2Component implements OnInit, AfterViewChecked {
 
   addDescription(droplet: Droplet){
     this.droplet.description = droplet.description;
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
-    this.router.navigate(['create/create3']);
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+          this.router.navigate(['create/create3']);
+        }
+      );
   }
 }

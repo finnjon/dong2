@@ -3,6 +3,7 @@
 <div *ngFor="let droplet of userDroplets">
   <div>
     <span>{{ droplet.name }}</span> |
-    <a [routerLink]="['/edit', droplet._id]">edit</a>
+    <!-- <a [routerLink]="['/edit', droplet._id]">edit</a> -->
+    <a (click)="editDroplet(droplet._id)">edit</a>
   </div>
 </div>

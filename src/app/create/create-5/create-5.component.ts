@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { Subscription } from 'rxjs/Rx';
+import { HttpService } from '../../http.service';
 
 @Component({
   selector: 'app-create-5',
@@ -34,7 +35,8 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   constructor(
     private dropletService: DropletService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private httpService: HttpService
   ) {
     this.subscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
@@ -60,8 +62,12 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
     } else {
       this.droplet.hints.push(hint); //note hint is an object
     }
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        }
+      );
     this.hint = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }
   }

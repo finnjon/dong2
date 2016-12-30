@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { Subscription } from 'rxjs/Rx';
+import { HttpService } from '../../http.service';
 
 @Component({
   selector: 'app-create-4',
@@ -44,7 +45,8 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
   constructor(
     private dropletService: DropletService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private httpService: HttpService
   ) {
     this.subscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
@@ -79,11 +81,14 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
     } else {
       this.droplet.questions.push(question); //note explanation is an object
     }
-    this.dropletService.updateCurrentDroplet(this.droplet);
-    this.dropletService.pushDroplet(this.droplet);
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        }
+      );
     this.question = {};
     if (index) {
-      console.log('navigating');
       this.router.navigate(['create/create4'])
     }
   }
