@@ -12,7 +12,7 @@ import { Response } from '@angular/http';
     <p>Make sure no-one has already created your droplet. Check below. If nothing comes up you are good to go.</p>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">
-        <input id="name" class="form-control" type="text" placeholder="Add unique name" [ngModel]="droplet.name" name="name" (keyup)="onSearch(f.value.name)">
+        <input id="name" class="form-control" type="text" placeholder="Add unique name" [ngModel]="droplet.name" name="name" (keyup)="onSearch(f.value.name)" autocomplete="off">
       </div>
       <div class="results">
         <div *ngFor="let result of searchResults">
