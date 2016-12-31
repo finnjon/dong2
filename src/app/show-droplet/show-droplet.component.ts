@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-show-droplet',
@@ -25,6 +27,7 @@ import { Router } from '@angular/router';
     </div>
 
     <h4>Explanations:</h4>
+    <button class="btn btn-sm" [routerLink]="['/create/create3']">Add New</button>
     <div *ngIf="droplet.explanations.length < 1">None</div>
     <div class="row" *ngFor="let explanation of droplet.explanations; let i=index">
       <div class="explanation col-md-10" (click)="selectExplanation(i)">{{ explanation.content }}
@@ -33,6 +36,7 @@ import { Router } from '@angular/router';
     </div>
 
     <h4>Questions:</h4>
+    <button class="btn btn-sm" [routerLink]="['/create/create4']">Add New</button>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
       <div class="question col-md-10" (click)="selectQuestion(i)">
@@ -45,6 +49,7 @@ import { Router } from '@angular/router';
     </div>
 
     <h4>Hints:</h4>
+    <button class="btn btn-sm" [routerLink]="['/create/create5']">Add New</button>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index">
       <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.content || "empty" }}
@@ -53,6 +58,7 @@ import { Router } from '@angular/router';
     </div>
 
     <h4>Tags:</h4>
+    <button class="btn btn-sm" [routerLink]="['/create/create6']">Add New</button>
     <div *ngIf="droplet.tags.length < 1">None</div>
     <button *ngFor="let tag of droplet.tags; let i=index" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
@@ -78,7 +84,8 @@ export class ShowDropletComponent implements OnInit {
 
   constructor(
     private dropletService: DropletService,
-    private router: Router
+    private router: Router,
+    private httpService: HttpService
   ) { }
 
   ngOnInit() {
@@ -91,25 +98,19 @@ export class ShowDropletComponent implements OnInit {
   removeElement(index, element) {
     if (element === "explanation") {
       this.droplet.explanations.splice(index, 1);
-      this.dropletService.updateCurrentDroplet(this.droplet);
-      this.dropletService.pushDroplet(this.droplet);
-      this.router.navigate(['create/create3']);
     } else if (element === "question") {
       this.droplet.questions.splice(index, 1);
-      this.dropletService.updateCurrentDroplet(this.droplet);
-      this.dropletService.pushDroplet(this.droplet);
-      this.router.navigate(['create/create4']);
     } else if (element === "hint") {
       this.droplet.hints.splice(index, 1);
-      this.dropletService.updateCurrentDroplet(this.droplet);
-      this.dropletService.pushDroplet(this.droplet);
-      this.router.navigate(['create/create5']);
     } else if (element === "tag") {
       this.droplet.tags.splice(index, 1);
-      this.dropletService.updateCurrentDroplet(this.droplet);
-      this.dropletService.pushDroplet(this.droplet);
-      this.router.navigate(['create/create6']);
     }
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        }
+      );
   }
 
   editThis(field) {
