@@ -30,7 +30,8 @@ import { HttpService } from '../http.service';
     <button class="btn btn-sm" [routerLink]="['/create/create3']">Add New</button>
     <div *ngIf="droplet.explanations.length < 1">None</div>
     <div class="row" *ngFor="let explanation of droplet.explanations; let i=index">
-      <div class="explanation col-md-10" (click)="selectExplanation(i)">{{ explanation.content }}
+      <div class="explanation col-md-10" (click)="selectExplanation(i)">
+        <span [innerHTML]="explanation.content || empty"></span>
         <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>
@@ -40,10 +41,16 @@ import { HttpService } from '../http.service';
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
       <div class="question col-md-10" (click)="selectQuestion(i)">
-        <div>{{ question.prompt || "empty" }}
+        <div>
+          <h5>Prompt:</h5>
+          <span [innerHTML]="question.prompt || empty"></span>
           <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         </div>
+        <hr>
+        <h5>Answer:</h5>
         <div>{{ question.answer || "empty" }}</div>
+        <hr>
+        <h5>Filled Answer:</h5>
         <div>{{ question.filledAnswer || "empty" }}</div>
       </div>
     </div>
@@ -52,7 +59,8 @@ import { HttpService } from '../http.service';
     <button class="btn btn-sm" [routerLink]="['/create/create5']">Add New</button>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index">
-      <div class="hint col-md-10" (click)="selectHint(i)">{{ hint.content || "empty" }}
+      <div class="hint col-md-10" (click)="selectHint(i)">
+        <span [innerHTML]="hint.content || empty"></span>
         <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
     </div>

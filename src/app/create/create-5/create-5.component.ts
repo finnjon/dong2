@@ -14,8 +14,8 @@ import { HttpService } from '../../http.service';
     <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Hint: <small>(required)</small></label>
-        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].content" name="hint" placeholder="Add a hint." required></textarea>
-        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="hint" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].content" name="content" placeholder="Add a hint." required></textarea>
+        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add a hint." required></textarea>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Hint</span>
@@ -29,7 +29,7 @@ import { HttpService } from '../../http.service';
 export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   private subscription: Subscription; //needed to revent memory leak on destroy
   droplet: Droplet;
-  hint: String;
+  content: String;
   index: Number;
 
   constructor(
@@ -68,7 +68,7 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
           this.dropletService.updateCurrentDroplet(droplet);
         }
       );
-    this.hint = ''; //empty form field
+    this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }
   }
 
