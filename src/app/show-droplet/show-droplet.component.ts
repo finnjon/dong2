@@ -83,11 +83,13 @@ import { HttpService } from '../http.service';
       <div class="progress-marker" [class.complete]="droplet.tags.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 2"></div>
     </h4>
-    <button class="btn btn-sm" [routerLink]="['/create/create6']">Add New</button>
     <div *ngIf="droplet.tags.length < 1">None</div>
     <button *ngFor="let tag of droplet.tags; let i=index" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
     </button>
+    <div>
+      <button class="btn btn-sm" [routerLink]="['/create/create6']">Add New</button>
+    </div>
   `,
   styles: [`
     .explanation, .question, .hint {

@@ -14,18 +14,27 @@ import { HttpService } from '../../http.service';
     <form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Question: <small>(required)</small></label>
-        <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." required autofocus></textarea>
-        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." required autofocus></textarea>
+        <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
+        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here."  (focus)="onFocus('question')" required></textarea>
+      </div>
+      <div *ngIf="focussed === 'question'" class="advice">
+        <p>Add a question and .....</p>
       </div>
       <div class="form-group">
         <label>Answer: <small>(required)</small></label>
-        <input id="answer" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].answer" name="answer" type="text" placeholder="Answer" required>
-        <input id="answer" *ngIf="!index" class="form-control" [(ngModel)]="question.answer" name="answer" type="text" placeholder="Answer" required>
+        <input id="answer" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].answer" name="answer" type="text" placeholder="Answer" (focus)="onFocus('answer')" required>
+        <input id="answer" *ngIf="!index" class="form-control" [(ngModel)]="question.answer" name="answer" type="text" placeholder="Answer" (focus)="onFocus('answer')" required>
+      </div>
+      <div *ngIf="focussed === 'answer'" class="advice">
+        <p>Add an answer and .....</p>
       </div>
       <div class="form-group">
         <label>Filled Answer:</label>
-        <input id="filled" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
-        <input id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here">
+        <input id="filled" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
+        <input id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
+      </div>
+      <div *ngIf="focussed === 'filledAnswer'" class="advice">
+        <p>If you would like an answer field to be pre-filled, do so here.</p>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Question</span>
@@ -41,6 +50,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
   droplet: Droplet;
   question = {};
   index: Number;
+  focussed = "question";
 
   constructor(
     private dropletService: DropletService,
@@ -90,6 +100,23 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
     this.question = {};
     if (index) {
       this.router.navigate(['create/create4'])
+    }
+  }
+
+  onFocus(field){
+    switch (field) {
+    case "question":
+      this.focussed = "question";
+      break;
+    case "answer":
+      this.focussed = "answer";
+      break;
+    case "filledAnswer":
+      this.focussed = "filledAnswer";
+      break;
+    default:
+      this.focussed = "";
+      ;
     }
   }
 

@@ -17,6 +17,9 @@ import { HttpService } from '../../http.service';
         <textarea id="explanation" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
         <textarea id="explanation" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
       </div>
+      <div class="advice">
+        <p>How would you explain this droplet to a student? Make sure you write plainly and do not make sure to direct students to other resources if additional concepts are required.</p>
+      </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update</span>
         <span *ngIf="!index">Add</span>

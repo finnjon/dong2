@@ -14,6 +14,9 @@ import { HttpService } from '../../http.service';
         <label>Tag: <small>(required)</small></label>
         <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
       </div>
+      <div class="advice">
+        <p>taggy tag</p>
+      </div>
       <button type="submit" class="btn btn-default">Add Tag</button>
     </form>
   `,

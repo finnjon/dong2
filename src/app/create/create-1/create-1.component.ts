@@ -12,7 +12,18 @@ import { Response } from '@angular/http';
     <p>Make sure no-one has already created your droplet. Check below. If nothing comes up you are good to go.</p>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">
-        <input id="name" class="form-control" type="text" placeholder="Add unique name" [ngModel]="droplet.name" name="name" (keyup)="onSearch(f.value.name)" autocomplete="off">
+        <input id="name"
+               class="form-control"
+               type="text"
+               placeholder="Add unique name"
+               [ngModel]="droplet.name"
+               name="name"
+               (keyup)="onSearch(f.value.name)"
+               autocomplete="off"
+               (focus)="onFocus()">
+      </div>
+      <div *ngIf="focussed" class="advice">
+        <p>Your name should be unique, not less than 10 characters, and the most obvious way a person would search for it.</p>
       </div>
       <div class="results">
         <div *ngFor="let result of searchResults">
@@ -31,6 +42,7 @@ export class Create1Component implements OnInit, AfterViewChecked {
   droplet: Droplet;
   searchResults = [];
   error;
+  focussed = false;
 
   constructor(
     private router: Router,
@@ -65,6 +77,10 @@ export class Create1Component implements OnInit, AfterViewChecked {
         (data: Response) => {
           this.searchResults = data.json();
       });
+  }
+
+  onFocus() {
+    this.focussed = true;
   }
 
 }

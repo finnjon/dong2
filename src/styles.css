@@ -3,3 +3,8 @@
 .pad8 {
   padding: 8px;
 }
+
+.advice {
+  padding: 10px;
+  background-color: yellow;
+}

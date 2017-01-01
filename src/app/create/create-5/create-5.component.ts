@@ -17,6 +17,9 @@ import { HttpService } from '../../http.service';
         <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].content" name="content" placeholder="Add a hint." required></textarea>
         <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add a hint." required></textarea>
       </div>
+      <div class="advice">
+        <p>Hinty hint.</p>
+      </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update Hint</span>
         <span *ngIf="!index">Add Hint</span>
