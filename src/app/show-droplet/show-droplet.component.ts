@@ -15,18 +15,25 @@ import { HttpService } from '../http.service';
           <span class="label label-danger">{{ droplet.open || "private" }}</span>
           <span class="label label-warning">{{ droplet.verified || "unverified" }}</span>
         </h4>
-        <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "New Droplet (Unnamed)" }}
+        <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "no name" }}
+          <div class="progress-marker" [class.complete]="droplet.name">
+        </div>
         </div>
       </div>
     </div>
 
-    <div *ngIf="droplet.description" class="row">
+    <h4>Description
+      <div class="progress-marker" [class.complete]="droplet.description"></div>
+    </h4>
+    <div class="row">
       <div class="col-md-10" (click)="editThis('description')">
-        <h5>{{ droplet.description || "empty" }}</h5>
+        <span>{{ droplet.description || "no description" }}</span>
       </div>
     </div>
 
-    <h4>Explanations:</h4>
+    <h4>Explanations
+      <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
+    </h4>
     <button class="btn btn-sm" [routerLink]="['/create/create3']">Add New</button>
     <div *ngIf="droplet.explanations.length < 1">None</div>
     <div class="row" *ngFor="let explanation of droplet.explanations; let i=index">
@@ -36,7 +43,13 @@ import { HttpService } from '../http.service';
       </div>
     </div>
 
-    <h4>Questions:</h4>
+    <h4>Questions
+      <div class="progress-marker" [class.complete]="droplet.questions.length > 0"></div>
+      <div class="progress-marker" [class.complete]="droplet.questions.length > 1"></div>
+      <div class="progress-marker" [class.complete]="droplet.questions.length > 2"></div>
+      <div class="progress-marker" [class.complete]="droplet.questions.length > 3"></div>
+      <div class="progress-marker" [class.complete]="droplet.questions.length > 4"></div>
+    </h4>
     <button class="btn btn-sm" [routerLink]="['/create/create4']">Add New</button>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index">
@@ -55,7 +68,7 @@ import { HttpService } from '../http.service';
       </div>
     </div>
 
-    <h4>Hints:</h4>
+    <h4>Hints (optional)</h4>
     <button class="btn btn-sm" [routerLink]="['/create/create5']">Add New</button>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index">
@@ -65,7 +78,11 @@ import { HttpService } from '../http.service';
       </div>
     </div>
 
-    <h4>Tags:</h4>
+    <h4>Tags
+      <div class="progress-marker" [class.complete]="droplet.tags.length > 0"></div>
+      <div class="progress-marker" [class.complete]="droplet.tags.length > 1"></div>
+      <div class="progress-marker" [class.complete]="droplet.tags.length > 2"></div>
+    </h4>
     <button class="btn btn-sm" [routerLink]="['/create/create6']">Add New</button>
     <div *ngIf="droplet.tags.length < 1">None</div>
     <button *ngFor="let tag of droplet.tags; let i=index" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
@@ -85,10 +102,22 @@ import { HttpService } from '../http.service';
       font-size: 24px;
       font-weight: bold;
     }
+    .progress-marker {
+      margin-left: 5px;
+      display: inline-block;
+      background-color: #d9534f;
+	    border-radius: 50%;
+	    width: 12px;
+	    height: 12px;
+    }
+    .complete {
+      background-color: green;
+    }
   `]
 })
 export class ShowDropletComponent implements OnInit {
   droplet: Droplet;
+  test = true;
 
   constructor(
     private dropletService: DropletService,
