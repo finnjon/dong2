@@ -34,6 +34,7 @@ export class HttpService {
 
   saveDroplet(droplet: Droplet) {
     if (droplet._id) {
+      droplet.updated_at = new Date().toJSON();
       return this.put(droplet);
     }
     return this.post(droplet);
