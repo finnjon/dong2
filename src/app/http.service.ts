@@ -8,7 +8,7 @@ import 'rxjs/Rx'; // to use map etc,
 
 @Injectable()
 export class HttpService {
-  private API_URL: string = 'http://localhost:3001';
+  private API_URL: string = 'https://localhost:3001';
 
   constructor(
     private http: Http,
