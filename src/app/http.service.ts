@@ -35,6 +35,7 @@ export class HttpService {
   saveDroplet(droplet: Droplet) {
     if (droplet._id) {
       droplet.updated_at = new Date().toJSON();
+      droplet.status = this.checkStatus(droplet);
       return this.put(droplet);
     }
     return this.post(droplet);
@@ -69,6 +70,19 @@ export class HttpService {
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
+  }
+
+  private checkStatus(droplet) {
+    if (
+      droplet.name &&
+      droplet.description &&
+      (droplet.explanations.length > 0) &&
+      (droplet.questions.length > 4) &&
+      (droplet.tags.length > 2)
+    ) { return "complete"; }
+    else {
+      return "draft";
+    }
   }
 
 }
