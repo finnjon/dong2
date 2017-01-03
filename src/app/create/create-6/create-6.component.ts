@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { HttpService } from '../../http.service';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-create-6',
@@ -33,6 +34,9 @@ export class Create6Component implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      droplet => this.droplet = droplet
+    )
   }
 
   ngAfterViewChecked() {

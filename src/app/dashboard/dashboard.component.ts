@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit {
   }
 
   editDroplet(id) {
-    console.log("clicked");
     this.httpService.getDroplet(id)
       .subscribe(
         (data: Response) => {

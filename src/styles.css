@@ -8,3 +8,13 @@
   padding: 10px;
   background-color: yellow;
 }
+
+.main-content {
+  padding: 0 15px;
+}
+
+.show-droplet {
+  height: 82vh;
+  overflow-y: auto;
+  padding-bottom: 25px;
+}

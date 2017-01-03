@@ -48,6 +48,9 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      droplet => this.droplet = droplet
+    )
   }
 
   ngAfterViewChecked() {
@@ -60,12 +63,13 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   addHint(hint, index) {
+    let dummy = this.droplet;
     if (index) {
-      this.droplet.hints[index] = hint;
+      dummy.hints[index] = hint;
     } else {
-      this.droplet.hints.push(hint); //note hint is an object
+      dummy.hints.push(hint); //note hint is an object
     }
-    this.httpService.saveDroplet(this.droplet)
+    this.httpService.saveDroplet(dummy)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);

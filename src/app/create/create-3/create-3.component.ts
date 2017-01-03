@@ -48,6 +48,9 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      droplet => this.droplet = droplet
+    )
   }
 
   ngAfterViewChecked() {

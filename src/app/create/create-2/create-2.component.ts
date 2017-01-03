@@ -43,6 +43,9 @@ export class Create2Component implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      droplet => this.droplet = droplet
+    )
   }
 
   ngAfterViewChecked() {

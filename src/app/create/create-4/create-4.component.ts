@@ -15,7 +15,7 @@ import { HttpService } from '../../http.service';
       <div class="form-group">
         <label>Question: <small>(required)</small></label>
         <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
-        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here."  (focus)="onFocus('question')" required></textarea>
+        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
       </div>
       <div *ngIf="focussed === 'question'" class="advice">
         <p>Add a question and .....</p>
@@ -65,6 +65,9 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
+    this.dropletService.pushedDroplet.subscribe(
+      droplet => this.droplet = droplet
+    )
   }
 
   ngAfterViewChecked() {

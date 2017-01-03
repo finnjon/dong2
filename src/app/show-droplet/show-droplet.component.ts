@@ -36,7 +36,6 @@ import { HttpService } from '../http.service';
 })
 export class ShowDropletComponent implements OnInit {
   droplet: Droplet;
-  test = true;
 
   constructor(
     private dropletService: DropletService,
@@ -52,16 +51,21 @@ export class ShowDropletComponent implements OnInit {
   }
 
   removeElement(index, element) {
+    console.log("remove clicked");
+    let dummy = this.droplet;
     if (element === "explanation") {
-      this.droplet.explanations.splice(index, 1);
+      this.router.navigate(['create/create3']);
+      dummy.explanations.splice(index, 1);
     } else if (element === "question") {
-      this.droplet.questions.splice(index, 1);
+      this.router.navigate(['create/create4']);
+      dummy.questions.splice(index, 1);
     } else if (element === "hint") {
-      this.droplet.hints.splice(index, 1);
+      this.router.navigate(['create/create5']);
+      dummy.hints.splice(index, 1);
     } else if (element === "tag") {
-      this.droplet.tags.splice(index, 1);
+      dummy.tags.splice(index, 1);
     }
-    this.httpService.saveDroplet(this.droplet)
+    this.httpService.saveDroplet(dummy)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
@@ -78,18 +82,25 @@ export class ShowDropletComponent implements OnInit {
   }
 
   selectExplanation(index) {
-    console.log("select exp");
+    console.log("select exp clicked");
     this.router.navigate(['create/create3', index]);
   }
 
   selectQuestion(index) {
-    console.log("select que");
+    console.log("rselect q clicked");
     this.router.navigate(['create/create4', index]);
   }
 
   selectHint(index) {
-    console.log("select hint");
+    console.log("select hint clicked");
     this.router.navigate(['create/create5', index]);
+  }
+
+  tracking(index, item) {
+    console.log(index);
+    console.log(item);
+    console.log(item._id);
+    return item._id;
   }
 
 }
