@@ -18,3 +18,12 @@
   overflow-y: auto;
   padding-bottom: 25px;
 }
+
+.alert-success {
+  position: absolute;
+  width: 300px;
+  margin: 0 auto;
+  background-color: black;
+  color: white;
+  z-index: 9999;
+}

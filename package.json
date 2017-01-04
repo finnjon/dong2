@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
     "@types/node": "^6.0.53",
+    "angular2-flash-messages": "^1.0.4",
     "angular2-jwt": "^0.1.27",
     "auth0-lock": "^10.7.3",
     "core-js": "^2.4.1",

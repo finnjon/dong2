@@ -28,8 +28,16 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 
 ##Notes
 
+###Focus
+
 Adding focus was a challenge. It turned out the lifecycle hook AfterViewChecked was run everytime I would want to check on focus, so I simply used this to set the focus using vanilla js. The issue was that sometimes there was a a mismatch between the hook running and the new element being created. It was stuck on the old one, could not find the element and threw an error. As a result I needed to check each time that it could find the element before performing the action.
 
 The other issue was with questions where there were several fields and we needed to prevent focus always returning to the first one. To do this we needed to check for where focus was, before then only refocussing if it wasn't somewhere it ought to be. The problem was that it was slow to get focus, so I needed to add a setTimout to give it time to work.
 
-All feels a bit hacky. 
+All feels a bit hacky.
+
+###Alerts
+
+For this I used an npm package called angular2-flash-messages. This is added to the app.module and added as a service to each page you want. The messages are added to app.component.html but triggered from any component to which they are added.
+
+I have it a default bootstrap class of alert-success but then overrode the bootstrap classes in styles.css after putting it in a div to center it using bootstrap. Not super elegant but seems to work okay.

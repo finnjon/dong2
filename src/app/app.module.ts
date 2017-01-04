@@ -22,6 +22,7 @@ import { Create5Component } from './create/create-5/create-5.component';
 import { Create6Component } from './create/create-6/create-6.component';
 import { ReviewComponent } from './review/review.component';
 import { HttpService } from './http.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HttpService } from './http.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    FlashMessagesModule
   ],
   providers: [AUTH_PROVIDERS, AuthGuard, Auth, DropletService, HttpService],
   bootstrap: [AppComponent]
