@@ -4,11 +4,11 @@ import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { Subscription } from 'rxjs/Rx';
 import { HttpService } from '../../http.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-3',
   template: `
-    <h4>Step 3</h4>
     <div>Give a clear explanation to help students understand the droplet being tested.</div>
     <br>
     <form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
@@ -39,7 +39,8 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
     private dropletService: DropletService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) {
     this.routeSubscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
@@ -62,17 +63,24 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
     this.routeSubscription.unsubscribe(); //prevents memory leaks from observable
   }
 
+  //note here if the explanation has an index it exists already in which case I only update the relevant field because otherwise the whole object is transformed and I lose all the other data.
   addExplanation(explanation, index) {
     if (index) {
-      this.droplet.explanations[index] = explanation;
+      this.droplet.explanations[index].updated_at = new Date().toJSON();
+      this.droplet.explanations[index].content = explanation.content; //prevent ovveride
     } else {
-      this.droplet.explanations.push(explanation); //note explanation is an object
+      explanation.created_at = new Date().toJSON();
+      explanation.updated_at = new Date().toJSON();
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
-        }
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.droplet.explanations.push(explanation)
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create3']) }

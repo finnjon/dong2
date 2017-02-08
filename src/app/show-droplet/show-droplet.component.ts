@@ -32,6 +32,9 @@ import { HttpService } from '../http.service';
     .complete {
       background-color: green;
     }
+    .btn {
+      margin-bottom: 10px;
+    }
   `]
 })
 export class ShowDropletComponent implements OnInit {
@@ -51,8 +54,7 @@ export class ShowDropletComponent implements OnInit {
   }
 
   removeElement(index, element) {
-    console.log("remove clicked");
-    let dummy = this.droplet;
+    let dummy = this.droplet; //use dummy to ensure droplet is only updated after response from server.
     if (element === "explanation") {
       this.router.navigate(['create/create3']);
       dummy.explanations.splice(index, 1);
@@ -82,24 +84,18 @@ export class ShowDropletComponent implements OnInit {
   }
 
   selectExplanation(index) {
-    console.log("select exp clicked");
     this.router.navigate(['create/create3', index]);
   }
 
   selectQuestion(index) {
-    console.log("rselect q clicked");
     this.router.navigate(['create/create4', index]);
   }
 
   selectHint(index) {
-    console.log("select hint clicked");
     this.router.navigate(['create/create5', index]);
   }
 
   tracking(index, item) {
-    console.log(index);
-    console.log(item);
-    console.log(item._id);
     return item._id;
   }
 

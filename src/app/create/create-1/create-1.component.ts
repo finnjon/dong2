@@ -4,11 +4,11 @@ import { DropletService } from '../../droplet.service';
 import { Droplet } from '../../droplet';
 import { HttpService } from '../../http.service';
 import { Response } from '@angular/http';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-1',
   template: `
-    <h4>Step 1</h4>
     <p>Make sure no-one has already created your droplet. Check below. If nothing comes up you are good to go.</p>
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="form-group">
@@ -47,7 +47,8 @@ export class Create1Component implements OnInit, AfterViewChecked {
   constructor(
     private router: Router,
     private dropletService: DropletService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -69,7 +70,10 @@ export class Create1Component implements OnInit, AfterViewChecked {
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
         },
-        (error) => this.error = error,
+        (error) => {
+          this.error = error;
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
         () => this.router.navigate(['create/create2'])
       );
   }

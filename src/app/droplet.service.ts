@@ -47,12 +47,12 @@ export class DropletService {
 
   updateCurrentDroplet(droplet: Droplet) {
     this.droplet = droplet;
+    this.flashMessagesService.show('Droplet updated!', { cssClass: 'alert-success', timeout: 2000 });
     this.pushDroplet(droplet);
   }
 
   pushDroplet(droplet: Droplet) {
     this.pushedDroplet.emit(droplet);
-    this.flashMessagesService.show('Droplet updated!', { cssClass: 'alert-success', timeout: 1500 });
   }
 
 }

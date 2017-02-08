@@ -3,11 +3,11 @@ import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { HttpService } from '../../http.service';
 import { Subscription } from 'rxjs/Rx';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-6',
   template: `
-    <h4>Step 6</h4>
     <div>Add search terms to help people find your droplet. Add one at a time and press enter or add.</div>
     <br>
     <form (ngSubmit)="addTag(f.value)" #f="ngForm">
@@ -29,7 +29,8 @@ export class Create6Component implements OnInit, AfterViewChecked {
 
   constructor(
     private dropletService: DropletService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -45,12 +46,16 @@ export class Create6Component implements OnInit, AfterViewChecked {
   }
 
   addTag(tag) { //adds one at a time to the tags array.
-    this.droplet.tags.push(tag); // hint is an object: hint.hint is the text
+    tag.created_at = new Date().toJSON();
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
-        }
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.droplet.tags.push(tag) // tag is an object
       );
     this.tag = ''; //empty form field
   }

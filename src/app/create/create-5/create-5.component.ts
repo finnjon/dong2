@@ -4,11 +4,11 @@ import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { Subscription } from 'rxjs/Rx';
 import { HttpService } from '../../http.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-5',
   template: `
-    <h4>Step 5</h4>
     <div>Create hints that will help jog students' memories as they try to answer questions.</div>
     <br>
     <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
@@ -39,7 +39,8 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
     private dropletService: DropletService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) {
     this.subscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
@@ -65,15 +66,21 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   addHint(hint, index) {
     let dummy = this.droplet;
     if (index) {
-      dummy.hints[index] = hint;
+      dummy.hints[index].updated_at = new Date().toJSON();
+      dummy.hints[index].content = hint.content;
     } else {
-      dummy.hints.push(hint); //note hint is an object
+      hint.created_at = new Date().toJSON();
+      hint.updated_at = new Date().toJSON();
     }
     this.httpService.saveDroplet(dummy)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
-        }
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.droplet.hints.push(hint)
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }

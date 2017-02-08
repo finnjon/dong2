@@ -4,11 +4,11 @@ import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { Subscription } from 'rxjs/Rx';
 import { HttpService } from '../../http.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-4',
   template: `
-    <h4>Step 4</h4>
     <div>Add some questions to test understanding of this droplet.</div>
     <br>
     <form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
@@ -56,7 +56,8 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
     private dropletService: DropletService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) {
     this.subscription = this.activatedRoute.params.subscribe(
       (param: any) => this.index = param['index']
@@ -90,15 +91,23 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
 
   addQuestion(question, index) {
     if (index) {
-      this.droplet.questions[index] = question;
+      this.droplet.questions[index].updated_at = new Date().toJSON();
+      this.droplet.questions[index].prompt = question.prompt;
+      this.droplet.questions[index].answer = question.answer;
+      this.droplet.questions[index].filledAnswer = question.filledAnswer;
     } else {
-      this.droplet.questions.push(question); //note explanation is an object
+      question.created_at = new Date().toJSON();
+      question.updated_at = new Date().toJSON();
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
-        }
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.droplet.questions.push(question) //note explanation is an object
       );
     this.question = {};
     if (index) {

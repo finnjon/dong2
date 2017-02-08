@@ -4,12 +4,12 @@ import { NgForm } from '@angular/forms';
 import { Droplet } from '../../droplet';
 import { DropletService } from '../../droplet.service';
 import { HttpService } from '../../http.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-2',
   template: `
-    <h4>Step 2</h4>
-    <div>Now give your droplet a description.</div>
+    <div>Give your droplet a description.</div>
     <br>
     <form (ngSubmit)="addDescription(f.value)" #f="ngForm">
       <div class="form-group">
@@ -38,7 +38,8 @@ export class Create2Component implements OnInit, AfterViewChecked {
   constructor(
     private dropletService: DropletService,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -60,6 +61,9 @@ export class Create2Component implements OnInit, AfterViewChecked {
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
           this.router.navigate(['create/create3']);
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         }
       );
   }
