@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
@@ -23,6 +23,14 @@ import { Create6Component } from './create/create-6/create-6.component';
 import { ReviewComponent } from './review/review.component';
 import { HttpService } from './http.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { CallbackComponent } from './callback/callback.component';
+// import { QuillModule } from 'ngx-quill';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenGetter: (() => localStorage.getItem('access_token'))
+  }), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -39,16 +47,24 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     Create4Component,
     Create5Component,
     Create6Component,
-    ReviewComponent
+    ReviewComponent,
+    CallbackComponent
   ],
   imports: [
+    // QuillModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     routing,
     FlashMessagesModule
   ],
-  providers: [AUTH_PROVIDERS, AuthGuard, Auth, DropletService, HttpService],
+  providers: [
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    },
+       AuthGuard, Auth, DropletService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

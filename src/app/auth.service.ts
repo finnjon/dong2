@@ -1,57 +1,79 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
-
-// Avoid name not found warnings
-declare var require: any //just a hack because the line below was throwing an error.
-let Auth0Lock: any = require('auth0-lock').default; //this is buggy but a persistent problem. Works now.
+import 'rxjs/add/operator/filter';
+import * as auth0 from 'auth0-js';
 
 @Injectable()
 export class Auth {
-  //Configure Auth0Lock
-  lock = new Auth0Lock('DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis', 'deeply.eu.auth0.com', {});
 
-  userProfile: Object;
+  userProfile: any;
 
-  constructor(private router: Router) {
-    // Set userProfile attribute of already saved profile
-    this.userProfile = JSON.parse(localStorage.getItem('profile'));
+  auth0 = new auth0.WebAuth({
+    clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',
+    domain: 'deeply.eu.auth0.com',
+    responseType: 'token id_token',
+    audience: 'https://deeply.eu.auth0.com/userinfo',
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid profile'
+  });
 
-    // Add callback for lock 'authenticated' event
-    this.lock.on("authenticated", (authResult) => {
-      localStorage.setItem('id_token', authResult.idToken);
+  constructor(public router: Router) { };
 
-      // Fetch profile information
-      this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-        if (error) {
-          //Handle error
-          alert(error);
-          return;
-        }
+  public login(): void {
+    this.auth0.authorize();
+  };
 
-        localStorage.setItem('profile', JSON.stringify(profile));
-        this.userProfile = profile;
-        this.router.navigate(['dashboard']);
-      });
+  public handleAuthentication(): void {
+    this.auth0.parseHash((err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        window.location.hash = '';
+        this.setSession(authResult);
+        this.router.navigate(['/dashboard']);
+      } else if (err) {
+        this.router.navigate(['/signup']);
+        console.log(err);
+      }
     });
-  };
+  }
 
-  public login() {
-    // Call the show method to display teh widget.
-    this.lock.show();
-  };
+  private setSession(authResult): void {
+    // Set the time that the access token will expire at
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_at', expiresAt);
+  }
 
-  public authenticated() {
-    // Check for unexpired JWT
-    // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired();
-  };
+  public getProfile(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access token must exist to fetch profile');
+    }
 
-  public logout() {
-    // Remove token from localStorage
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
+  public isAuthenticated(): boolean {
+    // Check whether the current time is past the
+    // access token's expiry time
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
+  }
+
+  public logout(): void {
+    // Remove tokens and expiry time from localStorage
+    localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
-    this.router.navigate(['']);
-  };
+    localStorage.removeItem('expires_at');
+    // Go back to the home route
+    this.router.navigate(['/']);
+  }
 
 
 }

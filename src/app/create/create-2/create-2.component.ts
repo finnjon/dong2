@@ -8,27 +8,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-2',
-  template: `
-    <div>Give your droplet a description.</div>
-    <br>
-    <form (ngSubmit)="addDescription(f.value)" #f="ngForm">
-      <div class="form-group">
-        <label>Description: <small>(required)</small></label>
-        <textarea id="description"
-                  class="form-control"
-                  rows="3"
-                  name="description"
-                  placeholder="Add helpful description of what this droplet tests." [ngModel]="droplet.description"
-                  required></textarea>
-      </div>
-      <div class="advice">
-        <p>Give a brief and clear description of whatever your droplet is testing, with examples if possible. Use HTML tags to make it clearer.</p>
-      </div>
-      <button type="submit" class="btn btn-default">Save Description</button>
-      <button class="btn" [routerLink]="['/create/create3']">Next</button>
-    </form>
-
-  `,
+  templateUrl: 'create-2.component.html',
   styles: []
 })
 

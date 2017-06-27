@@ -14,8 +14,26 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     <form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Question: <small>(required)</small></label>
-        <textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
-        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
+        <textarea
+          *ngIf="index"
+          id="question"
+          name="prompt"
+          placholder="Add a question here."
+          [(ngModel)]="droplet.questions[index].prompt"
+          required
+          (focus)="onFocus('question')">
+        </textarea>
+        <textarea
+          *ngIf="!index"
+          id="question"
+          name="prompt"
+          placholder="Add a question here."
+          [(ngModel)]="question.prompt"
+          required
+          (focus)="onFocus('question')">
+        </textarea>
+        <!--<textarea id="question" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.questions[index].prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>
+        <textarea id="question" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="question.prompt" name="prompt" placeholder="Add a question here." (focus)="onFocus('question')" required></textarea>-->
       </div>
       <div *ngIf="focussed === 'question'" class="advice">
         <p>Add a question and .....</p>
@@ -107,7 +125,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
         (error) => {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.droplet.questions.push(question) //note explanation is an object
+        () => this.droplet.questions.push(question)
       );
     this.question = {};
     if (index) {

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import { AuthHttp } from 'angular2-jwt';
 import { Auth } from './auth.service';
 import { Droplet } from './droplet';
 import { Observable } from 'rxjs/Observable'; //curious
-import 'rxjs/Rx'; // to use map etc,
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpService {
-  private API_URL: string = 'http://localhost:3001';
+
+  API_URL: string = 'http://localhost:3001';
 
   constructor(
     private http: Http,
-    private authHttp: AuthHttp,
+    public authHttp: AuthHttp,
     private auth: Auth
   ) { }
 

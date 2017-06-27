@@ -14,8 +14,24 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     <form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Explanation: <small>(required)</small></label>
-        <textarea id="explanation" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.explanations[index].content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
-        <textarea id="explanation" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add an explanation of the content this droplet tests." required autofocus></textarea>
+        <textarea
+          *ngIf="index"
+          id="explanation"
+          name="content"
+          placholder="Add an explanation of the content this droplet tests."
+          [(ngModel)]="droplet.explanations[index].content"
+          required
+          autofocus>
+        </textarea>
+        <textarea
+          *ngIf="!index"
+          id="explanation"
+          name="content"
+          placholder="Add an explanation of the content this droplet tests."
+          [(ngModel)]="content"
+          required
+          autofocus>
+        </textarea>
       </div>
       <div class="advice">
         <p>How would you explain this droplet to a student? Make sure you write plainly and do not make sure to direct students to other resources if additional concepts are required.</p>

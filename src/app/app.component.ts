@@ -6,15 +6,17 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [ Auth ]
+  styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   constructor(
-    private auth: Auth,
+    public auth: Auth,
     private dropletService: DropletService,
     private router: Router
-  ) {}
+  ) {
+    auth.handleAuthentication();
+  }
 
   createNew() {
     this.dropletService.setNewDroplet();

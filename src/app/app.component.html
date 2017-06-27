@@ -6,7 +6,7 @@
 
 <nav class="navbar">
   <a class="navbar-brand" [routerLink]="['/dashboard']">Deeply Open</a>
-  <ul class="nav navbar-nav" *ngIf="auth.authenticated()">
+  <ul class="nav navbar-nav" *ngIf="auth.isAuthenticated()">
     <li class="nav-item active">
       <a class="nav-link" [routerLink]="['/dashboard']">Dashboard<span class="sr-only">(current)</span></a>
     </li>
@@ -22,8 +22,8 @@
     </li>
   </ul>
   <div class="pull-right pad8">
-    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In | Sign Up</li>
-    <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</li>
+    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In | Sign Up</li>
+    <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
   </div>
 </nav>
 
