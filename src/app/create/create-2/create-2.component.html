@@ -1,15 +1,20 @@
-<div>Give your droplet a description.</div>
-<br>
 <form (ngSubmit)="addDescription(f.value)" #f="ngForm">
   <div class="form-group">
     <label>Description: <small>(required)</small></label>
-    <!-- <quill-editor
+    <quill-editor
       id="description"
       name="description"
       placholder="Add helpful description of what this droplet tests."
       [ngModel]="droplet.description"
+      (onEditorCreated)="setFocus($event)"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'clean']
+        ]
+      }"
       required>
-    </quill-editor> -->
+    </quill-editor>
   </div>
   <div class="advice">
     <p>Give a brief and clear description of whatever your droplet is testing, with examples if possible. Use HTML tags to make it clearer.</p>

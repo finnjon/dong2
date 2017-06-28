@@ -9,32 +9,42 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-create-3',
   template: `
-    <div>Give a clear explanation to help students understand the droplet being tested.</div>
-    <br>
     <form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Explanation: <small>(required)</small></label>
-        <textarea
+        <quill-editor
           *ngIf="index"
           id="explanation"
           name="content"
           placholder="Add an explanation of the content this droplet tests."
           [(ngModel)]="droplet.explanations[index].content"
-          required
-          autofocus>
-        </textarea>
-        <textarea
+          (onEditorCreated)="setFocus($event)"
+          [modules]="{
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['code-block', 'clean']
+            ]
+          }"
+          required>
+        </quill-editor>
+        <quill-editor
           *ngIf="!index"
           id="explanation"
           name="content"
           placholder="Add an explanation of the content this droplet tests."
           [(ngModel)]="content"
-          required
-          autofocus>
-        </textarea>
+          (onEditorCreated)="setFocus($event)"
+          [modules]="{
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['code-block', 'clean']
+            ]
+          }"
+          required>
+        </quill-editor>
       </div>
       <div class="advice">
-        <p>How would you explain this droplet to a student? Make sure you write plainly and do not make sure to direct students to other resources if additional concepts are required.</p>
+        <p>How would you explain this droplet to a student? Make sure you write plainly and make sure to direct students to other resources if additional concepts are required.</p>
       </div>
       <button type="submit" class="btn btn-default">
         <span *ngIf="index">Update</span>
@@ -100,6 +110,10 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create3']) }
+  }
+
+  setFocus($event) {
+    $event.focus();
   }
 
 }

@@ -47,4 +47,8 @@ export class Create2Component implements OnInit, AfterViewChecked {
         }
       );
   }
+
+  setFocus($event) {
+    $event.focus();
+  }
 }

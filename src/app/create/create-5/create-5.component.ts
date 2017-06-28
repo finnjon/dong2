@@ -14,8 +14,33 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
       <div class="form-group">
         <label>Hint: <small>(required)</small></label>
-        <textarea id="hint" *ngIf="index" class="form-control" rows="3" [(ngModel)]="droplet.hints[index].content" name="content" placeholder="Add a hint." required></textarea>
-        <textarea id="hint" *ngIf="!index" class="form-control" rows="3" [(ngModel)]="content" name="content" placeholder="Add a hint." required></textarea>
+        <quill-editor
+          id="hint"
+          *ngIf="index"
+          [(ngModel)]="droplet.hints[index].content"name="content"
+          placeholder="Add a hint."
+          (onEditorCreated)="setFocus($event)"
+          [modules]="{
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['code-block', 'clean']
+            ]
+          }"
+          required></quill-editor>
+        <quill-editor
+          id="hint"
+          *ngIf="!index"
+          [(ngModel)]="content"
+          name="content"
+          placeholder="Add a hint."
+          (onEditorCreated)="setFocus($event)"
+          [modules]="{
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['code-block', 'clean']
+            ]
+          }"
+          required></quill-editor>
       </div>
       <div class="advice">
         <p>Hinty hint.</p>
@@ -84,6 +109,10 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }
+  }
+
+  setFocus($event) {
+    $event.focus();
   }
 
 }
