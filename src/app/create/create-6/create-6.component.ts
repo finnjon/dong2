@@ -45,8 +45,10 @@ export class Create6Component implements OnInit, AfterViewChecked {
     if (el) { el.focus(); }
   }
 
-  addTag(tag) { //adds one at a time to the tags array.
+  //note you can't edit tags as there is no point. You just delete the one you don't like and make another one.
+  addTag(tag) {
     tag.created_at = new Date().toJSON();
+    this.droplet.tags.push(tag);
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
@@ -54,8 +56,7 @@ export class Create6Component implements OnInit, AfterViewChecked {
         },
         (error) => {
           this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
-        },
-        () => this.droplet.tags.push(tag) // tag is an object
+        }
       );
     this.tag = ''; //empty form field
   }

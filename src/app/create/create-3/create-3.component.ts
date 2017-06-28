@@ -93,10 +93,11 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
   addExplanation(explanation, index) {
     if (index) {
       this.droplet.explanations[index].updated_at = new Date().toJSON();
-      this.droplet.explanations[index].content = explanation.content; //prevent ovveride
+      this.droplet.explanations[index].content = explanation.content; //prevent overide
     } else {
       explanation.created_at = new Date().toJSON();
       explanation.updated_at = new Date().toJSON();
+      this.droplet.explanations.push(explanation);
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
@@ -106,7 +107,7 @@ export class Create3Component implements OnInit, OnDestroy, AfterViewChecked {
         (error) => {
           this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.droplet.explanations.push(explanation)
+        // () => this.droplet.explanations.push(explanation)
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create3']) }

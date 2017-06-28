@@ -128,6 +128,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
     } else {
       question.created_at = new Date().toJSON();
       question.updated_at = new Date().toJSON();
+      this.droplet.questions.push(question);
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
@@ -136,8 +137,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
         },
         (error) => {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
-        },
-        () => this.droplet.questions.push(question)
+        }
       );
     this.question = {};
     if (index) {

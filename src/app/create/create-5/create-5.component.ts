@@ -89,23 +89,22 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   addHint(hint, index) {
-    let dummy = this.droplet;
-    if (index) {
-      dummy.hints[index].updated_at = new Date().toJSON();
-      dummy.hints[index].content = hint.content;
-    } else {
+    if (index) { //if updating
+      this.droplet.hints[index].updated_at = new Date().toJSON();
+      this.droplet.hints[index].content = hint.content;
+    } else { //if new one
       hint.created_at = new Date().toJSON();
       hint.updated_at = new Date().toJSON();
+      this.droplet.hints.push(hint);
     }
-    this.httpService.saveDroplet(dummy)
+    this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
         },
         (error) => {
           this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
-        },
-        () => this.droplet.hints.push(hint)
+        }
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }
