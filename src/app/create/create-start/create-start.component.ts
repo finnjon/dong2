@@ -15,6 +15,7 @@ import { Droplet } from '../../droplet';
   `,
   styles: []
 })
+
 export class CreateStartComponent implements OnInit {
   droplet: Droplet;
   newDroplet = true;

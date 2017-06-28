@@ -5,14 +5,14 @@ import * as auth0 from 'auth0-js';
 
 @Injectable()
 export class Auth {
-
   userProfile: any;
+  profile: any;
 
   auth0 = new auth0.WebAuth({
     clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',
     domain: 'deeply.eu.auth0.com',
     responseType: 'token id_token',
-    audience: 'https://deeply.eu.auth0.com/userinfo',
+    //audience: 'https://deeply.eu.auth0.com/userinfo',
     redirectUri: 'http://localhost:4200/callback',
     scope: 'openid profile'
   });
