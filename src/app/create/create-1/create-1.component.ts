@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DropletService } from '../../droplet.service';
 import { Droplet } from '../../droplet';
@@ -22,7 +22,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
                autocomplete="off"
                (focus)="onFocus()">
       </div>
-      <div *ngIf="focussed" class="advice">
+      <div class="advice">
         <p>Your name should be unique, not less than 10 characters, and the most obvious way a person would search for it.</p>
       </div>
       <div class="results">
@@ -38,7 +38,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   `,
   styleUrls: ['./create-1.component.css']
 })
-export class Create1Component implements OnInit, AfterViewChecked {
+export class Create1Component implements OnInit, AfterViewInit {
   droplet: Droplet;
   searchResults = [];
   error;
@@ -58,7 +58,7 @@ export class Create1Component implements OnInit, AfterViewChecked {
     )
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     let el = document.getElementById('name');
     if (el) { el.focus(); }
   }

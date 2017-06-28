@@ -5,6 +5,7 @@ import { Auth } from './auth.service';
 import { Droplet } from './droplet';
 import { Observable } from 'rxjs/Observable'; //curious
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HttpService {
