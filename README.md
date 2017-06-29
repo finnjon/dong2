@@ -1,9 +1,8 @@
 # TODO
 
 Try to configure the quill editor once for all instances.
-
 Get focusing to work with the editor.
-
+When uploaded make sure you can't boot from certain routes that won't work.
 Write a (better) piece on how the authentication works.
 
 # Dong2 Deeply Open Angular 2
