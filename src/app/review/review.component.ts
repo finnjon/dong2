@@ -37,18 +37,11 @@ export class ReviewComponent implements OnInit {
     private dropletService: DropletService,
     public auth: Auth,
     private flashMessagesService: FlashMessagesService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-      this.role = this.auth.userProfile["http://roles/roles"][0];
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-        this.role = profile["http://roles/roles"][0];
-      });
-    }
+    this.profile = this.auth.userProfile;
+    this.role = this.auth.role;
     this.httpService.getReviewDroplets()
       .subscribe(
         (data: Response) => {
@@ -72,7 +65,6 @@ export class ReviewComponent implements OnInit {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         }
       );
-      //if success, send notification and if the button does not flip, flip it.
   }
 
 }

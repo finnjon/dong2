@@ -25,12 +25,10 @@ export class Auth {
   };
 
   public handleAuthentication(): void {
-    console.log('authorizing');
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/dashboard']);
       } else if (err) {
         this.router.navigate(['/signup']);
         console.log(err);
@@ -45,21 +43,21 @@ export class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    this.getProfile();
   }
 
-  public getProfile(cb): void {
+  public getProfile(): void {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access token must exist to fetch profile');
     }
-
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
         self.role = self.userProfile["http://roles/roles"];
       }
-      cb(err, profile);
+      this.router.navigate(['/dashboard']);
     });
   }
 

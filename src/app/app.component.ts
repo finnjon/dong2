@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DropletService } from './droplet.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from './auth.service';
 
@@ -9,24 +8,11 @@ import { Auth } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
-  profile: any;
+export class AppComponent {
 
   constructor(
     public auth: Auth,
-    private dropletService: DropletService,
     private router: Router
-  ) {
-    //auth.handleAuthentication();
-  }
-
-  ngOnInit() {
-
-  }
-
-  createNew() {
-    this.dropletService.setNewDroplet();
-    this.router.navigate(['create']);
-  }
+  ) {}
 
 }

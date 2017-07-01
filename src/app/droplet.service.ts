@@ -6,12 +6,12 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Injectable()
 export class DropletService {
   pushedDroplet = new EventEmitter<Droplet>();
-  droplet;
+  droplet: any;
 
   constructor(
     private auth: Auth,
     private flashMessagesService: FlashMessagesService
-  ) { }
+  ) {}
 
   getCurrentDroplet() {
     if (this.droplet) {

@@ -9,7 +9,7 @@ import { CREATE_ROUTES} from './create/create.routes';
 import { AuthGuard } from './auth.guard';
 
 const APP_ROUTES: Routes = [
-  { path: '', component: SignupComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'callback', component: CallbackComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
