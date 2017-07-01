@@ -26,6 +26,7 @@ export class DropletService {
       "", //name
       "", //description
       this.auth.userProfile["sub"], //user_id
+      "", //editor
       new Date().toJSON(), //created_at
       new Date().toJSON(), //updated_at
       "draft", //status

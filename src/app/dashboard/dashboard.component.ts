@@ -11,9 +11,10 @@ import { DropletService } from '../droplet.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userDroplets;
+  userDroplets: any;
+  userReviewDroplets: any;
   droplet: Droplet;
-  error;
+  error: any;
 
   constructor(
     private router: Router,
@@ -26,6 +27,12 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (data: Response) => {
           this.userDroplets = data.json();
+      });
+
+    this.httpService.getUserReviewDroplets()
+      .subscribe(
+        (data: Response) => {
+          this.userReviewDroplets = data.json();
       });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from './auth.service';
 import { DropletService } from './droplet.service';
 import { Router } from '@angular/router';
+import { Auth } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +17,11 @@ export class AppComponent implements OnInit {
     private dropletService: DropletService,
     private router: Router
   ) {
-    auth.handleAuthentication();
+    //auth.handleAuthentication();
   }
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
+
   }
 
   createNew() {

@@ -26,6 +26,10 @@ export class HttpService {
     return this.authHttp.get(`${this.API_URL}/api/userDroplets`);
   }
 
+  getUserReviewDroplets() {
+    return this.authHttp.get(`${this.API_URL}/api/userReviewDroplets`);
+  }
+
   getDroplet(id) {
     return this.http.get(`${this.API_URL}/api/droplets/` + id);
   }

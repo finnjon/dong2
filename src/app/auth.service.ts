@@ -6,13 +6,14 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class Auth {
   userProfile: any;
+  role: any;
   profile: any;
 
   auth0 = new auth0.WebAuth({
     clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',
     domain: 'deeply.eu.auth0.com',
     responseType: 'token id_token',
-    //audience: 'https://deeply.eu.auth0.com/userinfo',
+    audience: 'http://localhost:3001',
     redirectUri: 'http://localhost:4200/callback',
     scope: 'openid profile'
   });
@@ -24,6 +25,7 @@ export class Auth {
   };
 
   public handleAuthentication(): void {
+    console.log('authorizing');
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
@@ -37,6 +39,7 @@ export class Auth {
   }
 
   private setSession(authResult): void {
+    console.log('setting session');
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -54,6 +57,7 @@ export class Auth {
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
+        self.role = self.userProfile["http://roles/roles"];
       }
       cb(err, profile);
     });
@@ -72,7 +76,7 @@ export class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/']);
+    this.router.navigate(['/signup']);
   }
 
 
