@@ -7,7 +7,7 @@ export class Droplet {
     public created_at: string,
     public updated_at: string,
     public status: string,
-    public verified: boolean,
+    public verified: string,
     public language: string,
     public open: boolean,
     public tags: any,

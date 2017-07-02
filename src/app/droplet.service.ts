@@ -30,7 +30,7 @@ export class DropletService {
       new Date().toJSON(), //created_at
       new Date().toJSON(), //updated_at
       "draft", //status
-      false, //verified
+      "unverified", //verified
       "", //language
       false, //open
       [], //tags

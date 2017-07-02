@@ -4,6 +4,7 @@ import { HttpService } from '../http.service';
 import { Response } from '@angular/http';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private httpService: HttpService,
-    private dropletService: DropletService
+    private dropletService: DropletService,
+    private flashMessagesService: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,21 @@ export class DashboardComponent implements OnInit {
       ),
       (error) => this.error = error;
       () => this.router.navigate(['/edit', this.droplet._id]);
+  }
+
+  unreviewDroplet(droplet) {
+    droplet.verified = "submitted";
+    droplet.editor = "";
+    this.httpService.saveDroplet(droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.userReviewDroplets.splice(droplet)
+      );
   }
 
 }

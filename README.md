@@ -56,3 +56,9 @@ I have it a default bootstrap class of alert-success but then overrode the boots
 ###Quill Editor
 
 For this I used ngx-quill, which can be seen in the package.json. To customise the toolbar you need to use the settings as can be seen in the code.
+
+###Droplet Editing and Completion
+
+When a droplet is created it is immediately assigned "unverified" and "draft". Once enough data has been added (i.e. name, description, questions, keywords etc) it is automatically upgraded to "complete". At this point it is possible to have it verified. The verification process begins with the owner submitting the droplet for verification at which point it becomes "submitted". Once an editor has agreed to edit the droplet, it becomes "under review" and finally when the editor verifies it, it becomes "verified".
+
+Only once a droplet is verified can it be made "public" and be accessible via the api for apps.

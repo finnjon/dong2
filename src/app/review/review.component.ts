@@ -55,7 +55,6 @@ export class ReviewComponent implements OnInit {
 
   addEditor(droplet: Droplet) {
     droplet.editor = this.profile.sub;
-    console.log(droplet);
     this.httpService.saveDroplet(droplet)
       .subscribe(
         (droplet: Droplet) => {

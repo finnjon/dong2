@@ -11,6 +11,7 @@
 <div *ngFor="let droplet of userReviewDroplets">
   <div>
     <span>{{ droplet.name }}</span> |
-    <a (click)="unreviewDroplet(droplet._id)">stop being reviewer</a>
+    <span>{{ droplet.verified }}</span> |
+    <a (click)="unreviewDroplet(droplet)">resign as reviewer</a>
   </div>
 </div>

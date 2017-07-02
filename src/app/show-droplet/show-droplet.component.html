@@ -5,6 +5,7 @@
       <span class="label label-danger">{{ droplet.open || "private" }}</span>
       <span class="label label-warning">{{ droplet.verified || "unverified" }}</span>
     </h4>
+    <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview()">Submit for Review</button>
     <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "no name" }}
       <div class="progress-marker" [class.complete]="droplet.name">
       </div>

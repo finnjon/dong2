@@ -95,6 +95,16 @@ export class ShowDropletComponent implements OnInit {
     this.router.navigate(['create/create5', index]);
   }
 
+  submitForReview() {
+    this.droplet.verified = "submitted";
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+        }
+      );
+  }
+
   tracking(index, item) {
     return item._id;
   }
