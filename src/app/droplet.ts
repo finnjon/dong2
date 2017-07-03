@@ -14,6 +14,7 @@ export class Droplet {
     public hints: any,
     public explanations: any,
     public questions: any,
+    public comments: any,
     public _id?: string
   ) {}
 }

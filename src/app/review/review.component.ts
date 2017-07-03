@@ -5,6 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Response } from '@angular/http';
 import { Auth } from '../auth.service';
 import { Droplet } from '../droplet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review',
@@ -15,8 +16,10 @@ import { Droplet } from '../droplet';
     <div *ngFor="let droplet of reviewDroplets">
       <div class="row pad">
         <div class="col-md-2">{{ droplet.name }}</div>
-        <div class="col-md-2"><button class="btn btn-primary btn-xsmall" *ngIf="!droplet.editor && role !== 'user'" (click)="addEditor(droplet)">Review this droplet</button></div>
-        <div class="col-md-2"><button class="btn btn-danger btn-xsmall" *ngIf="droplet.editor === profile.sub">You are reviewing</button></div>
+        <div class="col-md-2" *ngIf="!droplet.editor && role !== 'user'">
+          <button class="btn btn-primary btn-xsmall" (click)="addEditor(droplet)">Review this droplet</button>
+        </div>
+        <div class="col-md-2"><button class="btn btn-success btn-xsmall" *ngIf="droplet.editor === profile.sub" (click)="reviewDroplet(droplet)">Go to Review</button></div>
       </div>
     </div>
 
@@ -36,7 +39,8 @@ export class ReviewComponent implements OnInit {
     private httpService: HttpService,
     private dropletService: DropletService,
     public auth: Auth,
-    private flashMessagesService: FlashMessagesService
+    private flashMessagesService: FlashMessagesService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -55,6 +59,7 @@ export class ReviewComponent implements OnInit {
 
   addEditor(droplet: Droplet) {
     droplet.editor = this.profile.sub;
+    droplet.verified = "under review";
     this.httpService.saveDroplet(droplet)
       .subscribe(
         (droplet: Droplet) => {
@@ -64,6 +69,10 @@ export class ReviewComponent implements OnInit {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         }
       );
+  }
+
+  reviewDroplet(droplet: Droplet) {
+    this.router.navigate(['/editor', droplet._id]);
   }
 
 }

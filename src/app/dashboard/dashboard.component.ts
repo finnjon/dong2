@@ -67,4 +67,9 @@ export class DashboardComponent implements OnInit {
       );
   }
 
+  reviewDroplet(droplet: Droplet) {
+    this.dropletService.droplet = droplet;
+    this.router.navigate(['/editor', droplet._id]);
+  }
+
 }

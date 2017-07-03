@@ -25,6 +25,7 @@ import { HttpService } from './http.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { CallbackComponent } from './callback/callback.component';
 import { QuillModule } from 'ngx-quill';
+import { EditorComponent } from './editor/editor.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -48,7 +49,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     Create5Component,
     Create6Component,
     ReviewComponent,
-    CallbackComponent
+    CallbackComponent,
+    EditorComponent
   ],
   imports: [
     QuillModule,

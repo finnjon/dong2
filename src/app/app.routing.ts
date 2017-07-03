@@ -5,6 +5,7 @@ import { ApiComponent } from './api/api.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReviewComponent } from './review/review.component';
+import { EditorComponent } from './editor/editor.component';
 import { CREATE_ROUTES} from './create/create.routes';
 import { AuthGuard } from './auth.guard';
 
@@ -17,6 +18,7 @@ const APP_ROUTES: Routes = [
   { path: 'edit/:id', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
+  { path: 'editor/:id', component: EditorComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'dashboard' }
 ];
 

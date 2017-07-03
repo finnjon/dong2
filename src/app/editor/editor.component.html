@@ -1,0 +1,163 @@
+<div class="col-md-10 col-md-offset-1">
+<h2>Editor Page</h2>
+<p>Click on a comment bubble to leave a comment or suggestion (or edit one already existing). When you have left all your suggestions click 'notify author'.</p>
+
+<div class="row">
+  <div class="col-md-5">
+    <h4>Name <span class="glyphicon glyphicon-comment" (click)="toggleMe('name', 0)"></span></h4>
+    <span>{{ droplet.name || "no name" }}</span>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" (click)="toggleMe('name', 0)" *ngIf="showEdit !== 'name' + 0 && droplet.comments.name">
+      <label>Comment:</label>
+      <p>{{ droplet.comments.name }}</p>
+    </div>
+    <form (ngSubmit)="addComment(f.value, 'name', 0)" #f="ngForm" *ngIf="showEdit === 'name' + 0">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="droplet.comments.name">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-5">
+    <h4>Description <span class="glyphicon glyphicon-comment" (click)="toggleMe('description', 0)"></span></h4>
+    <span [innerHTML]="droplet.description"></span>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" (click)="toggleMe('description', 0)" *ngIf="showEdit !== 'description' + 0 && droplet.comments.description">
+      <label>Comment:</label>
+      <p>{{ droplet.comments.description }}</p>
+    </div>
+    <form (ngSubmit)="addComment(f.value, 'description', 0)" #f="ngForm" *ngIf="showEdit === 'description' + 0">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="droplet.comments.description">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<h4>Explanations</h4>
+<div class="row" *ngFor="let explanation of droplet.explanations; let i=index; trackBy: tracking">
+  <div class="col-md-5">
+    <h5>Explanation {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('explanations', i)"></span></h5>
+    <span [innerHTML]="explanation.content"></span>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" *ngIf="showEdit !== 'explanations' + i && explanation.comment">
+      <label>Comment:</label>
+      <p>{{ explanation.comment }}</p>
+    </div>
+    <form (ngSubmit)="addCommentMulti(f.value, 'explanations', i)" #f="ngForm" *ngIf="showEdit === 'explanations' + i">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="explanation.comment">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<h4>Questions</h4>
+<div class="row" *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
+  <div class="col-md-5">
+    <h5>Question {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('questions', i)"></span></h5>
+    <span [innerHTML]="question.prompt"></span>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" *ngIf="showEdit !== 'questions' + i && question.comment">
+      <label>Comment:</label>
+      <p>{{ question.comment }}</p>
+    </div>
+    <form (ngSubmit)="addCommentMulti(f.value, 'questions', i)" #f="ngForm" *ngIf="showEdit === 'questions' + i">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="question.comment">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<h4>Hints</h4>
+<div class="row" *ngFor="let hint of droplet.hints; let i=index; trackBy: tracking">
+  <div class="col-md-5">
+    <h5>Hint {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('hints', i)"></span></h5>
+    <span [innerHTML]="hint.content"></span>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" *ngIf="showEdit !== 'hints' + i && hint.comment">
+      <label>Comment:</label>
+      <p>{{ hint.comment }}</p>
+    </div>
+    <form (ngSubmit)="addCommentMulti(f.value, 'hints', i)" #f="ngForm" *ngIf="showEdit === 'hints' + i">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="hint.comment">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-5">
+    <h4>Tags <span class="glyphicon glyphicon-comment" (click)="toggleMe('tags', 0)"></span></h4>
+    <button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm">{{ tag.tag }}</button>
+  </div>
+  <div class="col-md-5">
+    <div class="comment-box" (click)="toggleMe('tags', 0)" *ngIf="showEdit !== 'tags' + 0 && droplet.comments.tags">
+      <label>Comment:</label>
+      <p>{{ droplet.comments.tags }}</p>
+    </div>
+    <form (ngSubmit)="addComment(f.value, 'tags', 0)" #f="ngForm" *ngIf="showEdit === 'tags' + 0">
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          placeholder="Add comment"
+          [ngModel]="droplet.comments.tags">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<!-- <h4>Tags</h4>
+<button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="commentThis(tag, i)">{{ tag.tag }}</button> -->
+
+</div>

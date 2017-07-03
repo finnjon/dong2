@@ -36,7 +36,8 @@ export class DropletService {
       [], //tags
       [], //hints
       [], //explanations
-      [] //questions
+      [], //questions
+      {} //comments
     );
     this.setCurrentDroplet(this.droplet);
   }
