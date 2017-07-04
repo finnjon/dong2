@@ -25,6 +25,7 @@ export class EditorComponent implements OnInit {
     this.dropletService.pushedDroplet.subscribe(
       droplet => this.droplet = droplet
     )
+    if (!this.droplet.comments) {this.droplet.comments = {};}
   }
 
   addComment(comment, field, index) {
