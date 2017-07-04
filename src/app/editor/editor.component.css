@@ -11,3 +11,7 @@ hr {
 .glyphicon-remove {
   float: right;
 }
+
+.margin-l-5 {
+  margin-left: 5px;
+}

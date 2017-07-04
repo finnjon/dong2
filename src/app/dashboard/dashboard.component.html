@@ -1,17 +1,21 @@
 <h1>Dashboard</h1>
 <h3>Your Droplets</h3>
-<div *ngFor="let droplet of userDroplets">
+<div *ngFor="let droplet of userDroplets" class="dropletRow">
   <div>
     <span>{{ droplet.name }}</span> |
-    <a (click)="editDroplet(droplet._id)">edit</a>
+    <button class="btn btn-xs" (click)="editDroplet(droplet._id)">Edit</button>
+    <button class="btn btn-xs" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
   </div>
 </div>
 
 <h3>Your Review Droplets</h3>
-<div *ngFor="let droplet of userReviewDroplets">
+<div *ngFor="let droplet of userReviewDroplets" class="dropletRow">
   <div>
     <span>{{ droplet.name }}</span> |
-    <span>{{ droplet.verified }}</span> |
+    <button
+      class="btn btn-xs"
+      [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
+    </button> |
     <a (click)="unreviewDroplet(droplet)">resign as reviewer</a> |
     <a (click)="reviewDroplet(droplet)">REVIEW</a>
   </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
 import { HttpService } from '../http.service';
-import {FlashMessagesService } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-editor',
@@ -15,6 +16,7 @@ export class EditorComponent implements OnInit {
   showEdit: any;
 
   constructor(
+    private router: Router,
     private dropletService: DropletService,
     private httpService: HttpService,
     private flashMessagesService: FlashMessagesService
@@ -72,6 +74,22 @@ export class EditorComponent implements OnInit {
           this.error = error;
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         }
+      );
+  }
+
+  alertAuthor() {
+    this.droplet.verified = "review complete";
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+          this.flashMessagesService.show('Author alerted', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        (error) => {
+          this.error = error;
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => this.router.navigate(['/dashboard'])
       );
   }
 
