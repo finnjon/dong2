@@ -52,18 +52,19 @@ export class DashboardComponent implements OnInit {
       () => this.router.navigate(['/edit', this.droplet._id]);
   }
 
-  unreviewDroplet(droplet) {
+  unreviewDroplet(droplet, index) {
     droplet.verified = "submitted";
     droplet.editor = "";
     this.httpService.saveDroplet(droplet)
       .subscribe(
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
+          this.flashMessagesService.show('You have successfully resigned as editor of this droplet', { cssClass: 'alert-success', timeout: 2000 });
         },
         (error) => {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.userReviewDroplets.splice(droplet)
+        () => this.userReviewDroplets.splice(index, 1)
       );
   }
 
