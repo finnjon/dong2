@@ -9,7 +9,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" (click)="toggleMe('name', 0)" *ngIf="showEdit !== 'name' + 0 && droplet.comments.name">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'name', 0)"></span></div>
       <p>{{ droplet.comments.name }}</p>
     </div>
     <form (ngSubmit)="addComment(f.value, 'name', 0)" #f="ngForm" *ngIf="showEdit === 'name' + 0">
@@ -35,7 +35,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" (click)="toggleMe('description', 0)" *ngIf="showEdit !== 'description' + 0 && droplet.comments.description">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'description', 0)"></span></div>
       <p>{{ droplet.comments.description }}</p>
     </div>
     <form (ngSubmit)="addComment(f.value, 'description', 0)" #f="ngForm" *ngIf="showEdit === 'description' + 0">
@@ -61,7 +61,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" *ngIf="showEdit !== 'explanations' + i && explanation.comment">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'explanations', i)"></span></div>
       <p>{{ explanation.comment }}</p>
     </div>
     <form (ngSubmit)="addCommentMulti(f.value, 'explanations', i)" #f="ngForm" *ngIf="showEdit === 'explanations' + i">
@@ -87,7 +87,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" *ngIf="showEdit !== 'questions' + i && question.comment">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'questions', i)"></span></div>
       <p>{{ question.comment }}</p>
     </div>
     <form (ngSubmit)="addCommentMulti(f.value, 'questions', i)" #f="ngForm" *ngIf="showEdit === 'questions' + i">
@@ -113,7 +113,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" *ngIf="showEdit !== 'hints' + i && hint.comment">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'hints', i)"></span></div>
       <p>{{ hint.comment }}</p>
     </div>
     <form (ngSubmit)="addCommentMulti(f.value, 'hints', i)" #f="ngForm" *ngIf="showEdit === 'hints' + i">
@@ -139,7 +139,7 @@
   </div>
   <div class="col-md-5">
     <div class="comment-box" (click)="toggleMe('tags', 0)" *ngIf="showEdit !== 'tags' + 0 && droplet.comments.tags">
-      <label>Comment:</label>
+      <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'tags', 0)"></span></div>
       <p>{{ droplet.comments.tags }}</p>
     </div>
     <form (ngSubmit)="addComment(f.value, 'tags', 0)" #f="ngForm" *ngIf="showEdit === 'tags' + 0">
