@@ -89,7 +89,14 @@
 <div class="row" *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
   <div class="col-md-5">
     <h5>Question {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('questions', i)"></span></h5>
-    <span [innerHTML]="question.prompt"></span>
+    <label>Prompt</label>
+    <div [innerHTML]="question.prompt"></div>
+    <label>Answer</label>
+    <div>{{ question.answer }}</div>
+    <div *ngIf="question.filled_answer">
+      <label>Pre-filled Answer</label>
+      <div>{{ question.filled_answer }}</div>
+    </div>
   </div>
   <div class="col-md-5">
     <div class="comment-box" *ngIf="showEdit !== 'questions' + i && question.comment">
