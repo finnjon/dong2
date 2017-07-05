@@ -5,10 +5,15 @@
       <span class="label label-danger">{{ droplet.open || "private" }}</span>
       <span class="label label-warning">{{ droplet.verified || "unverified" }}</span>
     </h4>
-    <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview()">Submit for Review</button>
+    <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('submit')">Submit for Review</button>
+    <button *ngIf="droplet.verified === 'under review' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('resubmit')">Resubmit for Review</button>
     <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "no name" }}
       <div class="progress-marker" [class.complete]="droplet.name">
       </div>
+    </div>
+    <div *ngIf="droplet.comments.name" class="left15 comments">
+      <label>Editor comment:</label>
+      <div>{{ droplet.comments.name }}</div>
     </div>
   </div>
 </div>
@@ -21,6 +26,10 @@
     <span [innerHTML]="droplet.description"></span>
   </div>
 </div>
+<div *ngIf="droplet.comments.description" class="left15 comments col-md-10">
+  <label>Editor comment:</label>
+  <div>{{ droplet.comments.description }}</div>
+</div>
 
 <h4>Explanations
   <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
@@ -31,6 +40,10 @@
   <div class="explanation col-md-10" (click)="selectExplanation(i)">
     <span [innerHTML]="explanation.content || empty"></span>
     <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
+  </div>
+  <div *ngIf="explanation.comment" class="comments col-md-10">
+    <label>Editor comment:</label>
+    <div>{{ explanation.comment }}</div>
   </div>
 </div>
 
@@ -57,6 +70,10 @@
     <h5>Filled Answer:</h5>
     <div>{{ question.filledAnswer || "empty" }}</div>
   </div>
+  <div *ngIf="question.comment" class="comments col-md-10">
+    <label>Editor comment:</label>
+    <div>{{ question.comment }}</div>
+  </div>
 </div>
 
 <h4>Hints (optional)</h4>
@@ -66,6 +83,10 @@
   <div class="hint col-md-10" (click)="selectHint(i)">
     <span [innerHTML]="hint.content || empty"></span>
     <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
+  </div>
+  <div *ngIf="hint.comment" class="comments col-md-10">
+    <label>Editor comment:</label>
+    <div>{{ hint.comment }}</div>
   </div>
 </div>
 
@@ -80,3 +101,7 @@
 <button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
 </button>
+<div *ngIf="droplet.comments.tags" class="left15 comments col-md-10">
+  <label>Editor comment:</label>
+  <div>{{ droplet.comments.tags }}</div>
+</div>

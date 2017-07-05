@@ -5,33 +5,8 @@ Get focusing to work with the editor.
 When uploaded make sure you can't boot from certain routes that won't work.
 Write a (better) piece on how the authentication works.
 
-# Dong2 Deeply Open Angular 2
-
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.19-3.
-
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
 
 ##Notes
 
@@ -57,8 +32,14 @@ I have it a default bootstrap class of alert-success but then overrode the boots
 
 For this I used ngx-quill, which can be seen in the package.json. To customise the toolbar you need to use the settings as can be seen in the code.
 
-###Droplet Editing and Completion
+###Droplet process
 
-When a droplet is created it is immediately assigned "unverified" and "draft". Once enough data has been added (i.e. name, description, questions, keywords etc) it is automatically upgraded to "complete". At this point it is possible to have it verified. The verification process begins with the owner submitting the droplet for verification at which point it becomes "submitted". Once an editor has agreed to edit the droplet, it becomes "under review" and finally when the editor verifies it, it becomes "verified".
+When a droplet is created it is a draft. In the creation view you can see what is necessary to complete for it to be assigned "complete". When all balls are turned green it will be automatically assigned the value "complete".
+
+Later we may add another designation "premium" for a genuinely wonderful droplet with multiple questions and so forth.
+
+###Droplet Editing
+
+When a droplet is created it is immediately assigned "unverified". Once enough data has been added the author can submit it for review. At this point it gets the status "submitted". At this point it will show up in the review panel and someone with the editor or admin role can elect to become the reviewer. They will then be able to select it at which point it is "under review". If it is perfect the editor can verify it. More likely they will add some comments and send it back. If they do it will get the status "review complete". The author should then make changes and resubmit. When they do it will be "resubmitted". This can go back and forth but finally it will be "verified".
 
 Only once a droplet is verified can it be made "public" and be accessible via the api for apps.

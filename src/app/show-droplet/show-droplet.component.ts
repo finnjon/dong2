@@ -35,6 +35,14 @@ import { HttpService } from '../http.service';
     .btn {
       margin-bottom: 10px;
     }
+    .comments {
+      border: 1px solid black;
+      padding: 5px;
+      margin: 0 0 10px 15px;
+    }
+    .left15 {
+      margin-left: 0;
+    }
   `]
 })
 export class ShowDropletComponent implements OnInit {
@@ -95,8 +103,12 @@ export class ShowDropletComponent implements OnInit {
     this.router.navigate(['create/create5', index]);
   }
 
-  submitForReview() {
-    this.droplet.verified = "submitted";
+  submitForReview(submissionType) {
+    if (submissionType === "submit") {
+      this.droplet.verified = "submitted";
+    } else if (submissionType === "resubmit") {
+      this.droplet.verified = "resubmitted";
+    }    
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
