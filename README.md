@@ -42,4 +42,13 @@ Later we may add another designation "premium" for a genuinely wonderful droplet
 
 When a droplet is created it is immediately assigned "unverified". Once enough data has been added the author can submit it for review. At this point it gets the status "submitted". At this point it will show up in the review panel and someone with the editor or admin role can elect to become the reviewer. They will then be able to select it at which point it is "under review". If it is perfect the editor can verify it. More likely they will add some comments and send it back. If they do it will get the status "review complete". The author should then make changes and resubmit. When they do it will be "resubmitted". This can go back and forth but finally it will be "verified".
 
+So in short it goes like this:
+
+- unverified
+- submitted
+- under review
+- review complete
+- resubmitted (optional)
+- verified
+
 Only once a droplet is verified can it be made "public" and be accessible via the api for apps.
