@@ -26,10 +26,10 @@
 }
 
 .alert-success {
-  position: absolute;
+  position: fixed;
   width: 300px;
   margin: 0 auto;
-  background-color: black;
-  color: white;
+  background-color: #fdfca5;
+  color: black;
   z-index: 9999;
 }
