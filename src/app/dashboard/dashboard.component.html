@@ -22,7 +22,16 @@
         <div class="col-md-3">{{ droplet.name | uppercase }}</div>
         <div class="col-md-4">
           <button class="btn btn-sm" (click)="reviewDroplet(droplet)">Review</button>
-          <button class="btn btn-sm" (click)="unreviewDroplet(droplet, i)">Resign!</button>
+          <button
+            class="btn btn-sm"
+            mwlConfirmationPopover
+            [title]="title"
+            [message]="message"
+            placement="left"
+            (confirm)="confirmClicked = true; unreviewDroplet(droplet, i)"
+            (cancel)="cancelClicked = true">
+            Resign!
+          </button>
           <button
             class="btn btn-sm btn-primary"
             [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
