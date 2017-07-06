@@ -31,7 +31,7 @@ app.use('*', function(req, res) {
 	return res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 8080;
 
 http.createServer(app).listen(port, function(err) {
 	console.log('listening in http://localhost:' + port);
