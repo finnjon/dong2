@@ -1,9 +1,8 @@
 {
-  "name": "auth0-nodejsapi-sample",
+  "name": "deeplydata-server",
   "version": "0.1.0",
-  "description": "Auth0 + NodeJS API Seed",
-  "repository": "git://github.com/auth0/auth0-nodejsapi-sample",
-  "author": "Auth0",
+  "description": "Sever stuff for deeply data",
+  "author": "Jonathon Martin",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -12,9 +11,8 @@
     "express-jwt": "^5.3.0",
     "mongoose": "^4.4.19",
     "jwks-rsa": "^1.2.0"
-
   },
   "engines": {
-    "node": "^4.3"
+    "node": "^6.10.2"
   }
 }
