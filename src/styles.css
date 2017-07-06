@@ -33,3 +33,18 @@
   color: black;
   z-index: 9999;
 }
+
+.right {
+  float: right;
+}
+
+.flash-message {
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}

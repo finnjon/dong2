@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from './auth.service';
 import { Droplet } from './droplet';
@@ -10,13 +10,22 @@ import { DropletService } from './droplet.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements DoCheck {
+  nickname: String;
+  role: String;
 
   constructor(
     public auth: Auth,
     private router: Router,
     private dropletService: DropletService
   ) {}
+
+  ngDoCheck() { //def not efficient
+    if (this.auth.userProfile) {
+      this.nickname = this.auth.userProfile.nickname;
+      this.role = this.auth.role;
+    }
+  }
 
   goToCreate() {
     this.dropletService.setNewDroplet();

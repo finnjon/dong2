@@ -12,14 +12,13 @@ import { Router } from '@angular/router';
   template: `
     <h3>Droplets for Review</h3>
     <p>Draft droplets ready for review will show up here. Only people who have the right to edit droplets can select them. If you would like this role please contact us immediately.</p>
-    <h5>Role: {{ role }}</h5>
     <div *ngFor="let droplet of reviewDroplets">
-      <div class="row pad">
-        <div class="col-md-2">{{ droplet.name }}</div>
-        <div class="col-md-2" *ngIf="!droplet.editor && role !== 'user'">
-          <button class="btn btn-primary btn-xsmall" (click)="addEditor(droplet)">Review this droplet</button>
-        </div>
-        <div class="col-md-2"><button class="btn btn-success btn-xsmall" *ngIf="droplet.editor === profile.sub" (click)="reviewDroplet(droplet)">Go to Review</button></div>
+      <div class="row pad vertical-align">
+          <div class="col-md-3">{{ droplet.name | uppercase }}</div>
+          <div class="col-md-4" *ngIf="!droplet.editor && role !== 'user'">
+            <button class="btn btn-primary btn-xsmall" (click)="addEditor(droplet)">Review this droplet</button>
+          </div>
+          <div class="col-md-2"><button class="btn btn-success btn-xsmall" *ngIf="droplet.editor === profile.sub" (click)="reviewDroplet(droplet)">Go to Review</button></div>
       </div>
     </div>
 
