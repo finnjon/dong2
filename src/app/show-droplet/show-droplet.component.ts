@@ -108,7 +108,7 @@ export class ShowDropletComponent implements OnInit {
       this.droplet.verified = "submitted";
     } else if (submissionType === "resubmit") {
       this.droplet.verified = "resubmitted";
-    }    
+    }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {

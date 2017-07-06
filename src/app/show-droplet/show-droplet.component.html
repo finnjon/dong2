@@ -11,7 +11,7 @@
       <div class="progress-marker" [class.complete]="droplet.name">
       </div>
     </div>
-    <div *ngIf="droplet.comments.name" class="left15 comments">
+    <div *ngIf="droplet.comments && droplet.comments.name" class="left15 comments">
       <label>Editor comment:</label>
       <div>{{ droplet.comments.name }}</div>
     </div>
@@ -26,7 +26,7 @@
     <span [innerHTML]="droplet.description"></span>
   </div>
 </div>
-<div *ngIf="droplet.comments.description" class="left15 comments col-md-10">
+<div *ngIf="droplet.comments && droplet.comments.description" class="left15 comments col-md-10">
   <label>Editor comment:</label>
   <div>{{ droplet.comments.description }}</div>
 </div>
@@ -101,7 +101,7 @@
 <button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
 </button>
-<div *ngIf="droplet.comments.tags" class="left15 comments col-md-10">
+<div *ngIf="droplet.comments && droplet.comments.tags" class="left15 comments col-md-10">
   <label>Editor comment:</label>
   <div>{{ droplet.comments.tags }}</div>
 </div>
