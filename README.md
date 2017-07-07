@@ -4,7 +4,8 @@
 - Get focusing to work with the editor.
 - When uploaded make sure you can't boot from certain routes that won't work.
 - Write a (better) piece on how the authentication works.
-- Put navbar into own component and update username etc if it changes. Maybe subscribe.
+- Put navbar into own component and update username etc if it changes. Currently data stays on logout!
+
 
 
 ## Development server
