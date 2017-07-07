@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class HttpService {
 
-  API_URL: string = 'http://localhost:3001';
+  API_URL: string = 'http://localhost:8080';
 
   constructor(
     private http: Http,

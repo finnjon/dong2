@@ -13,7 +13,7 @@ export class Auth {
     clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',
     domain: 'deeply.eu.auth0.com',
     responseType: 'token id_token',
-    audience: 'http://localhost:8080',
+    audience: 'http://localhost:3001',
     redirectUri: 'http://localhost:8080/callback',
     scope: 'openid profile'
   });

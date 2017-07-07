@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "engines": {
-    "node": "6.10.2"
+    "node": "6.10.2",
+    "npm": "3.10.10"
   },
   "angular-cli": {},
   "scripts": {

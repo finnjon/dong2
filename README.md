@@ -12,6 +12,16 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Notes
 
+### Deployment
+
+Originally I had the api as a separate node project but when I went to deploy I decided to add it to the ng2 project in the server folder. I then created a single package.json with the dependencies for all of them in there. Hopefully it is obvious which are which. I also added node and npm version names and moved the angular cli to dependencies instead of dev dependencies so that I could manage it from the google cloud.
+
+I have used the google cloud platform with an id of deeplydata and a default url.
+
+There is a debate about whether it is best to build the site and then add it to github or whether it is best to run the ng build --prod --aot on the server itself. Possibly that is the best move.
+
+There is also an issue about whether the site can find the server if server.js is not in the main directory but stored in the server directory. But let's see. Maybe I will move it.
+
 ### Authentication
 
 I am using Auth0 for authentication. Basically you simply sign up for an account and then npm install and have a link to log in or sign up. This takes you away to their own login page which allows you to log in or sign up. When it returns you successfully it gives you some jwt's for accessing the api you have also set up. The jwt's are set up to send the token with all requests and can be decripted on the server using the secret you get from the auth0 site. Massive pain in the arse with poor documentation.

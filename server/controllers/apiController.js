@@ -23,6 +23,12 @@ module.exports = function(app) {
 	}));
 	app.use(cors());
 
+	app.get('/droplet', checkJwt, function(req, res) {
+		res.send(200, {
+			text: "You have fetched the droplet"
+		});
+	});
+
 	app.get('/api/droplets/:id', function(req, res) {
 		Droplets.findOne({
 			_id: req.params.id
