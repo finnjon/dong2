@@ -14,7 +14,7 @@ export class Auth {
     domain: 'deeply.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'http://localhost:3001',
-    redirectUri: 'https://deeplydata.appspot.com',
+    redirectUri: 'https://deeplydata.appspot.com/callback', //set for dev as localhost
     scope: 'openid profile'
   });
 
