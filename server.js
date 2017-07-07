@@ -21,5 +21,5 @@ app.use('*', function(req, res) {
 });
 
 http.createServer(app).listen(port, function(err) {
-	console.log('listening in http://localhost:' + port);
+	console.log('listening on ' + port);
 });

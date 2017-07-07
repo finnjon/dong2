@@ -8,13 +8,14 @@ export class Auth {
   userProfile: any;
   role: any;
   profile: any;
+  redirectUri = process.env.url || 'http://localhost:8080/callback';
 
   auth0 = new auth0.WebAuth({
     clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',
     domain: 'deeply.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'http://localhost:3001',
-    redirectUri: 'https://deeplydata.appspot.com/callback', //set for dev as localhost
+    redirectUri: this.redirectUri,
     scope: 'openid profile'
   });
 
@@ -37,7 +38,6 @@ export class Auth {
   }
 
   private setSession(authResult): void {
-    console.log('setting session');
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
