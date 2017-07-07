@@ -4,30 +4,7 @@
    </div>
 </div>
 
-<nav class="navbar navbar-inverse">
-  <a class="navbar-brand" [routerLink]="['/dashboard']">Deeply Open</a>
-  <ul class="nav navbar-nav" *ngIf="auth.isAuthenticated()">
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/dashboard']">Dashboard<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" (click)="goToCreate()">Create<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/review']">Review<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/api']">API<span class="sr-only">(current)</span></a>
-    </li>
-  </ul>
-  <div class="pull-right pad8">
-    <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In | Sign Up</li>
-    <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
-  </div>
-  <div style="color: white" *ngIf="role && role !== null" class="pull-right">
-    <h5>Signed in as: {{ nickname }} | role: {{ role }}</h5>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 
 <div class="main-content">
   <router-outlet></router-outlet>

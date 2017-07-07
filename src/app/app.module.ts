@@ -27,6 +27,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { QuillModule } from 'ngx-quill';
 import { EditorComponent } from './editor/editor.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -51,7 +52,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     Create6Component,
     ReviewComponent,
     CallbackComponent,
-    EditorComponent
+    EditorComponent,
+    NavbarComponent
   ],
   imports: [
     QuillModule,

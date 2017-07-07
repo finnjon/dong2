@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 
 @Injectable()
 export class Auth {
+  pushedProfile = new EventEmitter<any>();
   userProfile: any;
   role: any;
   profile: any;
@@ -56,6 +57,7 @@ export class Auth {
       if (profile) {
         self.userProfile = profile;
         self.role = self.userProfile["http://roles/roles"];
+        this.pushProfile(self);
       }
       this.router.navigate(['/dashboard']);
     });
@@ -75,6 +77,10 @@ export class Auth {
     localStorage.removeItem('expires_at');
     // Go back to the home route
     this.router.navigate(['/signup']);
+  }
+
+  pushProfile(profile: any) {
+    this.pushedProfile.emit(profile);
   }
 
 
