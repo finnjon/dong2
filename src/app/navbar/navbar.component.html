@@ -18,7 +18,7 @@
     <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In | Sign Up</li>
     <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
   </div>
-  <div *ngIf="auth.isAuthenticated() && profile.role" class="details pull-right vertical-align">
+  <div *ngIf="auth.isAuthenticated() && profile" class="details pull-right vertical-align">
     <h5>Signed in as: {{ profile.userProfile.nickname }} | role: {{ profile.role }}</h5>
   </div>
 </nav>

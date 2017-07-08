@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class Auth {
@@ -9,7 +10,8 @@ export class Auth {
   userProfile: any;
   role: any;
   profile: any;
-  redirectUri = process.env.url || 'http://localhost:8080/callback';
+  //this may look odd and it does for this reason. There are three base urls I may want to set. One is for deployment which with google cloud comes from the app.yaml, which can be accessed using process.env. If that does not exist because I am working locally, I want either the single server url, which is in the environment variable production, or if I want to use two servers in development to use the nice features, I can use the 4200 localhost in the dev environment.
+  redirectUri = process.env.url || environment.baseUrl + '/callback';
 
   auth0 = new auth0.WebAuth({
     clientID: 'DZj2YgDoOKZU6tTRlEWsODMF7yGiRuis',

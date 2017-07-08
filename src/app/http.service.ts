@@ -6,11 +6,12 @@ import { Droplet } from './droplet';
 import { Observable } from 'rxjs/Observable'; //curious
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class HttpService {
 
-  API_URL: string = process.env.url || 'http://localhost:8080';
+  API_URL: string = process.env.url || "http://localhost:8080";
 
   constructor(
     private http: Http,
