@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class HttpService {
 
+
+  // rather than use environment variables I am using the app.yaml to specify the url on deploy and if not the API url is always 8080.
   API_URL: string = process.env.url || "http://localhost:8080";
 
   constructor(
