@@ -74,7 +74,10 @@ export class Create1Component implements OnInit, AfterViewInit {
           this.error = error;
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.router.navigate(['create/create2'])
+        () => {
+          this.flashMessagesService.show('Name updated', { cssClass: 'alert-success', timeout: 2000 });
+          this.router.navigate(['create/create2']);
+        }
       );
   }
 

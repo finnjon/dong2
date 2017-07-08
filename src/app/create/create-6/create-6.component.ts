@@ -51,12 +51,9 @@ export class Create6Component implements OnInit, AfterViewChecked {
     this.droplet.tags.push(tag);
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
-        (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-        },
-        (error) => {
-          this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
-        }
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('Tag updated', { cssClass: 'alert-success', timeout: 2000 })
       );
     this.tag = ''; //empty form field
   }

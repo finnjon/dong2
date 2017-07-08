@@ -99,12 +99,9 @@ export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
-        (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-        },
-        (error) => {
-          this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 });
-        }
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('An error occurred!', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('Hint updated', { cssClass: 'alert-success', timeout: 2000 })
       );
     this.content = ''; //empty form field
     if (index) { this.router.navigate(['create/create5']) }

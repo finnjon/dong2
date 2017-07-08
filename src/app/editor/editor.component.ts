@@ -42,7 +42,10 @@ export class EditorComponent implements OnInit {
           this.error = error;
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.toggleMe(field, index)
+        () => {
+          this.flashMessagesService.show('Comment added', { cssClass: 'alert-success', timeout: 2000 });
+          this.toggleMe(field, index);
+        }
       );
   }
 
@@ -57,7 +60,10 @@ export class EditorComponent implements OnInit {
           this.error = error;
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
         },
-        () => this.toggleMe(field, index)
+        () => {
+          this.flashMessagesService.show('Comment added', { cssClass: 'alert-success', timeout: 2000 });
+          this.toggleMe(field, index);
+        }
       );
   }
 
@@ -73,7 +79,8 @@ export class EditorComponent implements OnInit {
         (error) => {
           this.error = error;
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
-        }
+        },
+        () => this.flashMessagesService.show('Comment removed', { cssClass: 'alert-success', timeout: 2000 })
       );
   }
 

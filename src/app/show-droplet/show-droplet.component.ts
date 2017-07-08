@@ -4,6 +4,7 @@ import { DropletService } from '../droplet.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HttpService } from '../http.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-show-droplet',
@@ -51,7 +52,8 @@ export class ShowDropletComponent implements OnInit {
   constructor(
     private dropletService: DropletService,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private flashMessagesService: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -77,9 +79,9 @@ export class ShowDropletComponent implements OnInit {
     }
     this.httpService.saveDroplet(dummy)
       .subscribe(
-        (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-        }
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('I am sorry, something went wrong', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('You have successfully removed this ' + element, { cssClass: 'alert-success', timeout: 2000 })
       );
   }
 
@@ -111,9 +113,9 @@ export class ShowDropletComponent implements OnInit {
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
-        (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-        }
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('Sumbission failed', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('Droplet submitted for review', { cssClass: 'alert-success', timeout: 2000 })
       );
   }
 

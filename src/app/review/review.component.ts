@@ -64,9 +64,8 @@ export class ReviewComponent implements OnInit {
         (droplet: Droplet) => {
           this.dropletService.updateCurrentDroplet(droplet);
         },
-        (error) => {
-          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
-        }
+        (error) => this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('You have successfully become the editor', { cssClass: 'alert-success', timeout: 2000 })
       );
   }
 

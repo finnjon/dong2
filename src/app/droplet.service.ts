@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Droplet } from './droplet';
 import { Auth } from './auth.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
 export class DropletService {
@@ -10,7 +9,6 @@ export class DropletService {
 
   constructor(
     private auth: Auth,
-    private flashMessagesService: FlashMessagesService
   ) {}
 
   getCurrentDroplet() {
@@ -49,7 +47,6 @@ export class DropletService {
 
   updateCurrentDroplet(droplet: Droplet) {
     this.droplet = droplet;
-    this.flashMessagesService.show('Droplet updated!', { cssClass: 'alert-success', timeout: 2000 });
     this.pushDroplet(droplet);
   }
 

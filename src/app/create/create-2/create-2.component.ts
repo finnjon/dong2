@@ -39,11 +39,14 @@ export class Create2Component implements OnInit, AfterViewChecked {
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
         (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-          this.router.navigate(['create/create3']);
+          this.dropletService.updateCurrentDroplet(droplet)
         },
         (error) => {
           this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => {
+          this.flashMessagesService.show('Description updated', { cssClass: 'alert-success', timeout: 2000 });
+          this.router.navigate(['create/create3']);
         }
       );
   }

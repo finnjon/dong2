@@ -132,12 +132,9 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
     }
     this.httpService.saveDroplet(this.droplet)
       .subscribe(
-        (droplet: Droplet) => {
-          this.dropletService.updateCurrentDroplet(droplet);
-        },
-        (error) => {
-          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
-        }
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('Question updated', { cssClass: 'alert-success', timeout: 2000 })
       );
     this.question = {};
     if (index) {
