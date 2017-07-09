@@ -57,6 +57,7 @@ export class Auth {
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
+        console.log(profile);
         self.userProfile = profile;
         self.role = self.userProfile["http://roles/roles"];
         this.pushProfile(self);
@@ -81,7 +82,7 @@ export class Auth {
     this.router.navigate(['/signup']);
   }
 
-  pushProfile(profile: any) {
+  pushProfile(profile: any) { //send profile to any component listening
     this.pushedProfile.emit(profile);
   }
 

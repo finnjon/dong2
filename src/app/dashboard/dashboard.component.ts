@@ -33,14 +33,14 @@ export class DashboardComponent implements OnInit {
     this.dropletService.setNewDroplet();
     this.httpService.getUserDroplets()
       .subscribe(
-        (data: Response) => {
-          this.userDroplets = data.json();
-      });
+        (data: Response) => this.userDroplets = data.json(),
+        (error) => this.error = error
+      );
     this.httpService.getUserReviewDroplets()
       .subscribe(
-        (data: Response) => {
-          this.userReviewDroplets = data.json();
-      });
+        (data: Response) => this.userReviewDroplets = data.json(),
+        (error) => this.error = error
+      );
   }
 
   editDroplet(id) {
@@ -49,11 +49,10 @@ export class DashboardComponent implements OnInit {
         (data: Response) => {
           this.droplet = data.json();
           this.dropletService.setCurrentDroplet(this.droplet);
-          this.router.navigate(['/edit', this.droplet._id]);
-        }
-      ),
-      (error) => this.error = error;
-      () => this.router.navigate(['/edit', this.droplet._id]);
+        },
+        (error) => this.error = error,
+        () => this.router.navigate(['/edit', this.droplet._id])
+      );
   }
 
   unreviewDroplet(droplet, index) {

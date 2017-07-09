@@ -11,8 +11,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class HttpService {
 
-
-  // rather than use environment variables I am using the app.yaml to specify the url on deploy and if not the API url is always 8080.
+  //This environment variable has been set in the app.yaml file which google cloud uses to set it. Locally we use 8080 for the api.
   API_URL: string = process.env.url || "http://localhost:8080";
 
   constructor(

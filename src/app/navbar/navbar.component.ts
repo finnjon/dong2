@@ -11,6 +11,7 @@ import { DropletService } from '../droplet.service';
 })
 export class NavbarComponent implements OnInit {
   profile: any;
+  error: any;
 
   constructor(
     public auth: Auth,
@@ -19,9 +20,11 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.pushedProfile.subscribe(
-      profile => this.profile = profile
-    )
+    this.auth.pushedProfile
+      .subscribe(
+        (profile) => this.profile = profile,
+        (error) => this.error = error,
+      );
   }
 
   goToCreate() {
