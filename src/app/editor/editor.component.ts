@@ -100,6 +100,21 @@ export class EditorComponent implements OnInit {
       );
   }
 
+  verifyDroplet() {
+    this.droplet.verified = "verified";
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => {
+          this.dropletService.updateCurrentDroplet(droplet);
+          this.flashMessagesService.show('Droplet verified', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        (error) => {
+          this.error = error;
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        }
+      );
+  }
+
   //Notes on toggling. In order to toggle visibility we use the field and the index, which are passed in the click handler. By adding them together we can create a variable that combines them to provide a unique id for the field, even if there are many. This is what is toggled.
   toggleMe(field, index) {
     if (this.showEdit !== field + index) {

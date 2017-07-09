@@ -48,6 +48,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class ShowDropletComponent implements OnInit {
   droplet: Droplet;
+  public: String;
 
   constructor(
     private dropletService: DropletService,
@@ -58,9 +59,8 @@ export class ShowDropletComponent implements OnInit {
 
   ngOnInit() {
     this.droplet = this.dropletService.getCurrentDroplet();
-    this.dropletService.pushedDroplet.subscribe(
-      droplet => this.droplet = droplet
-    )
+    this.dropletService.pushedDroplet.subscribe(droplet => this.droplet = droplet);
+    this.droplet.open ? this.public = "public" : this.public = "private";
   }
 
   removeElement(index, element) {
@@ -116,6 +116,17 @@ export class ShowDropletComponent implements OnInit {
         (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
         (error) => this.flashMessagesService.show('Sumbission failed', { cssClass: 'alert-success', timeout: 2000 }),
         () => this.flashMessagesService.show('Droplet submitted for review', { cssClass: 'alert-success', timeout: 2000 })
+      );
+  }
+
+  //note, once a droplet is made public it cannot be made private again because people may be using it.
+  makePublic() {
+    this.droplet.open = true;
+    this.httpService.saveDroplet(this.droplet)
+      .subscribe(
+        (droplet: Droplet) => this.dropletService.updateCurrentDroplet(droplet),
+        (error) => this.flashMessagesService.show('An error occurred: the droplet could not be made public', { cssClass: 'alert-success', timeout: 2000 }),
+        () => this.flashMessagesService.show('Droplet now public', { cssClass: 'alert-success', timeout: 2000 })
       );
   }
 

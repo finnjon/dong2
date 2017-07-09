@@ -3,11 +3,12 @@
   <div class="col-md-10">
     <h4>
       <span class="label label-primary">{{ droplet.status || "draft" }}</span>
-      <span class="label label-danger">{{ droplet.open || "private" }}</span>
+      <span class="label label-danger">{{ public || "private" }}</span>
       <span class="label label-warning">{{ droplet.verified || "unverified" }}</span>
     </h4>
     <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('submit')">Submit for Review</button>
     <button *ngIf="droplet.verified === 'under review' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('resubmit')">Resubmit for Review</button>
+    <button *ngIf="droplet.verified === 'verified' && !droplet.open" class="btn btn-small" (click)="makePublic()">Make Public</button>
     <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "no name" }}
       <div class="progress-marker" [class.complete]="droplet.name">
       </div>
