@@ -4,7 +4,7 @@
     <quill-editor
       id="description"
       name="description"
-      placholder="Add helpful description of what this droplet tests."
+      placeholder="Add description"
       [ngModel]="droplet.description"
       (onEditorCreated)="setFocus($event)"
       [modules]="{
@@ -17,7 +17,11 @@
     </quill-editor>
   </div>
   <div class="advice">
-    <p>Give a brief and clear description of whatever your droplet is testing, with examples if possible. Use HTML tags to make it clearer.</p>
+    <ul>
+      <li>Describe what your droplet tests.</li>
+      <li>Give examples if possible.</li>
+      <li>Use styling to make it clearer.</li>
+    </ul>
   </div>
   <button type="submit" class="btn btn-default">Save Description</button>
   <button class="btn" [routerLink]="['/create/create3']">Next</button>

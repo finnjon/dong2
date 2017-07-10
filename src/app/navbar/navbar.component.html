@@ -1,24 +1,26 @@
-<nav class="navbar navbar-inverse">
-  <a class="navbar-brand" [routerLink]="['/dashboard']">Deeply Open</a>
-  <ul class="nav navbar-nav" *ngIf="auth.isAuthenticated()">
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/dashboard']">Dashboard<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" (click)="goToCreate()">Create<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/review']">Review<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" [routerLink]="['/api']">API<span class="sr-only">(current)</span></a>
-    </li>
-  </ul>
-  <div class="pull-right pad8">
+<nav class="navbar" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-logo">
+      <object class="navbar-logo" data="../assets/deeply-logo-v4.svg" type="image/svg+xml"></object>
+    </a>
+  </div>
+  <div class="pull-right">
     <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In | Sign Up</li>
     <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
+    <h5 *ngIf="auth.isAuthenticated() && profile" class="pull-left details">{{ profile.userProfile.name }}</h5>
   </div>
-  <div *ngIf="auth.isAuthenticated() && profile" class="details pull-right">
-    <h5>Signed in as: {{ profile.userProfile.name }}</h5>
-  </div>
+  <ul class="nav navbar-nav navbar-right" *ngIf="auth.isAuthenticated()">
+    <li class="navbar-nav-item">
+      <a class="nav-link" [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/create" (click)="goToCreate()" [routerLinkActive]="['active']">Create</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/review']" [routerLinkActive]="['active']">Review</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/api']" [routerLinkActive]="['active']">API</a>
+    </li>
+  </ul>
 </nav>

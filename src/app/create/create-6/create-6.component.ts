@@ -7,20 +7,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-6',
-  template: `
-    <div>Add search terms to help people find your droplet. Add one at a time and press enter or add.</div>
-    <br>
-    <form (ngSubmit)="addTag(f.value)" #f="ngForm">
-      <div class="form-group">
-        <label>Tag: <small>(required)</small></label>
-        <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
-      </div>
-      <div class="advice">
-        <p>taggy tag</p>
-      </div>
-      <button type="submit" class="btn btn-default">Add Tag</button>
-    </form>
-  `,
+  templateUrl: './create-6.component.html',  
   styles: []
 })
 export class Create6Component implements OnInit, AfterViewChecked {

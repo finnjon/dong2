@@ -1,0 +1,13 @@
+<form (ngSubmit)="addTag(f.value)" #f="ngForm">
+  <div class="form-group">
+    <label>Tag: <small>(required)</small></label>
+    <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
+  </div>
+  <div class="advice">
+    <ul>
+      <li>How will people search for your droplet. That should be a tag.</li>
+      <li>Add as many as makes sense.</li>
+    </ul>
+  </div>
+  <button type="submit" class="btn btn-default">Add Tag</button>
+</form>

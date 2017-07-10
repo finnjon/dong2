@@ -8,50 +8,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-5',
-  template: `
-    <div>Create hints that will help jog students' memories as they try to answer questions.</div>
-    <br>
-    <form (ngSubmit)="addHint(f.value, index)" #f="ngForm">
-      <div class="form-group">
-        <label>Hint: <small>(required)</small></label>
-        <quill-editor
-          id="hint"
-          *ngIf="index"
-          [(ngModel)]="droplet.hints[index].content"name="content"
-          placeholder="Add a hint."
-          (onEditorCreated)="setFocus($event)"
-          [modules]="{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['code-block', 'clean']
-            ]
-          }"
-          required></quill-editor>
-        <quill-editor
-          id="hint"
-          *ngIf="!index"
-          [(ngModel)]="content"
-          name="content"
-          placeholder="Add a hint."
-          (onEditorCreated)="setFocus($event)"
-          [modules]="{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['code-block', 'clean']
-            ]
-          }"
-          required></quill-editor>
-      </div>
-      <div class="advice">
-        <p>Hinty hint.</p>
-      </div>
-      <button type="submit" class="btn btn-default">
-        <span *ngIf="index">Update Hint</span>
-        <span *ngIf="!index">Add Hint</span>
-      </button>
-      <button class="btn" [routerLink]="['/create/create6']">Next</button>
-    </form>
-  `,
+  templateUrl: './create-5.component.html',
   styles: []
 })
 export class Create5Component implements OnInit, OnDestroy, AfterViewChecked {

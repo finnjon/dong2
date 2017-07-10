@@ -8,71 +8,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-create-4',
-  template: `
-    <div>Add some questions to test understanding of this droplet.</div>
-    <br>
-    <form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
-      <div class="form-group">
-        <label>Question: <small>(required)</small></label>
-        <quill-editor
-          *ngIf="index"
-          id="question"
-          name="prompt"
-          placholder="Add a question here."
-          [(ngModel)]="droplet.questions[index].prompt"
-          (onEditorCreated)="setFocus($event)"
-          [modules]="{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['code-block', 'clean']
-            ]
-          }"
-          required
-          (focus)="onFocus('question')">
-        </quill-editor>
-        <quill-editor
-          *ngIf="!index"
-          id="question"
-          name="prompt"
-          placholder="Add a question here."
-          [(ngModel)]="question.prompt"
-          (onEditorCreated)="setFocus($event)"
-          [modules]="{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['code-block', 'clean']
-            ]
-          }"
-          required
-          (focus)="onFocus('question')">
-        </quill-editor>
-      </div>
-      <div *ngIf="focussed === 'question'" class="advice">
-        <p>Add a question and .....</p>
-      </div>
-      <div class="form-group">
-        <label>Answer: <small>(required)</small></label>
-        <input id="answer" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].answer" name="answer" type="text" placeholder="Answer" (focus)="onFocus('answer')" required>
-        <input id="answer" *ngIf="!index" class="form-control" [(ngModel)]="question.answer" name="answer" type="text" placeholder="Answer" (focus)="onFocus('answer')" required>
-      </div>
-      <div *ngIf="focussed === 'answer'" class="advice">
-        <p>Add an answer and .....</p>
-      </div>
-      <div class="form-group">
-        <label>Filled Answer:</label>
-        <input id="filled" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
-        <input id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
-      </div>
-      <div *ngIf="focussed === 'filledAnswer'" class="advice">
-        <p>If you would like an answer field to be pre-filled, do so here.</p>
-      </div>
-      <button type="submit" class="btn btn-default">
-        <span *ngIf="index">Update Question</span>
-        <span *ngIf="!index">Add Question</span>
-      </button>
-      <button class="btn" [routerLink]="['/create/create5']">Next</button>
-    </form>
-  `,
+  templateUrl: './create-4.component.html',
   styles: []
 })
 export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
@@ -145,6 +81,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
   onFocus(field){
     switch (field) {
     case "question":
+      console.log("focussed on question");
       this.focussed = "question";
       break;
     case "answer":

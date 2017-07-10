@@ -1,0 +1,68 @@
+<form (ngSubmit)="addQuestion(f.value, index)" #f="ngForm">
+  <div class="form-group">
+    <label>Question: <small>(required)</small></label>
+    <quill-editor
+      *ngIf="index"
+      id="question"
+      name="prompt"
+      placeholder="Add a question"
+      [(ngModel)]="droplet.questions[index].prompt"
+      (onEditorCreated)="setFocus($event)"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'clean']
+        ]
+      }"
+      required
+      (focus)="onFocus('question')">
+    </quill-editor>
+    <quill-editor
+      *ngIf="!index"
+      id="question"
+      name="prompt"
+      placeholder="Add a question"
+      [(ngModel)]="question.prompt"
+      (onEditorCreated)="setFocus($event)"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'clean']
+        ]
+      }"
+      required
+      (focus)="onFocus('question')">
+    </quill-editor>
+  </div>
+  <div *ngIf="focussed === 'question'" class="advice">
+    <ul>
+      <li>Think of a question that will test understanding of this droplet.</li>
+      <li>Format if necessary.</li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <label>Answer: <small>(required)</small></label>
+    <input id="answer" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].answer" name="answer" type="text" placeholder="Add an answer" (focus)="onFocus('answer')" required>
+    <input id="answer" *ngIf="!index" class="form-control" [(ngModel)]="question.answer" name="answer" type="text" placeholder="Add an answer" (focus)="onFocus('answer')" required>
+  </div>
+  <div *ngIf="focussed === 'answer'" class="advice">
+    <ul>
+      <li>Write the answer to the question.</li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <label>Filled Answer:</label>
+    <input id="filled" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
+    <input id="filled" *ngIf="!index" class="form-control" [(ngModel)]="question.filledAnswer" name="filledAnswer" type="text" class="form-control" placeholder="If you would like to pre-fill the answer field, do so here" (focus)="onFocus('filledAnswer')">
+  </div>
+  <div *ngIf="focussed === 'filledAnswer'" class="advice">
+    <ul>
+      <li>If you would like the student to edit an pre-filled answer, write it here.</li>
+    </ul>
+  </div>
+  <button type="submit" class="btn btn-default">
+    <span *ngIf="index">Update Question</span>
+    <span *ngIf="!index">Add Question</span>
+  </button>
+  <button class="btn" [routerLink]="['/create/create5']">Next</button>
+</form>

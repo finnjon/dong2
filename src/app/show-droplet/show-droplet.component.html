@@ -1,18 +1,18 @@
 
 <div class="row">
   <div class="col-md-10">
+    <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "My New Droplet" }}
+      <div class="progress-marker" [class.complete]="droplet.name">
+      </div>
+    </div>
     <h4>
       <span class="label label-primary">{{ droplet.status || "draft" }}</span>
       <span class="label label-danger">{{ public || "private" }}</span>
       <span class="label label-warning">{{ droplet.verified || "unverified" }}</span>
     </h4>
-    <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('submit')">Submit for Review</button>
-    <button *ngIf="droplet.verified === 'under review' && droplet.status ==='complete'" class="btn btn-small" (click)="submitForReview('resubmit')">Resubmit for Review</button>
-    <button *ngIf="droplet.verified === 'verified' && !droplet.open" class="btn btn-small" (click)="makePublic()">Make Public</button>
-    <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "no name" }}
-      <div class="progress-marker" [class.complete]="droplet.name">
-      </div>
-    </div>
+    <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-xs btn-primary" (click)="submitForReview('submit')">Submit for Review</button>
+    <button *ngIf="droplet.verified === 'under review' && droplet.status ==='complete'" class="btn btn-xs btn-primary" (click)="submitForReview('resubmit')">Resubmit for Review</button>
+    <button *ngIf="droplet.verified === 'verified' && !droplet.open" class="btn btn-xs btn-primary" (click)="makePublic()">Make Public</button>
     <div *ngIf="droplet.comments && droplet.comments.name" class="left15 comments col-md-10">
       <label>Editor comment:</label>
       <div>{{ droplet.comments.name }}</div>
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="droplet.description" class="row">
   <div class="col-md-10">
     <h4>Description
       <div class="progress-marker" [class.complete]="droplet.description"></div>
@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="droplet.explanations.length > 0" class="row">
   <div class="col-md-10">
     <h4>Explanations
       <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
@@ -57,7 +57,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="droplet.questions.length > 0" class="row">
   <div class="col-md-10">
     <h4>Questions
       <div class="progress-marker" [class.complete]="droplet.questions.length > 0"></div>
@@ -90,7 +90,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="droplet.hints.length > 0" class="row">
   <div class="col-md-10">
     <h4>Hints (optional)</h4>
     <button class="btn btn-sm" [routerLink]="['/create/create5']">Add New</button>
@@ -108,7 +108,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="droplet.tags.length > 0" class="row">
   <div class="col-md-10">
     <h4>Tags
       <div class="progress-marker" [class.complete]="droplet.tags.length > 0"></div>

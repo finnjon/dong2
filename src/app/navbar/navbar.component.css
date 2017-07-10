@@ -1,4 +1,33 @@
 .details {
-  color: #fff;
-  margin-right: 15px;
+  margin: 17px 2em 0 2em;
+  font-weight: 200;
+  text-decoration: underline;
+}
+
+.nav-link {
+  color: #777;
+}
+
+.navbar-nav {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.navbar-logo {
+  float: left;
+  padding: .5em;
+  height: 10em;
+  margin-left: 10px;
+}
+
+.navbar-right {
+  margin-right: 10px;
+}
+
+.btn-margin {
+  margin: 4px;
+}
+
+.active {
+  color: #8C00FF;
 }

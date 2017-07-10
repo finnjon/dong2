@@ -1,0 +1,47 @@
+<form (ngSubmit)="addExplanation(f.value, index)" #f="ngForm">
+  <div class="form-group">
+    <label>Explanation: <small>(required)</small></label>
+    <quill-editor
+      *ngIf="index"
+      id="explanation"
+      name="content"
+      [(ngModel)]="droplet.explanations[index].content"
+      placeholder="Add an explanation"
+      (onEditorCreated)="setFocus($event)"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'clean']
+        ]
+      }"
+      required>
+    </quill-editor>
+    <quill-editor
+      *ngIf="!index"
+      id="explanation"
+      name="content"
+      [(ngModel)]="content"
+      placeholder="Add an explanation"
+      (onEditorCreated)="setFocus($event)"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'clean']
+        ]
+      }"
+      required>
+    </quill-editor>
+  </div>
+  <div class="advice">
+    <ul>
+      <li>How would you explain this droplet to a student in the simplest terms?</li>
+      <li>Directed the student to other resources if additional concepts are needed to understand the explanation?</li>
+      <li>Use formatting to make it easier to read.</li>
+    </ul>
+  </div>
+  <button type="submit" class="btn btn-default">
+    <span *ngIf="index">Update</span>
+    <span *ngIf="!index">Add Explanation</span>
+  </button>
+  <button class="btn" [routerLink]="['/create/create4']">Next</button>
+</form>

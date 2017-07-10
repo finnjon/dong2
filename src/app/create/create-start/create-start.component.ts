@@ -5,15 +5,19 @@ import { Droplet } from '../../droplet';
 @Component({
   selector: 'app-create-start',
   template: `
-    <div *ngIf="newDroplet" class="pad8">
-      Hi! Let's get started creating a droplet. The first thing to do is check that the droplet you want to create is not already in use. To do that, click here:
-    </div>
-    <div *ngIf="!newDroplet" class="pad8">
+    <p *ngIf="newDroplet">
+      Great! You want to create a droplet. It's easy. Click start and you will be asked to give your droplet a name. Follow the instructions and you will see your droplet building on the right. Turn all the balls green and you will have completed the droplet and can send it for review.
+    </p>
+    <p *ngIf="!newDroplet">
       To edit your droplet simply click on the element you wish to edit on the right. To add something new click above.
-    </div>
-    <button *ngIf="newDroplet" class="btn btn-large" [routerLink]="['create1']">Start</button>
+    </p>
+    <button *ngIf="newDroplet" class="btn btn-large start-button" [routerLink]="['create1']">Start</button>
   `,
-  styles: []
+  styles: [`
+    .start-button {
+      margin-top: 0.7em;
+    }
+  `]
 })
 
 export class CreateStartComponent implements OnInit {

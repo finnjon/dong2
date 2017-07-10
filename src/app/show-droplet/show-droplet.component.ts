@@ -9,43 +9,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-show-droplet',
   templateUrl: './show-droplet.component.html',
-  styles: [`
-    .explanation, .question, .hint {
-      background-color: rgba(255, 235, 59, 0.54);
-      border: 1px solid transparent;
-      border-radius: 4px;
-      padding: 10px;
-      margin-bottom: 5px;
-      margin-left: 15px;
-    }
-    .droplet-name {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .progress-marker {
-      margin-left: 5px;
-      display: inline-block;
-      background-color: #d9534f;
-	    border-radius: 50%;
-	    width: 12px;
-	    height: 12px;
-    }
-    .complete {
-      background-color: green;
-    }
-    .btn {
-      margin-bottom: 10px;
-    }
-    .comments {
-      border: 1px solid black;
-      padding: 5px;
-      margin: 0 0 10px 15px;
-    }
-    .left15 {
-      margin-left: 0;
-    }
-  `]
+  styleUrls: ['./show-droplet.component.css']
 })
+
 export class ShowDropletComponent implements OnInit {
   droplet: Droplet;
   public: String;

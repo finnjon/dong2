@@ -1,40 +1,39 @@
 <div class="row">
-  <div class="col-md-offset-1">
-    <h1>Dashboard</h1>
-    <h3>Your Droplets</h3>
-    <div *ngFor="let droplet of userDroplets" class="dropletRow">
+  <div class="col-md-5 col-md-offset-1">
+    <h4>My Droplets</h4>
+    <div *ngFor="let droplet of userDroplets">
       <div class="row vertical-align">
-        <div class="col-md-3">{{ droplet.name | uppercase }} </div>
-        <div class="col-md-4">
-          <button class="btn btn-sm" (click)="editDroplet(droplet._id)">
+        <div class="col-md-5">{{ droplet.name | uppercase }} </div>
+        <div class="col-md-7">
+          <button class="btn btn-xs btn-primary no-border" (click)="editDroplet(droplet._id)">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button class="btn btn-sm btn-primary" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
+          <button class="btn btn-xs btn-primary no-border" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <hr>
-
-    <h3>Your Review Droplets</h3>
-    <div *ngFor="let droplet of userReviewDroplets; let i=index;" class="dropletRow">
+  <div class="col-md-5">
+    <h4>My Review Droplets</h4>
+    <div *ngFor="let droplet of userReviewDroplets; let i=index;">
       <div class="row vertical-align">
-        <div class="col-md-3">{{ droplet.name | uppercase }}</div>
-        <div class="col-md-4">
-          <button class="btn btn-sm" (click)="reviewDroplet(droplet)">Review</button>
+        <div class="col-md-4">{{ droplet.name | uppercase }}</div>
+        <div class="col-md-8">
+          <button class="btn btn-xs btn-primary no-border" (click)="reviewDroplet(droplet)">Review</button>
           <button
-            class="btn btn-sm"
+            class="btn btn-xs btn-primary no-border"
+            [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
+          </button>
+          <button
+            class="btn btn-xs btn-primary no-border"
             mwlConfirmationPopover
             [title]="title"
             [message]="message"
             placement="left"
             (confirm)="confirmClicked = true; unreviewDroplet(droplet, i)"
             (cancel)="cancelClicked = true">
-            Resign!
-          </button>
-          <button
-            class="btn btn-sm btn-primary"
-            [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
+            <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>
       </div>
