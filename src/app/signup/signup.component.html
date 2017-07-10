@@ -1,7 +1,7 @@
 <div class="container">
-  <div>
-    <h3>Imagine if all the world's knowledge was organised for learning, not for reading.</h3>
-    <h3>Freely available to all.</h3>
-    <h3>This is our mission - and we need your help</h3>
+  <div class="signin-blurb">
+    <p>Imagine if all the world's knowledge was organised for learning, not for reading.</p>
+    <p>This is our mission — it is a bold mission — and we need your help</p>
+    <li class="btn btn-primary btn-margin signup" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Sign Up</li>
   </div>
 </div>
