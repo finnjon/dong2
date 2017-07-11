@@ -1,10 +1,7 @@
 .description, .explanation, .question, .hint {
   background-color: #e5c8ef;
-  border: 1px solid transparent;
   padding: 10px;
   margin-bottom: 5px;
-  margin-left: 15px;
-
 }
 .droplet-name {
   font-size: 24px;
@@ -20,30 +17,16 @@
   width: 12px;
   height: 12px;
 }
-.complete {
-  background-color: green;
-}
-.btn {
-  margin-bottom: 10px;
-}
-
+.complete { background-color: green; }
+.btn { margin-bottom: 10px; }
 .btn-add {
   color: #77a75b;
   padding: 3px;
 }
-
-.btn-add:hover {
-  color: green;
-}
+.btn-add:hover { color: green; }
 .comments {
   border: 1px solid black;
-  padding: 5px;
-  margin: 0 0 10px 15px;
+  padding: 10px;
+  margin: 10px 0 15px 0;
 }
-.left15 {
-  margin-left: 0;
-}
-
-.down-a-bit {
-  margin-top: 14px;
-}
+.down-a-bit { margin-top: 14px; }

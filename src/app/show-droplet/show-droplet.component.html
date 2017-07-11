@@ -1,9 +1,13 @@
 
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "My New Droplet" }}
       <div class="progress-marker down-a-bit" [class.complete]="droplet.name">
       </div>
+    </div>
+    <div *ngIf="droplet.comments && droplet.comments.name" class="comments col-md-12">
+      <label>Editor comment:</label>
+      <div>{{ droplet.comments.name }}</div>
     </div>
     <h4>
       <span class="label label-primary">{{ droplet.status || "draft" }}</span>
@@ -13,24 +17,18 @@
     <button *ngIf="droplet.verified === 'unverified' && droplet.status ==='complete'" class="btn btn-xs btn-primary" (click)="submitForReview('submit')">Submit for Review</button>
     <button *ngIf="droplet.verified === 'under review' && droplet.status ==='complete'" class="btn btn-xs btn-primary" (click)="submitForReview('resubmit')">Resubmit for Review</button>
     <button *ngIf="droplet.verified === 'verified' && !droplet.open" class="btn btn-xs btn-primary" (click)="makePublic()">Make Public</button>
-    <div *ngIf="droplet.comments && droplet.comments.name" class="left15 comments col-md-10">
-      <label>Editor comment:</label>
-      <div>{{ droplet.comments.name }}</div>
-    </div>
   </div>
 </div>
 
 <div *ngIf="droplet.description" class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <h4>Description
       <div class="progress-marker" [class.complete]="droplet.description"></div>
     </h4>
-    <div class="row">
-      <div class="col-md-11 description" (click)="editThis('description')">
-        <span [innerHTML]="droplet.description"></span>
-      </div>
+    <div class="description" (click)="editThis('description')">
+      <span [innerHTML]="droplet.description"></span>
     </div>
-    <div *ngIf="droplet.comments && droplet.comments.description" class="left15 comments col-md-10">
+    <div *ngIf="droplet.comments && droplet.comments.description" class="comments ">
       <label>Editor comment:</label>
       <div>{{ droplet.comments.description }}</div>
     </div>
@@ -38,19 +36,18 @@
 </div>
 
 <div *ngIf="droplet.explanations.length > 0" class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <h4>
       Explanations
       <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create3']"></span>
       <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
     </h4>
-    <div *ngIf="droplet.explanations.length < 1">None</div>
-    <div class="row" *ngFor="let explanation of droplet.explanations; let i=index; trackBy: tracking">
-      <div class="explanation col-md-11" (click)="selectExplanation(i)">
+    <div *ngFor="let explanation of droplet.explanations; let i=index; trackBy: tracking">
+      <div class="explanation" (click)="selectExplanation(i)">
         <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span [innerHTML]="explanation.content || empty"></span>
       </div>
-      <div *ngIf="explanation.comment" class="comments col-md-10">
+      <div *ngIf="explanation.comment" class="comments">
         <label>Editor comment:</label>
         <div>{{ explanation.comment }}</div>
       </div>
@@ -59,7 +56,7 @@
 </div>
 
 <div *ngIf="droplet.questions.length > 0" class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <h4>Questions
       <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create4']"></span>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 0"></div>
@@ -69,8 +66,8 @@
       <div class="progress-marker" [class.complete]="droplet.questions.length > 4"></div>
     </h4>
     <div *ngIf="droplet.questions.length < 1">None</div>
-    <div class="row" *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
-      <div class="question col-md-11" (click)="selectQuestion(i)">
+    <div *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
+      <div class="question" (click)="selectQuestion(i)">
         <div>
           <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
           <h5>Prompt:</h5>
@@ -83,7 +80,7 @@
         <h5>Filled Answer:</h5>
         <div>{{ question.filledAnswer || "empty" }}</div>
       </div>
-      <div *ngIf="question.comment" class="comments col-md-10">
+      <div *ngIf="question.comment" class="comments">
         <label>Editor comment:</label>
         <div>{{ question.comment }}</div>
       </div>
@@ -92,17 +89,16 @@
 </div>
 
 <div *ngIf="droplet.hints.length > 0" class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <h4>Hints (optional)
     <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create5']"></span>
     </h4>
-    <div *ngIf="droplet.hints.length < 1">None</div>
-    <div class="row" *ngFor="let hint of droplet.hints; let i=index; trackBy: tracking">
-      <div class="hint col-md-11" (click)="selectHint(i)">
+    <div *ngFor="let hint of droplet.hints; let i=index; trackBy: tracking">
+      <div class="hint" (click)="selectHint(i)">
         <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span [innerHTML]="hint.content || empty"></span>
       </div>
-      <div *ngIf="hint.comment" class="comments col-md-10">
+      <div *ngIf="hint.comment" class="comments">
         <label>Editor comment:</label>
         <div>{{ hint.comment }}</div>
       </div>
@@ -111,18 +107,17 @@
 </div>
 
 <div *ngIf="droplet.tags.length > 0" class="row">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <h4>Tags
       <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create6']"></span>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 0"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 2"></div>
     </h4>
-    <div *ngIf="droplet.tags.length < 1">None</div>
     <button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
     </button>
-    <div *ngIf="droplet.comments && droplet.comments.tags" class="left15 comments col-md-10">
+    <div *ngIf="droplet.comments && droplet.comments.tags" class="comments">
       <label>Editor comment:</label>
       <div>{{ droplet.comments.tags }}</div>
     </div>
