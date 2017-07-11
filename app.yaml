@@ -15,7 +15,7 @@ runtime: nodejs
 env: flex
 
 env_variables:
- url: "http://deeplydata.appspot.com"
+ url: "https://deeplydata.appspot.com"
 
 manual_scaling:
   instances: 1
