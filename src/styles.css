@@ -37,7 +37,7 @@ body {
 .advice {
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #ccd1ef;
+  background-color: #e5c8ef;
 }
 
 /*This is a container class from quill editor. This makes it bigger.*/
@@ -56,12 +56,11 @@ body {
 }
 
 .alert-success {
-  border: 1px solid black;
   position: fixed;
   width: 300px;
   margin: 0 auto;
-  background-color: #fdfca5;
-  color: black;
+  background-color: #8C00FF;
+  color: #FFF;
   z-index: 9999;
 }
 

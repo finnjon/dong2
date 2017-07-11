@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-10">
     <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "My New Droplet" }}
-      <div class="progress-marker" [class.complete]="droplet.name">
+      <div class="progress-marker down-a-bit" [class.complete]="droplet.name">
       </div>
     </div>
     <h4>
@@ -26,7 +26,7 @@
       <div class="progress-marker" [class.complete]="droplet.description"></div>
     </h4>
     <div class="row">
-      <div class="col-md-10" (click)="editThis('description')">
+      <div class="col-md-11 description" (click)="editThis('description')">
         <span [innerHTML]="droplet.description"></span>
       </div>
     </div>
@@ -39,13 +39,14 @@
 
 <div *ngIf="droplet.explanations.length > 0" class="row">
   <div class="col-md-10">
-    <h4>Explanations
+    <h4>
+      Explanations
+      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create3']"></span>
       <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
     </h4>
-    <button class="btn btn-sm" [routerLink]="['/create/create3']">Add New</button>
     <div *ngIf="droplet.explanations.length < 1">None</div>
     <div class="row" *ngFor="let explanation of droplet.explanations; let i=index; trackBy: tracking">
-      <div class="explanation col-md-10" (click)="selectExplanation(i)">
+      <div class="explanation col-md-11" (click)="selectExplanation(i)">
         <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span [innerHTML]="explanation.content || empty"></span>
       </div>
@@ -60,16 +61,16 @@
 <div *ngIf="droplet.questions.length > 0" class="row">
   <div class="col-md-10">
     <h4>Questions
+      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create4']"></span>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 0"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 2"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 3"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 4"></div>
     </h4>
-    <button class="btn btn-sm" [routerLink]="['/create/create4']">Add New</button>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div class="row" *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
-      <div class="question col-md-10" (click)="selectQuestion(i)">
+      <div class="question col-md-11" (click)="selectQuestion(i)">
         <div>
           <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
           <h5>Prompt:</h5>
@@ -92,11 +93,12 @@
 
 <div *ngIf="droplet.hints.length > 0" class="row">
   <div class="col-md-10">
-    <h4>Hints (optional)</h4>
-    <button class="btn btn-sm" [routerLink]="['/create/create5']">Add New</button>
+    <h4>Hints (optional)
+    <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create5']"></span>
+    </h4>
     <div *ngIf="droplet.hints.length < 1">None</div>
     <div class="row" *ngFor="let hint of droplet.hints; let i=index; trackBy: tracking">
-      <div class="hint col-md-10" (click)="selectHint(i)">
+      <div class="hint col-md-11" (click)="selectHint(i)">
         <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span [innerHTML]="hint.content || empty"></span>
       </div>
@@ -111,13 +113,12 @@
 <div *ngIf="droplet.tags.length > 0" class="row">
   <div class="col-md-10">
     <h4>Tags
+      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create6']"></span>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 0"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 2"></div>
     </h4>
-    <button class="btn btn-sm" [routerLink]="['/create/create6']">Add New</button>
     <div *ngIf="droplet.tags.length < 1">None</div>
-    <br>
     <button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
     </button>

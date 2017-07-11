@@ -1,17 +1,19 @@
-.explanation, .question, .hint {
-  background-color: rgba(255, 235, 59, 0.54);
+.description, .explanation, .question, .hint {
+  background-color: #e5c8ef;
   border: 1px solid transparent;
-  border-radius: 4px;
   padding: 10px;
   margin-bottom: 5px;
   margin-left: 15px;
+
 }
 .droplet-name {
   font-size: 24px;
   font-weight: bold;
 }
 .progress-marker {
-  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 6px;
+  float: right;
   display: inline-block;
   background-color: #d9534f;
   border-radius: 50%;
@@ -24,6 +26,15 @@
 .btn {
   margin-bottom: 10px;
 }
+
+.btn-add {
+  color: #77a75b;
+  padding: 3px;
+}
+
+.btn-add:hover {
+  color: green;
+}
 .comments {
   border: 1px solid black;
   padding: 5px;
@@ -31,4 +42,8 @@
 }
 .left15 {
   margin-left: 0;
+}
+
+.down-a-bit {
+  margin-top: 14px;
 }
