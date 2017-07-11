@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 export class HttpService {
 
   //This environment variable has been set in the app.yaml file which google cloud uses to set it. Locally we use 8080 for the api.
-  API_URL: string = process.env.url || "http://localhost:8080";
+  API_URL: string = process.env.url || environment.apiUrl;
 
   constructor(
     private http: Http,
