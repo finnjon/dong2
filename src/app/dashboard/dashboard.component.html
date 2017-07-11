@@ -1,28 +1,34 @@
 <div class="row">
   <div class="col-md-5 col-md-offset-1">
-    <h4>My Droplets</h4>
+    <h3>My Droplets <span class="h5" (click)="showEdit = !showEdit">Edit</span></h3>
     <div *ngFor="let droplet of userDroplets">
-      <div class="row vertical-align">
-        <div class="col-md-5">{{ droplet.name | uppercase }} </div>
+      <div class="row vertical-align mid-height">
         <div class="col-md-7">
-          <button class="btn btn-xs btn-primary no-border" (click)="editDroplet(droplet._id)">
+          <button *ngIf="showEdit" class="btn btn-xs btn-primary no-border" (click)="editDroplet(droplet._id)">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button class="btn btn-xs btn-primary no-border" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
+          {{ droplet.name | uppercase }}
+        </div>
+        <div class="col-md-5">
+          <button class="btn btn-xs btn-primary no-border no-hover" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="col-md-5">
-    <h4>My Review Droplets</h4>
+    <h3>My Review Droplets <span class="h5" (click)="showReview = !showReview">Review</span></h3>
     <div *ngFor="let droplet of userReviewDroplets; let i=index;">
-      <div class="row vertical-align">
-        <div class="col-md-4">{{ droplet.name | uppercase }}</div>
+      <div class="row vertical-align mid-height">
         <div class="col-md-8">
-          <button class="btn btn-xs btn-primary no-border" (click)="reviewDroplet(droplet)">Review</button>
+          <button *ngIf="showReview" class="btn btn-xs btn-primary no-border" (click)="reviewDroplet(droplet)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          {{ droplet.name | uppercase }}
+        </div>
+        <div class="col-md-4">
           <button
-            class="btn btn-xs btn-primary no-border"
+            class="btn btn-xs btn-primary no-border no-hover"
             [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
           </button>
           <button

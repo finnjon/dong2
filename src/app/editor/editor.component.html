@@ -1,19 +1,18 @@
 <div class="col-md-10 col-md-offset-1">
 <div>
   <h2>
-    <span>Editor Page</span>
-    <button class="btn btn-small btn-success pull-right margin-l-5" (click)="verifyDroplet()">Verify</button>
-    <button class="btn btn-small btn-info pull-right" (click)="alertAuthor()">Alert Author</button>
+    <span>Review Panel</span>
+    <button class="btn btn-xs btn-primary pull-right margin-l-5" (click)="verifyDroplet()">Verify</button>
+    <button class="btn btn-xs btn-primary pull-right" (click)="alertAuthor()">Alert Author</button>
   </h2>
 </div>
-<p>Click on a comment bubble to leave a comment or suggestion (or edit one already existing). When you have left all your suggestions click 'notify author'.</p>
-
+<p>Click on the comment icons to leave or edit a comment. When you have finished click "Alert Author". Once you are satisfied no more changes need to be made, click "Verify"</p>
 <div class="row">
-  <div class="col-md-5">
-    <h4>Name <span class="glyphicon glyphicon-comment" (click)="toggleMe('name', 0)"></span></h4>
+  <div class="col-md-6">
+    <h4 class="purple">Name <span class="glyphicon glyphicon-comment" (click)="toggleMe('name', 0)"></span></h4>
     <span>{{ droplet.name || "no name" }}</span>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" (click)="toggleMe('name', 0)" *ngIf="showEdit !== 'name' + 0 && droplet.comments.name">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'name', 0)"></span></div>
       <p>{{ droplet.comments.name }}</p>
@@ -27,7 +26,7 @@
           [ngModel]="droplet.comments.name">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-xs btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
@@ -35,11 +34,11 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-5">
-    <h4>Description <span class="glyphicon glyphicon-comment" (click)="toggleMe('description', 0)"></span></h4>
+  <div class="col-md-6">
+    <h4 class="purple">Description <span class="glyphicon glyphicon-comment" (click)="toggleMe('description', 0)"></span></h4>
     <span [innerHTML]="droplet.description"></span>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" (click)="toggleMe('description', 0)" *ngIf="showEdit !== 'description' + 0 && droplet.comments.description">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'description', 0)"></span></div>
       <p>{{ droplet.comments.description }}</p>
@@ -53,19 +52,18 @@
           [ngModel]="droplet.comments.description">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-xs btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
 <hr>
 
-<h4>Explanations</h4>
 <div class="row" *ngFor="let explanation of droplet.explanations; let i=index;">
-  <div class="col-md-5">
-    <h5>Explanation {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('explanations', i)"></span></h5>
+  <div class="col-md-6">
+    <h4 class="purple">Explanation {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('explanations', i)"></span></h4>
     <span [innerHTML]="explanation.content"></span>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" *ngIf="showEdit !== 'explanations' + i && explanation.comment">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'explanations', i)"></span></div>
       <p>{{ explanation.comment }}</p>
@@ -79,26 +77,24 @@
           [ngModel]="explanation.comment">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-xs btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
 <hr>
 
-<h4>Questions</h4>
 <div class="row" *ngFor="let question of droplet.questions; let i=index;">
-  <div class="col-md-5">
-    <h5>Question {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('questions', i)"></span></h5>
-    <label>Prompt</label>
+  <div class="col-md-6">
+    <h4 class="purple">Question {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('questions', i)"></span></h4>
     <div [innerHTML]="question.prompt"></div>
-    <label>Answer</label>
+    <label class="answer">Answer</label>
     <div>{{ question.answer }}</div>
     <div *ngIf="question.filled_answer">
       <label>Pre-filled Answer</label>
       <div>{{ question.filled_answer }}</div>
     </div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" *ngIf="showEdit !== 'questions' + i && question.comment">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'questions', i)"></span></div>
       <p>{{ question.comment }}</p>
@@ -112,19 +108,18 @@
           [ngModel]="question.comment">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-xs btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
 <hr>
 
-<h4>Hints</h4>
 <div class="row" *ngFor="let hint of droplet.hints; let i=index;">
-  <div class="col-md-5">
-    <h5>Hint {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('hints', i)"></span></h5>
+  <div class="col-md-6">
+    <h4 class="purple">Hint {{ i+1 }} <span class="glyphicon glyphicon-comment" (click)="toggleMe('hints', i)"></span></h4>
     <span [innerHTML]="hint.content"></span>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" *ngIf="showEdit !== 'hints' + i && hint.comment">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(true, 'hints', i)"></span></div>
       <p>{{ hint.comment }}</p>
@@ -138,7 +133,7 @@
           [ngModel]="hint.comment">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-xs btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
@@ -146,11 +141,11 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-5">
-    <h4>Tags <span class="glyphicon glyphicon-comment" (click)="toggleMe('tags', 0)"></span></h4>
+  <div class="col-md-6">
+    <h4 class="purple">Tags <span class="glyphicon glyphicon-comment" (click)="toggleMe('tags', 0)"></span></h4>
     <button *ngFor="let tag of droplet.tags; let i=index;" type="button" class="btn btn-default btn-sm">{{ tag.tag }}</button>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="comment-box" (click)="toggleMe('tags', 0)" *ngIf="showEdit !== 'tags' + 0 && droplet.comments.tags">
       <div><label>Comment:</label><span class="glyphicon glyphicon-remove" (click)="removeComment(false, 'tags', 0)"></span></div>
       <p>{{ droplet.comments.tags }}</p>
@@ -160,17 +155,13 @@
         <textarea
           name="comment"
           class="form-control"
-          placeholder="Add comment"
+          placeholder="Write your comment here"
           [ngModel]="droplet.comments.tags">
         </textarea>
       </div>
-      <button type="submit" class="btn btn-xsmall">Add Comment</button>
+      <button type="submit" class="btn btn-primary">Add Comment</button>
     </form>
   </div>
 </div>
-<hr>
-
-<!-- <h4>Tags</h4>
-<button *ngFor="let tag of droplet.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="commentThis(tag, i)">{{ tag.tag }}</button> -->
 
 </div>

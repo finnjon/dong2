@@ -1,17 +1,17 @@
 .comment-box {
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 5px;
+  background-color: #e5c8ef;
+  padding: 10px;
 }
 
-hr {
-  border-top: 3px double #8c8b8b;
+hr { border-top: 3px double #8c8b8b; }
+p { font-size: 1.2em; }
+.glyphicon-remove { float: right; }
+.margin-l-5 { margin-left: 5px; }
+.btn-primary { font-size: 14px; }
+.purple { color: #8c00ff; }
+.form-group {margin-bottom: 7px; }
+.form-group textarea {
+  border-color: #333;
+  border-radius: 0;
 }
-
-.glyphicon-remove {
-  float: right;
-}
-
-.margin-l-5 {
-  margin-left: 5px;
-}
+.answer { margin-top: 10px; }

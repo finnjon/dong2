@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   userReviewDroplets: any;
   droplet: Droplet;
   error: any;
+  public showEdit: boolean = false;
+  public showReview: boolean = false;
   public title: string = 'Warning!!!';
   public message: string = 'Are you sure you wish to resign as editor of this droplet?';
   public confirmClicked: boolean = false;
