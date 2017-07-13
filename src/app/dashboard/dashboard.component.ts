@@ -31,8 +31,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //note that I set the new droplet here because this is first component loaded after authentication. To set the new droplet requires a user id so I can't do it earlier. If I do it in the create component it doesn't work.
-    this.dropletService.setNewDroplet();
     this.httpService.getUserDroplets()
       .subscribe(
         (data: Response) => this.userDroplets = data.json(),

@@ -39,8 +39,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit() {
     this.profile = this.auth.userProfile;
-    this.role = this.auth.role[0];
-    console.log(this.role);
+    if (this.auth.role) { this.role = this.auth.role[0] };
     this.httpService.getReviewDroplets()
       .subscribe(
         (data: Response) => {
