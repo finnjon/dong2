@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-offset-1">
+    <h3>Droplets for Review</h3>
+    <p><i>Click droplet to see description</i></p>
+    <p *ngIf="role === 'user'">Draft droplets ready for review will show up here. Only people who have the right to edit droplets can select them. If you would like this role please contact us immediately.</p>
+    <div *ngIf="role !== 'user'">
+      <div *ngFor="let droplet of reviewDroplets">
+        <div class="row pad">
+            <div class="col-md-5">
+              <div class="add-cursor" (click)="showDescription[droplet._id] = !showDescription[droplet._id]">{{ droplet.name | uppercase }}</div>
+              <div class="description" *ngIf="showDescription[droplet._id]"  [innerHTML]="droplet.description"></div>
+            </div>
+            <div class="col-md-3" *ngIf="!droplet.editor && role !== 'user'">
+              <button class="btn btn-primary btn-xsmall" (click)="addEditor(droplet)">Review this droplet</button>
+            </div>
+            <div class="col-md-2"><button class="btn btn-success btn-xsmall" *ngIf="droplet.editor === profile.sub" (click)="reviewDroplet(droplet)">Go to Review</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

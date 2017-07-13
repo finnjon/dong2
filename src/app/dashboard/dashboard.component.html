@@ -29,20 +29,17 @@
         <div class="col-md-8">
           <li class="">{{ droplet.name | uppercase }}</li>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <button class="btn btn-xs btn-primary no-border no-hover" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
-        </div>
-        <div class="col-md-1">
-          <button
-            class="btn btn-xs btn-primary no-border"
+          <span
+            class="glyphicon glyphicon-remove purple pencil-dash"
             mwlConfirmationPopover
             [title]="title"
             [message]="message"
             placement="left"
             (confirm)="confirmClicked = true; unreviewDroplet(droplet, i)"
             (cancel)="cancelClicked = true">
-            <span class="glyphicon glyphicon-remove"></span>
-          </button>
+          </span>
         </div>
       </div>
     </div>
