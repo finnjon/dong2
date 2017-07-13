@@ -3,13 +3,16 @@
     <h3>My Droplets <span class="h5" (click)="showEdit = !showEdit">Edit</span></h3>
     <div *ngFor="let droplet of userDroplets">
       <div class="row vertical-align mid-height">
-        <div class="col-md-7">
-          <button *ngIf="showEdit" class="btn btn-xs btn-primary no-border" (click)="editDroplet(droplet._id)">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
-          {{ droplet.name | uppercase }}
+        <div *ngIf="showEdit" class="col-md-1">
+          <span
+            class="glyphicon glyphicon-pencil purple pencil-dash"
+            (click)="editDroplet(droplet._id)"
+            ></span>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
+          <li class="">{{ droplet.name | uppercase }}</li>
+        </div>
+        <div class="col-md-3">
           <button class="btn btn-xs btn-primary no-border no-hover" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
         </div>
       </div>
@@ -20,17 +23,16 @@
     <h3>My Review Droplets <span class="h5" (click)="showReview = !showReview">Review</span></h3>
     <div *ngFor="let droplet of userReviewDroplets; let i=index;">
       <div class="row vertical-align mid-height">
-        <div class="col-md-8">
-          <button *ngIf="showReview" class="btn btn-xs btn-primary no-border" (click)="reviewDroplet(droplet)">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
-          {{ droplet.name | uppercase }}
+        <div *ngIf="showReview" class="col-md-1">
+          <span class="glyphicon glyphicon-pencil purple pencil-dash" (click)="reviewDroplet(droplet)"></span>
         </div>
-        <div class="col-md-4">
-          <button
-            class="btn btn-xs btn-primary no-border no-hover"
-            [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}
-          </button>
+        <div class="col-md-8">
+          <li class="">{{ droplet.name | uppercase }}</li>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-xs btn-primary no-border no-hover" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
+        </div>
+        <div class="col-md-1">
           <button
             class="btn btn-xs btn-primary no-border"
             mwlConfirmationPopover
