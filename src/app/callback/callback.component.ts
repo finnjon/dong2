@@ -11,6 +11,7 @@ export class CallbackComponent implements OnInit {
   constructor(
     public auth: Auth,
   ) {
+    console.log('authenticating in callback component')
     auth.handleAuthentication();
   }
 

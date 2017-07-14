@@ -22,9 +22,19 @@ There is a debate about whether it is best to build the site and then add it to 
 
 There is also an issue about whether the site can find the server if server.js is not in the main directory but stored in the server directory. But let's see. Maybe I will move it.
 
-### Authentication
+### Authentication and loading
 
-I am using Auth0 for authentication. Basically you simply sign up for an account and then NPM install and have a link to log in or sign up. This takes you away to their own login page which allows you to log in or sign up. When it returns you successfully it gives you some JWT's for accessing the api you have also set up. The JWT's are set up to send the token with all requests and can be decripted on the server using the secret you get from the auth0 site. Massive pain in the arse with poor documentation.
+This has been a particular pain. I am using Auth0. Essentially the process is this:
+
+1. Any url beginning with deepldata.appspot.com will go to the node server and return the index.html which loads the app. So the starting point is always the same on loading.
+
+2. The app component will then check whether the user is authenticated by checking for an id_token, a jwt, in web storage. If one is there, it will check for a userProfile. If there is a token but no profile, it will fetch one and then direct to the dashboard.
+
+3. If there is not valid token it will redirect to the signin page. There the user can click to signin or signup using Auth0. Clicking the button will direct to Auth0's own signin page.
+
+4. On successful login or signup Auth0 reload the app component which will fail to find a token because it has not been added yet. It will then load the callback component, which will run the script to load the token into local storage and get the profile out of it, and having done that will redirect to the dashboard.
+
+5. Authenticated pages all have an auth guard which basically runs the code to check for the token and the profile.
 
 ### Focus
 
