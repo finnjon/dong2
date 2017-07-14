@@ -26,10 +26,10 @@
         <div *ngIf="showReview" class="col-md-1">
           <span class="glyphicon glyphicon-pencil purple pencil-dash" (click)="reviewDroplet(droplet)"></span>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <li class="">{{ droplet.name | uppercase }}</li>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <button class="btn btn-xs btn-primary no-border no-hover" [ngClass]="{'btn-danger': droplet.verified === 'review complete'}">{{ droplet.verified }}</button>
           <span
             class="glyphicon glyphicon-remove purple pencil-dash"

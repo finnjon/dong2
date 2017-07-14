@@ -44,7 +44,6 @@ export class HttpService {
     if (droplet._id) {
       droplet.updated_at = new Date().toJSON();
       droplet.status = this.checkStatus(droplet);
-      console.log(droplet.status);
       return this.put(droplet);
     }
     return this.post(droplet);
