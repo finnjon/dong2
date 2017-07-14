@@ -10,7 +10,7 @@ import { CREATE_ROUTES} from './create/create.routes';
 import { AuthGuard } from './auth.guard';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'signup', pathMatch: 'full' },
   { path: 'callback', component: CallbackComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
@@ -19,7 +19,7 @@ const APP_ROUTES: Routes = [
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: 'editor/:id', component: EditorComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'signup' }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
