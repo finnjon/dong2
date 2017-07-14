@@ -35,7 +35,8 @@ var dropletSchema = new Schema({
 		created_at: String,
 		updated_at: String,
 		filledAnswer: String,
-		comment: String
+		comment: String,
+		qsHint: String
 	}],
 	comments: {
 		name: String,

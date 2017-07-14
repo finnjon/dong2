@@ -45,7 +45,8 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
          if (
            focussed !== ('question') &&
            focussed !== ('answer') &&
-           focussed !== ('filled')
+           focussed !== ('filled') &&
+           focussed !== ('qsHint')
          ) { el.focus(); }
        }, 500);
     }
@@ -61,6 +62,7 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
       this.droplet.questions[index].prompt = question.prompt;
       this.droplet.questions[index].answer = question.answer;
       this.droplet.questions[index].filledAnswer = question.filledAnswer;
+      this.droplet.questions[index].qsHint = question.qsHint;
     } else {
       question.created_at = new Date().toJSON();
       question.updated_at = new Date().toJSON();
@@ -89,6 +91,9 @@ export class Create4Component implements OnInit, OnDestroy, AfterViewChecked {
       break;
     case "filledAnswer":
       this.focussed = "filledAnswer";
+      break;
+    case "qsHint":
+      this.focussed = "qsHint";
       break;
     default:
       this.focussed = "";

@@ -76,9 +76,16 @@
         <hr>
         <h5>Answer:</h5>
         <div>{{ question.answer || "empty" }}</div>
-        <hr>
-        <h5>Filled Answer:</h5>
-        <div>{{ question.filledAnswer || "empty" }}</div>
+        <div *ngIf="question.filledAnswer">
+          <hr>
+          <h5>Filled Answer:</h5>
+          <div>{{ question.filledAnswer || "empty" }}</div>
+        </div>
+        <div *ngIf="question.qsHint">
+          <hr>
+          <h5>Question-specific Hint:</h5>
+          <div>{{ question.qsHint || "empty" }}</div>
+        </div>
       </div>
       <div *ngIf="question.comment" class="comments">
         <label>Editor comment:</label>

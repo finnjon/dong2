@@ -60,6 +60,17 @@
       <li>If you would like the student to edit an pre-filled answer, write it here.</li>
     </ul>
   </div>
+
+  <div class="form-group">
+    <label>Question-Specific Hint:</label>
+    <input id="qsHint" *ngIf="index" class="form-control" [(ngModel)]="droplet.questions[index].qsHint" name="qsHint" type="text" class="form-control" placeholder="If you would like to include a question-specific hint do so here." (focus)="onFocus('qsHint')">
+    <input id="qsHint" *ngIf="!index" class="form-control" [(ngModel)]="question.qsHint" name="qsHint" type="text" class="form-control" placeholder="If you would like to include a question-specific hint do so here." (focus)="onFocus('qsHint')">
+  </div>
+  <div *ngIf="focussed === 'qsHint'" class="advice">
+    <ul>
+      <li>If the general hints are not appropriate for this question, add a hint specific to the question here.</li>
+    </ul>
+  </div>
   <button type="submit" class="btn btn-default">
     <span *ngIf="index">Update Question</span>
     <span *ngIf="!index">Add Question</span>
