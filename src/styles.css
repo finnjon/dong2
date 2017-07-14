@@ -76,3 +76,5 @@ body {
 .purple {
   color: #8C00FF;
 }
+
+.cursor { cursor: hand; cursor: pointer }

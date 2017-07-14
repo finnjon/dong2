@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-md-11">
-    <div class="droplet-name" (click)="editThis('name')">{{ droplet.name || "My New Droplet" }}
+    <div class="droplet-name cursor" (click)="editThis('name')">{{ droplet.name || "My New Droplet" }}
       <div class="progress-marker down-a-bit" [class.complete]="droplet.name">
       </div>
     </div>
@@ -25,7 +25,7 @@
     <h4>Description
       <div class="progress-marker" [class.complete]="droplet.description"></div>
     </h4>
-    <div class="description" (click)="editThis('description')">
+    <div class="description cursor" (click)="editThis('description')">
       <span [innerHTML]="droplet.description"></span>
     </div>
     <div *ngIf="droplet.comments && droplet.comments.description" class="comments ">
@@ -39,13 +39,13 @@
   <div class="col-md-11">
     <h4>
       Explanations
-      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create3']"></span>
+      <span class="glyphicon glyphicon-plus btn-add cursor" [routerLink]="['/create/create3']"></span>
       <div class="progress-marker" [class.complete]="droplet.explanations.length > 0"></div>
     </h4>
     <div *ngFor="let explanation of droplet.explanations; let i=index; trackBy: tracking">
       <div class="explanation" (click)="selectExplanation(i)">
-        <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
-        <span [innerHTML]="explanation.content || empty"></span>
+        <span (click)="removeElement(i, 'explanation')" class="pull-right glyphicon glyphicon-remove cursor" aria-hidden="true"></span>
+        <span [innerHTML]="explanation.content || empty" class="cursor"></span>
       </div>
       <div *ngIf="explanation.comment" class="comments">
         <label>Editor comment:</label>
@@ -58,7 +58,7 @@
 <div *ngIf="droplet.questions.length > 0" class="row">
   <div class="col-md-11">
     <h4>Questions
-      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create4']"></span>
+      <span class="glyphicon glyphicon-plus btn-add cursor" [routerLink]="['/create/create4']"></span>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 0"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.questions.length > 2"></div>
@@ -67,9 +67,9 @@
     </h4>
     <div *ngIf="droplet.questions.length < 1">None</div>
     <div *ngFor="let question of droplet.questions; let i=index; trackBy: tracking">
-      <div class="question" (click)="selectQuestion(i)">
+      <div class="question cursor" (click)="selectQuestion(i)">
         <div>
-          <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <span (click)="removeElement(i, 'question')" class="pull-right glyphicon glyphicon-remove cursor" aria-hidden="true"></span>
           <h5>Prompt:</h5>
           <span [innerHTML]="question.prompt || empty"></span>
         </div>
@@ -91,12 +91,12 @@
 <div *ngIf="droplet.hints.length > 0" class="row">
   <div class="col-md-11">
     <h4>Hints (optional)
-    <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create5']"></span>
+    <span class="glyphicon glyphicon-plus btn-add cursor" [routerLink]="['/create/create5']"></span>
     </h4>
     <div *ngFor="let hint of droplet.hints; let i=index; trackBy: tracking">
       <div class="hint" (click)="selectHint(i)">
-        <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove" aria-hidden="true"></span>
-        <span [innerHTML]="hint.content || empty"></span>
+        <span (click)="removeElement(i, 'hint')" class="pull-right glyphicon glyphicon-remove cursor" aria-hidden="true"></span>
+        <span [innerHTML]="hint.content || empty" class="cursor"></span>
       </div>
       <div *ngIf="hint.comment" class="comments">
         <label>Editor comment:</label>
@@ -109,7 +109,7 @@
 <div *ngIf="droplet.tags.length > 0" class="row">
   <div class="col-md-11">
     <h4>Tags
-      <span class="glyphicon glyphicon-plus btn-add" [routerLink]="['/create/create6']"></span>
+      <span class="glyphicon glyphicon-plus btn-add cursor" [routerLink]="['/create/create6']"></span>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 0"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 1"></div>
       <div class="progress-marker" [class.complete]="droplet.tags.length > 2"></div>

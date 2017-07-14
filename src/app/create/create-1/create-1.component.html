@@ -8,7 +8,10 @@
            name="name"
            (keyup)="onSearch(f.value.name)"
            autocomplete="off"
-           (focus)="onFocus()">
+           (focus)="onFocus()"
+           required
+           minlength="5"
+           maxlength="35">
   </div>
   <div class="advice">
     <ul>
