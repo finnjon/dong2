@@ -2,11 +2,16 @@
 
 - Try to configure the quill editor once for all instances.
 - Get focusing to work with the editor.
-- When uploaded make sure you can't boot from certain routes that won't work.
-- Write a (better) piece on how the authentication works.
-- Put navbar into own component and update username etc if it changes. Currently data stays on logout!
+- Consider multiple question-specific hints or dragging them in from the generic hints.
 
 ## Notes
+
+### Mongo Nonsense
+
+Wrangling the data previously used to prepare it for the site was not easy but a couple of things I learned:
+
+- if you import an array of objects (i.e. droplets) into Mlab you need to wrap them in an array and when you use Mlab's import command, add the flag --jsonArray. Otherwise it will give you an error.
+- What you get when exporting from Mlab is not valid json, it is just a bunch of objects. You need to wrap them in a root object and also have commas between the objects for it to be valid json.
 
 ### Google cloud
 

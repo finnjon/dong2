@@ -45,6 +45,6 @@ var dropletSchema = new Schema({
 	}
 });
 
-var Droplets = mongoose.model('Droplets3', dropletSchema);
+var Droplets = mongoose.model('Droplets4', dropletSchema);
 
 module.exports = Droplets;
