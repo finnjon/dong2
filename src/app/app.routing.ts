@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReviewComponent } from './review/review.component';
 import { EditorComponent } from './editor/editor.component';
+import { CreatePoolComponent } from './create-pool/create-pool.component';
 import { CREATE_ROUTES} from './create/create.routes';
 import { AuthGuard } from './auth.guard';
 
@@ -15,6 +16,7 @@ const APP_ROUTES: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
+  { path: 'create-pool', component: CreatePoolComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },

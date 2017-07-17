@@ -3,6 +3,7 @@ import { Auth } from '../auth.service';
 import { Router } from '@angular/router';
 import { Droplet } from '../droplet';
 import { DropletService } from '../droplet.service';
+import { PoolService } from '../pool.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public auth: Auth,
     private router: Router,
-    private dropletService: DropletService
+    private dropletService: DropletService,
+    private poolService: PoolService
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,11 @@ export class NavbarComponent implements OnInit {
   goToCreate() {
     this.dropletService.setNewDroplet();
     this.router.navigate(['/create']);
+  }
+
+  goToCreatePool() {
+    this.poolService.setNewPool();
+    this.router.navigate(['/create-pool']);
   }
 
 }

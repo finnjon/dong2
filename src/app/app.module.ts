@@ -17,6 +17,7 @@ import { Create2Component } from './create/create-2/create-2.component';
 import { Create3Component } from './create/create-3/create-3.component';
 import { ShowDropletComponent } from './show-droplet/show-droplet.component';
 import { DropletService } from './droplet.service';
+import { PoolService } from './pool.service';
 import { Create4Component } from './create/create-4/create-4.component';
 import { Create5Component } from './create/create-5/create-5.component';
 import { Create6Component } from './create/create-6/create-6.component';
@@ -28,6 +29,7 @@ import { QuillModule } from 'ngx-quill';
 import { EditorComponent } from './editor/editor.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CreatePoolComponent } from './create-pool/create-pool.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -53,7 +55,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReviewComponent,
     CallbackComponent,
     EditorComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreatePoolComponent,
   ],
   imports: [
     QuillModule,
@@ -72,7 +75,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
-       AuthGuard, Auth, DropletService, HttpService],
+       AuthGuard,
+       Auth,
+       DropletService,
+       PoolService,
+       HttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
