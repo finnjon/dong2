@@ -1,4 +1,5 @@
 var Droplets = require('../models/dropletModel');
+var Pools = require('../models/poolModel');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var jwt = require('express-jwt');
@@ -38,6 +39,15 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/pools/:id', function(req, res) {
+		Pools.findOne({
+			_id: req.params.id
+		}, function(err, pool) {
+			if (err) throw err;
+			res.send(pool);
+		});
+	});
+
 	app.get('/api/userDroplets', checkJwt, function(req, res) {
 		Droplets.find({
 					user_id: req.user.sub
@@ -46,7 +56,18 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(droplets);
 				})
-			.limit(20);
+			.limit(15);
+	});
+
+	app.get('/api/userPools', checkJwt, function(req, res) {
+		Pools.find({
+					user_id: req.user.sub
+				}, //sub is ID
+				function(err, pools) {
+					if (err) throw err;
+					res.send(pools);
+				})
+			.limit(15);
 	});
 
 	app.get('/api/userReviewDroplets', checkJwt, function(req, res) {
@@ -81,6 +102,19 @@ module.exports = function(app) {
 				function(err, droplets) {
 					if (err) throw err;
 					res.send(droplets);
+				})
+			.limit(10);
+	});
+
+	app.get('/api/pools', function(req, res) {
+		var searchString = req.param('search');
+		Pools.find({
+					name: new RegExp(searchString, "i")
+				},
+				'_id name description status language created_at',
+				function(err, pools) {
+					if (err) throw err;
+					res.send(pools);
 				})
 			.limit(10);
 	});
@@ -120,6 +154,41 @@ module.exports = function(app) {
 			newDroplet.save(function(err, droplet) {
 				if (err) throw err;
 				res.send(droplet);
+			});
+		}
+	});
+
+	app.post('/api/pools', checkJwt, function(req, res) {
+		if (req.body._id) { //if id then obj exists and so update
+			Pools.findByIdAndUpdate(
+				req.body._id, {
+					$set: req.body
+				}, {
+					new: true
+				}, //necessary to return updated object
+				function(err, pool) {
+					if (err) throw err;
+					res.send(pool);
+				});
+
+		} else { //no id so create
+
+			var newPool = Pools({
+				name: req.body.name,
+				description: req.body.description,
+				user_id: req.body.user_id,
+				created_at: req.body.created_at,
+				updated_at: req.body.updated_at,
+				status: req.body.status,
+				language: req.body.language,
+				open: req.body.open,
+				tags: req.body.tags,
+				droplets: req.body.droplets
+			});
+
+			newPool.save(function(err, pool) {
+				if (err) throw err;
+				res.send(pool);
 			});
 		}
 	});

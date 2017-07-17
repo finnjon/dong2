@@ -8,7 +8,7 @@ export class DropletService {
   droplet: any;
 
   constructor(
-    private auth: Auth,
+    private auth: Auth
   ) {}
 
   getCurrentDroplet() {
@@ -29,7 +29,7 @@ export class DropletService {
       new Date().toJSON(), //updated_at
       "draft", //status
       "unverified", //verified
-      "", //language
+      "english", //language
       false, //open
       [], //tags
       [], //hints

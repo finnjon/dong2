@@ -8,6 +8,7 @@ export class Pool {
     public status: string,
     public language: string,
     public tags: any,
+    public droplets: any,
     public open: boolean,
     public _id?: string
   ) {}

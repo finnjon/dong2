@@ -45,5 +45,31 @@
         </div>
       </div>
     </div>
+
+    <h3 *ngIf="userPools && userPools.length > 0">My Pools <span class="h5 cursor" (click)="showEditPool = !showEditPool">Edit</span></h3>
+    <div *ngFor="let pool of userPools; let i=index;">
+      <div class="row vertical-align mid-height">
+        <div *ngIf="showEditPool" class="col-md-1">
+          <span class="glyphicon glyphicon-pencil purple pencil-dash" (click)="editPool(pool._id)"></span>
+        </div>
+        <div class="col-md-7">
+          <li class="">{{ pool.name | uppercase }}</li>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-xs btn-primary no-border no-hover">{{ pool.status }}</button>
+        </div>
+        <!-- <div class="col-md-1 left">
+          <span
+            class="glyphicon glyphicon-remove purple pencil-dash"
+            mwlConfirmationPopover
+            [title]="title"
+            [message]="message"
+            placement="left"
+            (confirm)="confirmClicked = true; unreviewDroplet(droplet, i)"
+            (cancel)="cancelClicked = true">
+          </span>
+        </div> -->
+      </div>
+    </div>
   </div>
 </div>

@@ -17,6 +17,7 @@ const APP_ROUTES: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'create-pool', component: CreatePoolComponent, canActivate: [AuthGuard] },
+  { path: 'edit-pool/:id', component: CreatePoolComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: CreateComponent, canActivate: [AuthGuard], children: CREATE_ROUTES },
   { path: 'api', component: ApiComponent, canActivate: [AuthGuard] },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
