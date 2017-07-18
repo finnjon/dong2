@@ -1,0 +1,27 @@
+.results {
+  padding: 7px;
+  line-height: 1.6em;
+  list-style: none;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.results li:hover {
+  color: #8C00FF;
+}
+
+.tags-box {
+  margin-bottom: 15px;
+}
+
+.droplet-buttons {
+  margin: 3px 0;
+}
+
+.droplet-description {
+  padding-left: 3px;
+}
+
+.remove-droplet {
+  padding: 5px;
+}

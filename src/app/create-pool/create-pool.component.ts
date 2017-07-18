@@ -13,8 +13,11 @@ import { Response } from '@angular/http';
 export class CreatePoolComponent implements OnInit {
   pool: Pool;
   searchResults: any;
+  searchDropletResults: any;
   focussed = false;
   tag: String;
+  showBasics = true;
+  displayDescription = null;
 
   constructor(
     private poolService: PoolService,
@@ -24,12 +27,10 @@ export class CreatePoolComponent implements OnInit {
 
   ngOnInit() {
     this.pool = this.poolService.getCurrentPool();
-    console.log(this.pool);
     this.poolService.pushedPool.subscribe(pool => this.pool = pool);
   }
 
   onSubmit(data) {
-    console.log(data);
     this.pool.name = data.name;
     this.pool.description = data.description;
     this.httpService.savePool(this.pool)
@@ -66,7 +67,62 @@ export class CreatePoolComponent implements OnInit {
       });
   }
 
+  searchDroplets(query) {
+    this.httpService.searchDroplets(query)
+      .subscribe(
+        (data: Response) => {
+          this.searchDropletResults = data.json();
+      });
+  }
+
+  addToPool(droplet) {
+    var date = new Date().toJSON();
+    var addedDroplet = {
+      dropletId: droplet._id,
+      name: droplet.name,
+      description: droplet.description,
+      added_at: date,
+    }
+    this.pool.droplets.push(addedDroplet);
+    this.httpService.savePool(this.pool)
+      .subscribe(
+        (pool: Pool) => {
+          this.poolService.updateCurrentPool(pool);
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => {
+          this.flashMessagesService.show('Droplet added to pool', { cssClass: 'alert-success', timeout: 2000 });
+        }
+      );
+  }
+
+  removeDropletFromPool(index) {
+    this.pool.droplets.splice(index, 1);
+    this.httpService.savePool(this.pool)
+      .subscribe(
+        (pool: Pool) => {
+          this.poolService.updateCurrentPool(pool);
+        },
+        (error) => {
+          this.flashMessagesService.show('An error occurred', { cssClass: 'alert-success', timeout: 2000 });
+        },
+        () => {
+          this.flashMessagesService.show('Droplet removed from pool', { cssClass: 'alert-success', timeout: 2000 });
+        }
+      );
+  }
+
   onFocus(){
     this.focussed = true;
+  }
+
+  showDescription(index) {
+    if (this.displayDescription === index) {
+      this.displayDescription = null;
+    } else {
+      this.displayDescription = index;
+    }
   }
 }

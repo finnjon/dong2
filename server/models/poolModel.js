@@ -16,8 +16,10 @@ var poolSchema = new Schema({
 		created_at: String
 	}],
 	droplets: [{
-		droplet_id: String,
-		created_at: String,
+		dropletId: String,
+		name: String,
+		description: String,
+		added_at: String,
 	}],
 });
 

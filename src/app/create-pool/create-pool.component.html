@@ -1,72 +1,90 @@
 <div class="row">
   <div class="col-md-6 col-sm-6">
-    <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
-      <div class="form-group">
-        <label>Pool name: <small>(required)</small></label>
-        <input id="name"
-               class="form-control"
-               type="text"
-               placeholder="Add unique name"
-               [ngModel]="pool.name"
-               name="name"
-               (keyup)="onSearch(f.value.name)"
-               autocomplete="off"
-               (focus)="onFocus()"
-               required
-               minlength="5"
-               maxlength="35">
-      </div>
-      <div *ngIf="focussed[0]" class="advice">
-        <ul>
-          <li>Is your pool's name unique?</li>
-          <li>Does your pool's name have more than 10 characters?</li>
-          <li>What is the most obvious terms a person would use to search for your pool?</li>
-        </ul>
-      </div>
-      <div class="results">
-        <div *ngFor="let result of searchResults">
-          <div>{{ result.name }}</div>
+    <button class="btn btn-primary" (click)="showBasics = true">Basic Information</button>
+    <button class="btn btn-primary" (click)="showBasics = false">Add Droplets</button>
+    <div class="margin-top-10" *ngIf="showBasics">
+      <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+        <div class="form-group">
+          <label>Pool name: <small>(required)</small></label>
+          <input id="name"
+                 class="form-control"
+                 type="text"
+                 placeholder="Add unique name"
+                 [ngModel]="pool.name"
+                 name="name"
+                 (keyup)="onSearch(f.value.name)"
+                 autocomplete="off"
+                 (focus)="onFocus()"
+                 required
+                 minlength="5"
+                 maxlength="35">
         </div>
-      </div>
+        <div *ngIf="focussed[0]" class="advice">
+          <ul>
+            <li>Is your pool's name unique?</li>
+            <li>Does your pool's name have more than 10 characters?</li>
+            <li>What is the most obvious terms a person would use to search for your pool?</li>
+          </ul>
+        </div>
+        <div class="results">
+          <div *ngFor="let result of searchResults">
+            <div>{{ result.name }}</div>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Description: <small>(required)</small></label>
-        <quill-editor
-          id="description"
-          name="description"
-          placeholder="Add description"
-          [ngModel]="pool.description"
-          [modules]="{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['code-block', 'clean']
-            ]
-          }"
-          required>
-        </quill-editor>
+        <div class="form-group">
+          <label>Description: <small>(required)</small></label>
+          <quill-editor
+            id="description"
+            name="description"
+            placeholder="Add description"
+            [ngModel]="pool.description"
+            [modules]="{
+              toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                ['code-block', 'clean']
+              ]
+            }"
+            required>
+          </quill-editor>
+        </div>
+        <div *ngIf="focussed[1]" class="advice">
+          <ul>
+            <li>Describe in more detail what your collection of pools cover.</li>
+            <li>Use styling to make it more readable.</li>
+          </ul>
+        </div>
+        <button type="submit" class="btn btn-default">Save</button>
+      </form>
+      <hr>
+      <form (ngSubmit)="addTag(s.value)" #s="ngForm">
+        <div class="form-group">
+          <label>Tag: <small>(required)</small></label>
+          <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
+        </div>
+        <div *ngIf="focussed[2]" class="advice">
+          <ul>
+            <li>How will people search for your pool. That should be a tag.</li>
+            <li>Add as many as makes sense.</li>
+          </ul>
+        </div>
+        <button type="submit" class="btn btn-default">Add Tag</button>
+      </form>
+    </div>
+    <div class="margin-top-10" *ngIf="!showBasics">
+      <label>Search Droplets</label>
+      <input #searchInput
+             class="form-control"
+             type="text"
+             placeholder="Enter search terms"
+             name="search"
+             (keyup)="searchDroplets(searchInput.value)">
+    </div>
+    <div class="results">
+      <div *ngFor="let result of searchDropletResults">
+        <li><span class="purple glyphicon glyphicon-plus" (click)="addToPool(result)"></span> {{ result.name }}</li>
       </div>
-      <div *ngIf="focussed[1]" class="advice">
-        <ul>
-          <li>Describe in more detail what your collection of pools cover.</li>
-          <li>Use styling to make it more readable.</li>
-        </ul>
-      </div>
-      <button type="submit" class="btn btn-default">Save</button>
-    </form>
-    <hr>
-    <form (ngSubmit)="addTag(s.value)" #s="ngForm">
-      <div class="form-group">
-        <label>Tag: <small>(required)</small></label>
-        <input id="tag" class="form-control" [(ngModel)]="tag" name="tag" type="text" placeholder="Add tags one at a time." required>
-      </div>
-      <div *ngIf="focussed[2]" class="advice">
-        <ul>
-          <li>How will people search for your pool. That should be a tag.</li>
-          <li>Add as many as makes sense.</li>
-        </ul>
-      </div>
-      <button type="submit" class="btn btn-default">Add Tag</button>
-    </form>
+    </div>
   </div>
 
   <div class="col-md-6 col-sm-6">
@@ -90,12 +108,23 @@
       </div>
     </div>
 
-    <div *ngIf="pool.tags.length > 0" class="row">
+    <div *ngIf="pool.tags.length > 0" class="row tags-box">
       <div class="col-md-11">
         <h4>Tags</h4>
         <button *ngFor="let tag of pool.tags; let i=index; trackBy: tracking" type="button" class="btn btn-default btn-sm" (click)="removeElement(i, 'tag')">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ tag.tag }}
         </button>
+      </div>
+    </div>
+
+    <div *ngIf="pool.droplets.length > 0" class="row">
+      <div class="col-md-11">
+        <h4>Droplets in Pool</h4>
+        <div *ngFor="let droplet of pool.droplets; let i=index">
+          <span (click)="removeDropletFromPool(i)" class="glyphicon glyphicon-remove purple remove-droplet" aria-hidden="true"></span>
+          <li (click)="showDescription(i)" class="btn btn-small btn-primary droplet-buttons">{{ droplet.name }}</li>
+          <p class="droplet-description" *ngIf="displayDescription === i" [innerHTML]="droplet.description || 'no description created'"></p>
+        </div>
       </div>
     </div>
   </div>

@@ -49,7 +49,7 @@
     <h3 *ngIf="userPools && userPools.length > 0">My Pools <span class="h5 cursor" (click)="showEditPool = !showEditPool">Edit</span></h3>
     <div *ngFor="let pool of userPools; let i=index;">
       <div class="row vertical-align mid-height">
-        <div *ngIf="showEditPool" class="col-md-1">
+        <div *ngIf="showEditPool" class="col-md-1 cursor">
           <span class="glyphicon glyphicon-pencil purple pencil-dash" (click)="editPool(pool._id)"></span>
         </div>
         <div class="col-md-7">
