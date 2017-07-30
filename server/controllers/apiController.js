@@ -48,6 +48,27 @@ module.exports = function(app) {
 		});
 	});
 
+	app.post('/api/pooldrops', function(req, res) {
+		Droplets.find({
+			_id: {
+				$in: req.body
+			}
+		}, function(err, result) {
+			if (err) throw err;
+			res.send(result);
+		});
+	});
+
+
+
+	app.get('/api/latestPools', function(req, res) {
+		Pools.find({}, function(err, pools) {
+				if (err) throw err;
+				res.send(pools);
+			})
+			.limit(10);
+	});
+
 	app.get('/api/userDroplets', checkJwt, function(req, res) {
 		Droplets.find({
 					user_id: req.user.sub
@@ -56,7 +77,7 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(droplets);
 				})
-			.limit(15);
+			.limit(60);
 	});
 
 	app.get('/api/userPools', checkJwt, function(req, res) {
@@ -111,7 +132,7 @@ module.exports = function(app) {
 		Pools.find({
 					name: new RegExp(searchString, "i")
 				},
-				'_id name description status language created_at',
+				'_id name description status droplets language created_at',
 				function(err, pools) {
 					if (err) throw err;
 					res.send(pools);

@@ -4,7 +4,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { Auth } from './auth.service';
 import { Droplet } from './droplet';
 import { Pool } from './pool';
-import { Observable } from 'rxjs/Observable'; //curious
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { environment } from '../environments/environment';
