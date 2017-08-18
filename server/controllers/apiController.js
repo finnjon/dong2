@@ -39,6 +39,15 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/questions/:id', function(req, res) {
+		Droplets.findOne({
+			'questions._id': req.params.id
+		}, function(err, question) {
+			if (err) throw err;
+			res.send(question);
+		});
+	});
+
 	app.get('/api/pools/:id', function(req, res) {
 		Pools.findOne({
 			_id: req.params.id
