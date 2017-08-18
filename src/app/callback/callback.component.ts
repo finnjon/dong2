@@ -14,5 +14,4 @@ export class CallbackComponent {
     console.log('authenticating in callback component')
     auth.handleAuthentication();
   }
-
 }
