@@ -68,8 +68,6 @@ module.exports = function(app) {
 		});
 	});
 
-
-
 	app.get('/api/latestPools', function(req, res) {
 		Pools.find({}, function(err, pools) {
 				if (err) throw err;
