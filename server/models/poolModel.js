@@ -23,6 +23,6 @@ var poolSchema = new Schema({
 	}],
 });
 
-var Pools = mongoose.model('Pools', poolSchema);
+var Pools = mongoose.model('pools', poolSchema);
 
 module.exports = Pools;
