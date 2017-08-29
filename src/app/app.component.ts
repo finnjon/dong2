@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent implements OnInit{
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit{
       console.log('going to dashboard');
       this.router.navigate(['dashboard']);
     } else {
-      console.log('user not authenticated');
+      console.log('user not authenticated in app');
     }
   }
 
