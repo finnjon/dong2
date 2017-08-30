@@ -7,18 +7,21 @@
   <div class="pull-right">
     <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In</li>
     <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
-    <h5 *ngIf="auth.isAuthenticated() && profile" class="pull-left details">{{ profile.userProfile.name }}</h5>
+    <h5 *ngIf="auth.isAuthenticated() && profile" class="pull-left details">{{ profile.userProfile.name }} | {{ profile.role }}</h5>
   </div>
   <ul class="nav navbar-nav navbar-right" *ngIf="auth.isAuthenticated()">
     <li class="navbar-nav-item">
       <a class="nav-link" [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Dashboard</a>
     </li>
-    <li class="dropdown">
+    <li *ngIf="profile && profile.role[0] === 'admin'" class="dropdown">
       <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create <span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a class="nav-link" routerLink="/create" (click)="goToCreate()" [routerLinkActive]="['active']">Create Droplet</a></li>
         <li><a class="nav-link" routerLink="/create-pool" (click)="goToCreatePool()" [routerLinkActive]="['active']">Create Pool</a></li>
       </ul>
+    </li>
+    <li *ngIf="profile && profile.role[0] !== 'admin'" class="nav-item">
+      <a class="nav-link" routerLink="/create" (click)="goToCreate()" [routerLinkActive]="['active']">Create</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/review']" [routerLinkActive]="['active']">Review</a>
