@@ -1,4 +1,8 @@
-<div class="row">
+<div 
+  *ngIf="
+    (userDroplets && userDroplets.length > 0) ||
+    (userReviewDroplets && userReviewDroplets.length > 0)"
+  class="row">
   <div class="col-md-5 col-md-offset-1">
     <h3>My Droplets <span class="h5 cursor" (click)="showEdit = !showEdit">Edit</span></h3>
     <div *ngFor="let droplet of userDroplets">
@@ -72,4 +76,13 @@
       </div>
     </div>
   </div>
+</div>
+
+<div 
+  *ngIf="
+    (userDroplets && userDroplets.length === 0) &&
+    (userPools && userPools.length === 0) && 
+    (userReviewDroplets && userReviewDroplets.length === 0)"
+  >
+  <div class="welcome">Welcome to Deeply Data and great to have you on board. For a very quick overview watch the video below. If you are ready to get started creating or reviewing droplets, click above</div>
 </div>

@@ -21,6 +21,10 @@ import { Router } from '@angular/router';
     .description {
       padding: 10px 10px 10px 0;
     }
+    .no-permission {
+      margin: 40px 40px 40px 40px;
+      font-size: 16px;
+    }
   `]
 })
 export class ReviewComponent implements OnInit {

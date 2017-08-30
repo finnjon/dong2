@@ -1,9 +1,9 @@
 <div class="row">
+  <p class="no-permission" *ngIf="role === 'user'">You do not currently have permission to review droplets. If you would like permission please contact Jonathon at jonathon-at-deeply-dot-io.</p>
   <div class="col-md-offset-1">
-    <h3>Droplets for Review</h3>
-    <p><i>Click droplet to see description</i></p>
-    <p *ngIf="role === 'user'">Draft droplets ready for review will show up here. Only people who have the right to edit droplets can select them. If you would like this role please contact us immediately.</p>
     <div *ngIf="role !== 'user'">
+      <h3>Droplets for Review</h3>
+      <p><i>Click droplet to see description</i></p>
       <div *ngFor="let droplet of reviewDroplets">
         <div class="row pad">
             <div class="col-md-5">

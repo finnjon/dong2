@@ -7,7 +7,7 @@
   <div class="pull-right">
     <li class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log In</li>
     <li class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log Out</li>
-    <h5 *ngIf="auth.isAuthenticated() && profile" class="pull-left details">{{ profile.userProfile.name }} | {{ profile.role }}</h5>
+    <h5 *ngIf="auth.isAuthenticated() && profile" class="pull-left details">{{ profile.userProfile.name }}</h5>
   </div>
   <ul class="nav navbar-nav navbar-right" *ngIf="auth.isAuthenticated()">
     <li class="navbar-nav-item">

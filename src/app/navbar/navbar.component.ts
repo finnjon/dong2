@@ -19,17 +19,12 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private dropletService: DropletService,
     private poolService: PoolService
-  ) {
-    
-   }
+  ) {}
 
   ngOnInit() {
     this.auth.pushedProfile
     .subscribe(
-      (profile) => {
-        this.profile = profile;
-        console.log(this.profile);
-      },
+      (profile) => { this.profile = profile; },
       (error) => this.error = error
     );
   }
