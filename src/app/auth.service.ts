@@ -28,7 +28,7 @@ export class Auth {
   };
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+    this.auth0.parseHash(window.location.hash, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
