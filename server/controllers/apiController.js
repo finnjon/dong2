@@ -119,7 +119,8 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(droplets);
 				})
-			.limit(10);
+			.skip(parseInt(req.param('offset')))
+			.limit(parseInt(req.param('limit')));
 	});
 
 	// get name and description based on search string

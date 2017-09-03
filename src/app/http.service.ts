@@ -23,8 +23,8 @@ export class HttpService {
 
   //droplets
 
-  getReviewDroplets() {
-    return this.authHttp.get(`${this.API_URL}/api/reviewDroplets`);
+  getReviewDroplets(offset, limit) {
+    return this.authHttp.get(`${this.API_URL}/api/reviewDroplets?offset=` + offset + '&limit=' + limit);
   }
 
   getUserDroplets(offset, limit) {

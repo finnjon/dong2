@@ -32,6 +32,8 @@ export class ReviewComponent implements OnInit {
   profile: any;
   role: any;
   showDescription = {};
+  offset: number = 0; //droplets offset
+  limit: number = 5;
 
   constructor(
     private httpService: HttpService,
@@ -44,11 +46,22 @@ export class ReviewComponent implements OnInit {
   ngOnInit() {
     this.profile = this.auth.userProfile;
     if (this.auth.role) { this.role = this.auth.role[0] };
-    this.httpService.getReviewDroplets()
+    this.httpService.getReviewDroplets(this.offset, this.limit)
       .subscribe(
         (data: Response) => {
           this.reviewDroplets = data.json();
         },
+        (error) => {
+          this.flashMessagesService.show('Could not retrieve review droplets', { cssClass: 'alert-success', timeout: 2000 });
+        }
+      );
+  }
+
+  loadMore() {
+    this.offset += 5;
+    this.httpService.getReviewDroplets(this.offset, this.limit)
+      .subscribe(
+        (data: Response) => this.reviewDroplets = this.reviewDroplets.concat(data.json()),
         (error) => {
           this.flashMessagesService.show('Could not retrieve review droplets', { cssClass: 'alert-success', timeout: 2000 });
         }
