@@ -21,6 +21,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <a (click)="loadMore('userDlts')">Load More</a>
+    </div>
   </div>
 
   <div class="col-md-5">
@@ -48,6 +51,9 @@
           </span>
         </div>
       </div>
+    </div>
+    <div>
+      <a (click)="loadMore('reviewDlts')">Load More</a>
     </div>
 
     <h3 *ngIf="userPools && userPools.length > 0">My Pools <span class="h5 cursor" (click)="showEditPool = !showEditPool">Edit</span></h3>

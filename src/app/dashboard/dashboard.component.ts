@@ -20,6 +20,9 @@ export class DashboardComponent implements OnInit {
   droplet: Droplet;
   error: any;
   pool: Pool;
+  udOffset: number = 0; //userDroplets offset
+  rdOffset: number = 0; //reviewDroplets offset
+  limit: number = 5;
   public showEdit: boolean = false;
   public showEditPool: boolean = false;
   public showReview: boolean = false;
@@ -37,12 +40,12 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.httpService.getUserDroplets()
+    this.httpService.getUserDroplets(this.udOffset, this.limit)
       .subscribe(
         (data: Response) => this.userDroplets = data.json(),
         (error) => this.error = error
       );
-    this.httpService.getUserReviewDroplets()
+    this.httpService.getUserReviewDroplets(this.rdOffset, this.limit)
       .subscribe(
         (data: Response) => this.userReviewDroplets = data.json(),
         (error) => this.error = error
@@ -52,6 +55,28 @@ export class DashboardComponent implements OnInit {
         (data: Response) => this.userPools = data.json(),
         (error) => this.error = error
       );
+  }
+
+  loadMore(dlts){
+    if (dlts === "userDlts") {
+      this.udOffset += 5;
+      this.httpService.getUserDroplets(this.udOffset, this.limit)
+      .subscribe(
+        (data: Response) => {
+          this.userDroplets = this.userDroplets.concat(data.json());
+        },
+        (error) => this.error = error
+      );
+    } else if (dlts === "reviewDlts") {
+      this.rdOffset += 5;
+      this.httpService.getUserReviewDroplets(this.rdOffset, this.limit)
+        .subscribe(
+          (data: Response) => {
+            this.userReviewDroplets = this.userReviewDroplets.concat(data.json());
+          },
+          (error) => this.error = error
+        );
+    }
   }
 
   editDroplet(id) {

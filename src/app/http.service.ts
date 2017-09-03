@@ -27,16 +27,16 @@ export class HttpService {
     return this.authHttp.get(`${this.API_URL}/api/reviewDroplets`);
   }
 
-  getUserDroplets() {
-    return this.authHttp.get(`${this.API_URL}/api/userDroplets`);
+  getUserDroplets(offset, limit) {
+    return this.authHttp.get(`${this.API_URL}/api/userDroplets?offset=` + offset + '&limit=' + limit);
   }
 
   getUserPools() {
     return this.authHttp.get(`${this.API_URL}/api/userPools`);
   }
 
-  getUserReviewDroplets() {
-    return this.authHttp.get(`${this.API_URL}/api/userReviewDroplets`);
+  getUserReviewDroplets(offset, limit) {
+    return this.authHttp.get(`${this.API_URL}/api/userReviewDroplets?offset=` + offset + '&limit=' + limit);
   }
 
   getDroplet(id) {

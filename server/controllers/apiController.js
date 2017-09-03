@@ -73,7 +73,7 @@ module.exports = function(app) {
 				if (err) throw err;
 				res.send(pools);
 			})
-			.limit(10);
+			.limit(5);
 	});
 
 	app.get('/api/userDroplets', checkJwt, function(req, res) {
@@ -84,7 +84,8 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(droplets);
 				})
-			.limit(60);
+			.skip(parseInt(req.param('offset')))
+			.limit(parseInt(req.param('limit')));
 	});
 
 	app.get('/api/userPools', checkJwt, function(req, res) {
@@ -95,7 +96,7 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(pools);
 				})
-			.limit(15);
+			.limit(5);
 	});
 
 	app.get('/api/userReviewDroplets', checkJwt, function(req, res) {
@@ -106,7 +107,8 @@ module.exports = function(app) {
 					if (err) throw err;
 					res.send(droplets);
 				})
-			.limit(20);
+			.skip(parseInt(req.param('offset')))
+			.limit(parseInt(req.param('limit')));
 	});
 
 	app.get('/api/reviewDroplets', function(req, res) {
